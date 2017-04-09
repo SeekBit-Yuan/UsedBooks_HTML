@@ -1,0 +1,95 @@
+{
+	"index.html": {
+		"resources": [
+			"tab-webview-subpage-about.html",
+			"css/own.css",
+			"js/mui.min.js",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"fonts/iconfont.ttf",
+			"fonts/mui.ttf",
+			"barItem/home.html"
+		],
+		"refer": [
+			"tab-webview-subpage-about.html",
+			"tab-webview-subpage-setting.html",
+			"tab-webview-subpage-chat.html",
+			"tab-webview-subpage-contact.html",
+			"barItem/home.html",
+			"barItem/category.html",
+			"barItem/cart.html",
+			"barItem/mine.html",
+			"barItem/add.html"
+		]
+	},
+	"tab-webview-subpage-chat.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		]
+	},
+	"tab-webview-subpage-setting.html": {
+		"resources": [
+			"fonts/mui.ttf"
+		]
+	},
+	"barItem/home.html": {
+		"resources": [
+			"img/slider/slider2.jpg",
+			"js/own.js",
+			"img/1.jpg",
+			"img/slider/slider1.jpg",
+			"img/slider/slider3.jpg",
+			"img/slider/slider4.png",
+			"img/slider/ic_pic1.jpg",
+			"img/slider/ic_pic2.jpg",
+			"css/mui.min.css",
+			"img/slider/ic_pic4.jpg",
+			"img/slider/ic_pic3.jpg",
+			"img/ic_book3.jpg",
+			"img/ic_book2.jpg",
+			"img/ic_book1.jpg",
+			"img/ic_book4.jpg",
+			"css/own.css",
+			"css/iconfont.css"
+		]
+	},
+	"barItem/category.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/own.js",
+			"js/mui.min.js",
+			"img/category/category12.png",
+			"img/category/category2.png",
+			"img/category/category9.png",
+			"img/category/category8.png",
+			"img/category/category10.png",
+			"img/category/category5.png",
+			"img/category/category3.png",
+			"img/category/category4.png",
+			"img/category/category7.png",
+			"img/category/category6.png",
+			"img/category/category11.png",
+			"img/category/category1.png",
+			"css/own.css",
+			"css/iconfont.css"
+		]
+	},
+	"barItem/mine.html": {
+		"resources": [
+			"img/bg.jpeg",
+			"fonts/mui.ttf",
+			"img/bg.jpg",
+			"js/own.js",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"barItem/add.html": {
+		"resources": [
+			"js/own.js",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	}
+}
