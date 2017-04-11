@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>E3为父子模版可直接用index的父子模版</title>
+    <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/own.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+    
+    <style type="text/css">
+    		.mui-input-row label {
+    			width: 20%;
+    		}
+    		.mui-input-row label~input {
+    			width: 80%;
+    		}
+    </style>
+</head>
+<body>
+	
+	<header class="mui-bar mui-bar-nav own-main-background-color">
+			<button type="button" class="mui-action-back mui-btn  mui-btn-link mui-pull-left own-button">
+			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
+			<span class="own-left-nav-color">取消</span>
+		</button>
+			<h1 class="mui-title">用户反馈</h1>
+	</header>
+	
+	<div class="mui-content">
+		<div class="mui-button-row" style="margin: 10px 15px;">
+			<button type="button" class="mui-btn mui-btn-link own-btn-green mui-btn-block" style="padding: 5px 0px;">咨询客服</button>
+		</div>
+	</div>
+	
+	<script src="../js/mui.min.js" charset="UTF-8"></script>
+	<script src="../js/own.js" charset="UTF-8"></script>
+	<script src="../js/ajax.js" charset="UTF-8"></script>
+	<script type="text/javascript" charset="UTF-8">
+		mui.init({
+			swipeBack:true
+		});
+		
+	</script>
+	
+</body>
+</html>
