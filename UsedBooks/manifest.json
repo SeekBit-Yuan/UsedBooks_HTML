@@ -210,7 +210,10 @@
 					"barItem/category.html",
 					"barItem/cart.html",
 					"barItem/mine.html",
-					"barItem/add.html"
+					"barItem/add.html",
+					"barItem/test.html",
+					"template.html",
+					"mine/login.html"
 				],
 				"priority": 0
 			},
@@ -247,9 +250,12 @@
 					"img/ic_book1.jpg",
 					"img/ic_book4.jpg",
 					"css/own.css",
-					"css/iconfont.css"
+					"css/iconfont.css",
+					"js/mui.min.js"
 				],
-				"refer": [],
+				"refer": [
+					"Home/product-detail-needtem.html"
+				],
 				"priority": 0
 			},
 			"barItem/category.html": {
@@ -270,16 +276,195 @@
 					"img/category/category11.png",
 					"img/category/category1.png",
 					"css/own.css",
-					"css/iconfont.css"
+					"css/iconfont.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
 			},
 			"barItem/mine.html": {
 				"resources": [
-					"img/bg.jpeg",
-					"fonts/mui.ttf",
 					"img/bg.jpg",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/own.js",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"fonts/iconfont.ttf",
+					"img/touxiang.jpg"
+				],
+				"refer": [
+					"mine/my-order-needtem.html",
+					"mine/change-address-needtem.html",
+					"mine/change-email-needtem.html",
+					"mine/change-psd-needtem.html",
+					"mine/feedback-needtem.html"
+				],
+				"priority": 0
+			},
+			"barItem/add.html": {
+				"resources": [
+					"js/own.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/ajax.js",
+					"js/wl_ajax.js",
+					"js/load.js",
+					"js/md5.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"barItem/cart.html": {
+				"resources": [
+					"js/ajax.js",
+					"js/wl_ajax.js",
+					"css/mui.min.css",
+					"js/load.js",
+					"js/md5.js",
+					"js/own.js",
+					"js/mui.min.js",
+					"img/50.jpg",
+					"css/own.css",
+					"css/iconfont.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"barItem/test.html": {
+				"resources": [
+					"js/own.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"css/iconfont.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"mine/change-address-needtem.html": {
+				"resources": [
+					"js/own.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/own.css",
+					"css/iconfont.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"mine/login.html": {
+				"resources": [
+					"js/own.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/own.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [
+					"mine/register-needtem.html",
+					"mine/forget-psd-needtem.html"
+				],
+				"priority": 0
+			},
+			"mine/change-psd-needtem.html": {
+				"resources": [
+					"js/own.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/own.css",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"mine/my-order-needtem.html": {
+				"resources": [
+					"js/own.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/own.css",
+					"css/iconfont.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"template-main-third.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/own.css",
+					"css/iconfont.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"template-main-first.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"template.html": {
+				"resources": [
+					"js/own.js"
+				],
+				"refer": [
+					"template-main-third.html",
+					"template-main-second.html",
+					"template-main-first.html",
+					"mine/login.html"
+				],
+				"priority": 0
+			},
+			"login.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"images/sinaweibo.png",
+					"css/mui.min.css",
+					"css/style.css",
+					"images/weixin.png",
+					"images/qq.png",
+					"js/mui.enterfocus.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"mine/change-email-needtem.html": {
+				"resources": [
+					"css/own.css",
+					"js/own.js",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"mine/feedback-needtem.html": {
+				"resources": [
+					"css/own.css",
+					"js/own.js",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"mine/register-needtem.html": {
+				"resources": [
 					"js/own.js",
 					"js/mui.min.js",
 					"css/mui.min.css"
@@ -287,11 +472,34 @@
 				"refer": [],
 				"priority": 0
 			},
-			"barItem/add.html": {
+			"mine/forget-psd-needtem.html": {
 				"resources": [
 					"js/own.js",
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"css/own.css",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"Home/product-detail-needtem.html": {
+				"resources": [
+					"img/detail/2.jpg",
+					"img/detail/0.jpg",
+					"css/mui.min.css",
+					"img/detail/1.jpg",
+					"img/detail/4.jpg",
+					"img/detail/3.jpg",
+					"js/own.js",
+					"js/mui.min.js",
+					"img/3.jpg",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"img/touxiang.jpg",
+					"css/iconfont.css",
+					"img/ic_book1.jpg"
 				],
 				"refer": [],
 				"priority": 0

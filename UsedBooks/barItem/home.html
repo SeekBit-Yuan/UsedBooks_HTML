@@ -103,19 +103,24 @@
 			mui('#recommend').on('tap', 'a', function() {
 				var item = this;
 				var itemID = this.getAttribute('href');
+				var href = '../Home/product-detail-needtem.html';
 				var extendOptions = {
 					itemID: itemID
 				};
-				pushWebView({
-					webType: 'newWebview_First',
-					id: 'Home/product-detail-needtem.html',
-					href: 'Home/product-detail-needtem.html',
-					aniShow: getaniShow(),
-					title: "商品详情",
-					isBars: false,
-					barsIcon: '',
-					extendOptions: extendOptions
-				});
+//				pushWebView({
+//					webType: 'newWebview_First',
+//					id: 'Home/product-detail-needtem.html',
+//					href: 'Home/product-detail-needtem.html',
+//					aniShow: getaniShow(),
+//					title: "商品详情",
+//					isBars: false,
+//					barsIcon: '',
+//					extendOptions: extendOptions
+//				});
+                mui.openWindow({
+                	id: itemID,
+					url: href
+                });
 			});
 		})
 

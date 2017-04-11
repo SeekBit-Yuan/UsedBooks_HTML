@@ -32,7 +32,7 @@
 				<span class="mui-icon iconfont icon-leimu"></span>
 				<span class="mui-tab-label">分类</span>
 			</a>
-			<a class="mui-tab-item" href="barItem/add.html">
+			<a class="mui-tab-item" href="barItem/test.html">
 				<span class="mui-icon iconfont icon-jiahao"></span>
 				<span class="mui-tab-label">发布</span>
 			</a>
@@ -47,70 +47,121 @@
 		</nav>
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" charset="utf-8"> 
-			 //mui初始化
-			mui.init();
-			var subpages = ['barItem/home.html', 'barItem/category.html', 'barItem/add.html', 'barItem/cart.html', 'barItem/mine.html'];
-			var subpage_style = {
-				top: '45px',
-				bottom: '51px'
-			};
+			 mui.init({
+			swipeBack:false
+		});
+		
+		var navTitle;
+		var mainWebview;
+		var curBarItemWebview;
+		
+		var barItemWebviewArray = [];
+		var barItemArray = ['barItem/home.html','barItem/category.html','barItem/test.html','barItem/cart.html','barItem/mine.html'];
+		mui.plusReady(function(){
+			//获取当前title和当前webview
+			navTitle = document.querySelector('.mui-title');
+			mainWebview = plus.webview.currentWebview();
 			
-			var aniShow = {};
+			plus.navigator.setStatusBarBackground( "#41cea9" );
 			
-			 //创建子页面，首个选项卡页面显示，其它均隐藏；
-			mui.plusReady(function() {
-				var self = plus.webview.currentWebview();
-				for (var i = 0; i < 5; i++) {
-					var temp = {};
-					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
-					if (i > 0) {
-						sub.hide();
-					}else{
-						temp[subpages[i]] = "true";
-						mui.extend(aniShow,temp);
+			//设置只支持竖屏幕显示
+			plus.screen.lockOrientation("portrait-primary");
+			//初始化与index有关的页面
+			initIndexView();
+			
+			//检测是否需要显示导航页面todo
+			
+			//判断是否已经登陆,若没有登陆将预加载登陆页面
+			judgelogin();
+			
+			//预加载父子模版
+			initTemplate();
+		});
+		
+		
+		//初始化
+		function initIndexView(){
+			//初始化所有bar页面
+			inittabitemWebviews();
+			//添加bar点击事件接受
+			tapBaritem();
+		}
+		
+		
+		//初始化所有bar页面
+		function inittabitemWebviews(){
+			for (var i = 0; i < barItemArray.length; i++) {
+				barItemWebviewArray[i] = mui.preload({
+					id:barItemArray[i],
+					url:barItemArray[i],
+					styles:{
+						top:'44px',
+						bottom: '51px',
+						left: '0px',
+						bounce: 'vertical',
+						bounceBackground: '#f8f8f8'
+					},
+					waiting:{
+						autoShow:false
 					}
-					self.append(sub);
+				});
+				barItemWebviewArray[i].hide();
+				mainWebview.append(barItemWebviewArray[i]);
+			}
+			barItemWebviewArray[0].show();
+			curBarItemWebview = barItemWebviewArray[0];
+		}
+		
+		
+		//添加点击事件
+		function tapBaritem(){
+			mui('.mui-bar-tab').on('tap','.mui-tab-item',function(){
+				var baritem = this;
+				var baritemurl = baritem.getAttribute('href'); 
+//				indexof()如果为false返回－1所以前面加上~
+				if (!~curBarItemWebview.getURL().indexOf(baritemurl)) {
+					for (var i = 0; i < barItemArray.length; i++) {
+						if (barItemArray[i] == baritemurl) {
+							//更改头部名字
+							navTitle.innerText = baritem.children[baritem.children.length-1].innerText;
+							//切换baritemwebview
+							barItemWebviewArray[i].show();
+							curBarItemWebview = barItemWebviewArray[i];
+							break;
+						}
+					}
 				}
 			});
-			 //当前激活选项
-			var activeTab = subpages[0];
-			var title = document.getElementById("title");
-			 //选项卡点击事件
-			mui('.mui-bar-tab').on('tap', 'a', function(e) {
-				var targetTab = this.getAttribute('href');
-				if (targetTab == activeTab) {
-					return;
-				}
-				//更换标题
-				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
-				//显示目标选项卡
-				//若为iOS平台或非首次显示，则直接显示
-				if(mui.os.ios||aniShow[targetTab]){
-					plus.webview.show(targetTab);
-				}else{
-					//否则，使用fade-in动画，且保存变量
-					var temp = {};
-					temp[targetTab] = "true";
-					mui.extend(aniShow,temp);
-					plus.webview.show(targetTab,"fade-in",300);
-				}
-				//隐藏当前;
-				plus.webview.hide(activeTab);
-				//更改当前活跃的选项卡
-				activeTab = targetTab;
-			});
-			 //自定义事件，模拟点击“首页选项卡”
-			document.addEventListener('gohome', function() {
-				var defaultTab = document.getElementById("defaultTab");
-				//模拟首页点击
-				mui.trigger(defaultTab, 'tap');
-				//切换选项卡高亮
-				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
-				if (defaultTab !== current) {
-					current.classList.remove('mui-active');
-					defaultTab.classList.add('mui-active');
+		}
+		
+		
+		//预加载template
+		function initTemplate(){
+			var webview =  mui.preload({
+				id:'template',
+				url:'template.html',
+				styles:{
+					top: '-1000px',
 				}
 			});
+			webview.show();
+		};
+		
+		function judgelogin() {
+			//测试语句
+			localStorage.removeItem('user');
+			//判断是否已经登录成功//localstorage在页面关闭的时候也同样存在，sessionstorage页面关闭数据不存在
+			if (!localStorage.getItem('user')) {
+				mui.preload({
+					url:'mine/login.html',
+					id:'mine/login.html',
+					styles:{
+						top:'0px',
+						bottom:'0px'
+					}
+				});
+			}
+		}
 		</script>
 	</body>
 

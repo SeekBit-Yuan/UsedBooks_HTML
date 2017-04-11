@@ -157,6 +157,9 @@
 			cartWebview = plus.webview.currentWebview();
 			needlogin = document.querySelector('.need-login');
 			downDiv.style.display = 'none';
+			
+			needlogin.style.display = 'block';
+			
 			//为登录按钮添加事件
 			document.querySelector('.need-login button').addEventListener('tap',function(){
 				var title = '登录';
