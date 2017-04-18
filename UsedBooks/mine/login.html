@@ -40,11 +40,11 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-zhanghao01"></span></label>
-						<input type="text" class="mui-input-clear" value="13881111755" placeholder="请输入手机号或邮箱" />
+						<input id="account" type="text" class="mui-input-clear" placeholder="请输入用户名" />
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-mima1"></span></label>
-						<input type="password" class="mui-input-clear" value="123456" placeholder="请输入密码" />
+						<input id="password" type="password" class="mui-input-clear" placeholder="请输入密码" />
 					</div>
 				</form>
 			</div>
@@ -60,34 +60,52 @@
 
 		<script src="../js/mui.min.js" charset="UTF-8"></script>
 		<script src="../js/own.js" charset="UTF-8"></script>
+		<script src="../js/jquery-3.1.1.min.js"></script>
 		<script src="../js/ajax.js" charset="UTF-8"></script>
+		<script src="../js/bmob.js"></script>
+		<script src="../js/bmob-min.js"></script>
+		<script src="../js/bmobSocketIo.js"></script>
+		<script src="../js/bmobSocketIo-min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
 			mui.init({
 				swipeBack: true
 			});
-			var account;
-			var psd;
 			var login;
-			var register;
-			var repsd;
 			var loginWebview;
 			mui.plusReady(function() {
-				account = document.querySelector('input[type="text"]');
-				psd = document.querySelector('input[type="password"]');
 				login = document.getElementById('loginBtn');
-				register = document.getElementById('register');
-				repsd = document.getElementById('repsd');
 				loginWebview = plus.webview.currentWebview();
 				//检测本地的登录过的账号。
-				if (localStorage.getItem('account')) {
+				if(localStorage.getItem('account')) {
 					account.value = localStorage.getItem('account');
 				}
 				//登陆的点击事件
 				login.addEventListener('tap', function() {
-					//将两个数据存放起来，第一个是等出之后删除，第二个只要登录之后就会记录保存
-					localStorage.setItem('user', {});
-					mui.back();
-					mui.toast('登录成功');
+
+					var account = $("#account").val();
+					var password = $("#password").val();
+					
+					if($.trim(account) == ""){
+						alert("请输入用户名！");
+						return;
+					}
+					if($.trim(password) == ""){
+						alert("请输入密码！");
+						return;
+					}
+					
+					Bmob.User.logIn(account, password, {
+						success: function(user) {
+							//将两个数据存放起来，第一个是等出之后删除，第二个只要登录之后就会记录保存
+							localStorage.setItem('user', {});
+							mui.back();
+							mui.toast('登录成功');
+						},
+						error: function(user, error) {
+							alert("用户名或密码错误，请重新输入！ ");
+						}
+					});
+
 					//添加事件接收close事件，并且要判断是否已经登录成功，然后页面close，因为login页面是预先加载的页面
 					//在这里向需要的页面发送消息事件通知已经登录做响应的处理
 					loginWebview.addEventListener('hide', function() {
@@ -108,35 +126,20 @@
 					mui.openWindow({
 						id: 'mine/register-needtem.html',
 						url: 'register-needtem.html'
-                    });
-//					pushWebView({
-//						webType: 'newWebview_First',
-//						id: 'mine/register-needtem.html',
-//						href: 'mine/register-needtem.html',
-//						aniShow: getaniShow(),
-//						title: "注册",
-//						isBars: false,
-//						barsIcon: '',
-//						extendOptions: {}
-//					})
+					});
 				}, false);
 				//注册按钮的点击事件
 				repsd.addEventListener('tap', function() {
 					mui.openWindow({
 						id: 'mine/forget-psd-needtem.html',
 						url: 'forget-psd-needtem.html'
-                    });
-//					pushWebView({
-//						webType: 'newWebview_First',
-//						id: 'mine/forget-psd-needtem.html',
-//						href: 'mine/forget-psd-needtem.html',
-//						aniShow: getaniShow(),
-//						title: "注册",
-//						isBars: false,
-//						barsIcon: '',
-//						extendOptions: {}
-//					})
+					});
 				}, false);
+				
+				//服务器
+				//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
+				Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
+				
 			});
 		</script>
 	</body>

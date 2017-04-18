@@ -1,12 +1,11 @@
 
 @font-face {font-family: "iconfont";
-  src:url('../fonts/iconfont.ttf') format('truetype');
+  src: url('../fonts/iconfont.ttf') format('truetype');/* IE6-IE8 */
 }
 
 .iconfont {
   font-family:"iconfont" !important;
-  font-size:24
-  px;
+  font-size:24px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -16,9 +15,13 @@
 
 .icon-queren01:before { content: "\e651"; }
 
+.icon-center:before { content: "\e611"; }
+
 .icon-zhanghao01:before { content: "\e625"; }
 
 .icon-mima1:before { content: "\e61e"; }
+
+.icon-shoujibangding:before { content: "\e617"; }
 
 .icon-querenxinmima:before { content: "\e62a"; }
 
@@ -45,4 +48,6 @@
 .icon-user:before { content: "\e6c3"; }
 
 .icon-xinmima:before { content: "\e62b"; }
+
+.icon-xiugaixinxi:before { content: "\e7a9"; }
 

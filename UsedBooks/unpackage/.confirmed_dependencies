@@ -8,7 +8,9 @@
 			"css/mui.min.css",
 			"fonts/iconfont.ttf",
 			"fonts/mui.ttf",
-			"barItem/home.html"
+			"barItem/home.html",
+			"js/app.js",
+			"js/mui.enterfocus.js"
 		],
 		"refer": [
 			"tab-webview-subpage-about.html",
@@ -102,7 +104,8 @@
 			"css/own.css",
 			"css/iconfont.css",
 			"fonts/iconfont.ttf",
-			"img/touxiang.jpg"
+			"img/touxiang.jpg",
+			"mine/feedback-needtem.html"
 		],
 		"refer": [
 			"mine/change-address-needtem.html",
@@ -170,11 +173,17 @@
 			"css/own.css",
 			"fonts/mui.ttf",
 			"css/iconfont.css",
-			"fonts/iconfont.ttf"
+			"fonts/iconfont.ttf",
+			"js/jquery-3.1.1.min.js",
+			"js/bmob-min.js",
+			"js/bmob.js",
+			"js/bmobSocketIo-min.js",
+			"js/bmobSocketIo.js"
 		],
 		"refer": [
 			"mine/register-needtem.html",
-			"mine/forget-psd-needtem.html"
+			"mine/forget-psd-needtem.html",
+			"mine/register.html"
 		]
 	},
 	"mine/change-psd-needtem.html": {
@@ -221,7 +230,9 @@
 			"mine/login.html"
 		],
 		"resources": [
-			"js/own.js"
+			"js/own.js",
+			"css/mui.min.css",
+			"js/mui.min.js"
 		]
 	},
 	"login.html": {
@@ -259,7 +270,17 @@
 		"resources": [
 			"js/own.js",
 			"js/mui.min.js",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"js/jquery-3.1.1.min.js",
+			"js/bmob-min.js",
+			"js/app.js",
+			"js/bmobSocketIo.js",
+			"js/bmob.js",
+			"js/bmobSocketIo-min.js",
+			"css/own.css",
+			"css/iconfont.css",
+			"fonts/iconfont.ttf",
+			"fonts/mui.ttf"
 		]
 	},
 	"mine/forget-psd-needtem.html": {
@@ -269,7 +290,13 @@
 			"css/mui.min.css",
 			"css/own.css",
 			"css/iconfont.css",
-			"fonts/iconfont.ttf"
+			"fonts/iconfont.ttf",
+			"js/jquery-3.1.1.min.js",
+			"fonts/mui.ttf",
+			"js/bmob.js",
+			"js/bmob-min.js",
+			"js/bmobSocketIo-min.js",
+			"js/bmobSocketIo.js"
 		]
 	},
 	"Home/product-detail-needtem.html": {
@@ -288,6 +315,30 @@
 			"img/touxiang.jpg",
 			"css/iconfont.css",
 			"img/ic_book1.jpg"
+		]
+	},
+	"mine/register.html": {
+		"resources": [
+			"js/app.js",
+			"js/jquery-3.1.1.min.js",
+			"js/own.js",
+			"js/bmobSocketIo.js",
+			"js/bmob-min.js",
+			"mine/register.html",
+			"css/mui.min.css",
+			"css/own.css",
+			"js/mui.min.js",
+			"css/iconfont.css",
+			"fonts/iconfont.ttf"
+		],
+		"refer": [
+			"mine/register.html"
+		]
+	},
+	"template-main-second.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.min.js"
 		]
 	}
 }

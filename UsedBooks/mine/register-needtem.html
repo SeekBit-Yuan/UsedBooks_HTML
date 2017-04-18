@@ -1,103 +1,137 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>E3父子模版</title>
-    <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/own.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
-    <style type="text/css">
-    		/*下面两项是重置muicss的输入框label和input之间的宽比率*/
-    		.mui-input-row label {
-    			width: 20%;
-    		}
-    		.mui-input-row label~input {
-    			width: 80%;
-    		}
-    </style>
-</head>
-<body>
-	
-	<header class="mui-bar mui-bar-nav own-main-background-color">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>注册</title>
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/own.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<style type="text/css">
+			/*下面两项是重置muicss的输入框label和input之间的宽比率*/
+			
+			.mui-input-row label {
+				width: 20%;
+			}
+			
+			.mui-input-row label~input {
+				width: 80%;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav own-main-background-color">
 			<button type="button" class="mui-action-back mui-btn  mui-btn-link mui-pull-left own-button">
 			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
 			<span class="own-left-nav-color">取消</span>
 		</button>
 			<h1 class="mui-title">注册</h1>
-	</header>
-	
-	<div class="mui-content">
-		<div class="mui-card" style="margin-top: 30px;">
-			<form class="mui-input-group">
-				<div class="mui-input-row">
-					<label><span class="mui-icon iconfont icon-user"></span></label>
-					<input id="account" class="mui-input-clear" type="text" placeholder="输入手机或则邮箱" />
-				</div>
-				<div class="mui-input-row">
-					<label><span class="mui-icon iconfont icon-psw"></span></label>
-					<input id="psd" class="mui-input-clear" type="password" placeholder="输入密码" />
-				</div>
-				<div class="mui-input-row">
-					<label><span class="mui-icon iconfont icon-queren01"></span></label>
-					<input id="repsd" class="mui-input-clear" type="password" placeholder="确认密码" />
-				</div>
-			</form>
+		</header>
+
+		<div class="mui-content">
+			<div class="mui-card" style="margin-top: 30px;">
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label><span class="mui-icon iconfont icon-user"></span></label>
+						<input id="account" class="mui-input-clear" type="text" placeholder="请输入邮箱地址" />
+					</div>
+					<div class="mui-input-row">
+						<label><span class="mui-icon iconfont icon-psw"></span></label>
+						<input id="password" class="mui-input-clear" type="password" placeholder="请输入密码" />
+					</div>
+					<div class="mui-input-row">
+						<label><span class="mui-icon iconfont icon-queren01"></span></label>
+						<input id="repsd" class="mui-input-clear" type="password" placeholder="请确认密码" />
+					</div>
+				</form>
+			</div>
+			<div class="mui-button-row" style="margin: 10px 15px;">
+				<button id="reg" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">注册</button>
+			</div>
 		</div>
-		<div class="mui-button-row" style="margin: 10px 15px;">
-			<button type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">注册</button>
-		</div>
-	</div>
-	
-	<script src="../js/mui.min.js" charset="UTF-8"></script>
-	<script src="../js/own.js" charset="UTF-8"></script>
-	<script src="../js/ajax.js" charset="UTF-8"></script>
-	<script type="text/javascript" charset="UTF-8">
-		mui.init({
-			swipeBack:true
-		});
-		
-		var account;
-		var psd;
-		var repsd;
-		var registerBtn ;
-		mui.plusReady(function(){
-			account = document.getElementById('account');
-			psd = document.getElementById('psd');
-			repsd = document.getElementById('repsd');
-			registerBtn = document.querySelector('button[type="button"]');
-			
-			
-			registerBtn.addEventListener('tap',function(){
-				if (account.value.length <= 0) {
-					mui.toast('请输入要注册的账号');
-					return;
-				}
-				if (psd.value.length <= 0){
-					mui.toast('请输入密码');
-					return;
-				}
-				if (repsd.value.length <= 0 || psd.value != repsd.value	){
-					mui.toast('两次输入密码必须一致');
-					return;
-				}
-				
-				//联网注册
-				ajax_register({
-					account:account.value,
-					pwd:repsd.value,
-					website_id:'1'
-				});
-			},false);
-			
-		});
-		
-		function registerSeccess(data) {
-			if (data.code == '000000') {
-				
-			}
-		}
-	</script>
-	
-</body>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src="../js/bmob.js"></script>
+		<script src="../js/bmob-min.js"></script>
+		<script src="../js/bmobSocketIo.js"></script>
+		<script src="../js/bmobSocketIo-min.js"></script>
+		<script src="../js/own.js" charset="UTF-8"></script>
+		<script>
+			mui.init({
+				swipeBack: true
+			});
+
+			mui.plusReady(function() {
+				//注册按钮的点击事件
+				reg.addEventListener('tap', function() {
+					var account = $("#account").val();
+					var password = $("#password").val();
+					var repsd = $("#repsd").val();
+					
+					var regex_email = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+					var  regex_password = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/;
+
+					if($.trim(account) == "") {
+						alert("邮箱不能为空！");
+						return;
+					}else if(!regex_email.test(account)){
+						alert("请输入正确邮箱地址！");
+						return;
+					}
+
+					if($.trim(password) == "") {
+						alert("密码不能为空！");
+						return;
+					}else if(password.length < 6){
+						alert("密码应为6~16位数字和字母组合！");
+						return;
+					}else if(password.length > 16){
+						alert("密码应为6~16位数字和字母组合！");
+						return;
+					}else if(!regex_password.test(password)){
+						alert("密码应为6~16位数字和字母组合！");
+						return;
+					}
+					
+					if($.trim(repsd) == "") {
+						alert("确认密码不能为空！");
+						return;
+					}
+
+					if($.trim(password) != $.trim(repsd)) {
+						alert("两次输入密码不一致！");
+						return;
+					}
+
+					var user = new Bmob.User();
+					user.set("username", account);
+					user.set("password", password);
+					user.set("email",account);
+
+					user.signUp(null, {
+						success: function(user) {
+							mui.toast("注册成功");
+							mui.back();
+						},
+						error: function(user, error) {
+							alert("邮箱" + account + "已注册，请前往登录 ");
+						}
+					});
+
+				}, false);
+
+				//服务器
+				//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
+				Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
+
+			});
+		</script>
+
+	</body>
+
 </html>

@@ -1,69 +1,107 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>E3 父子模版</title>
-    
-    <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/own.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
-	<style type="text/css">
-    		/*下面两项是重置muicss的输入框label和input之间的宽比率*/
-    		.mui-input-row label {
-    			width: 20%;
-    		}
-    		.mui-input-row label~input {
-    			width: 80%;
-    		}
-    </style>
-</head>
-<body>
-	
-	<header class="mui-bar mui-bar-nav own-main-background-color">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>E3 父子模版</title>
+
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/own.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<style type="text/css">
+			/*下面两项是重置muicss的输入框label和input之间的宽比率*/
+			
+			.mui-input-row label {
+				width: 20%;
+			}
+			
+			.mui-input-row label~input {
+				width: 80%;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav own-main-background-color">
 			<button type="button" class="mui-action-back mui-btn  mui-btn-link mui-pull-left own-button">
 			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
 			<span class="own-left-nav-color">取消</span>
 		</button>
 			<h1 class="mui-title">忘记密码</h1>
-	</header>
-	
-	<div class="mui-content">
-		<div class="mui-card" style="margin-top: 30px;">
-			<form class="mui-input-group">
-				<div class="mui-input-row">
-					<label><span class="mui-icon iconfont icon-zhanghao01"></span></label>
-					<input id="account" class="mui-input-clear" type="text" placeholder="输入手机或则邮箱" />
-				</div>
-			</form>
+		</header>
+
+		<div class="mui-content">
+			<div class="mui-card" style="margin-top: 30px;">
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label><span class="mui-icon iconfont icon-center"></span></label>
+						<input id="email" class="mui-input-clear" type="text" placeholder="输入绑定邮箱" />
+					</div>
+				</form>
+			</div>
+			<div class="mui-button-row" style="margin: 10px 15px;">
+				<button id="sub" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">提交</button>
+			</div>
 		</div>
-		<div class="mui-button-row" style="margin: 10px 15px;">
-			<button type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">提交</button>
-		</div>
-	</div>
-	<script src="../js/mui.min.js" charset="UTF-8"></script>
-	<script src="../js/own.js" charset="UTF-8"></script>
-	<script type="text/javascript" charset="UTF-8">
-		mui.init({
-			swipeBack:true
-		});
-		
-		var uploadBtn;
-		var account;
-		mui.plusReady(function(){
-			account = document.querySelector('input[type="text"]');
-			uploadBtn = document.querySelector('button[type="button"]');
-			
-			uploadBtn.addEventListener('tap',function(){
-				if(account.value.length <= 0){
-					mui.toast('请输入账号');
-					return;
-				}
-				
-				//联网发送信息todo
-			},false);
-		});
-		
-	</script>
-</body>
+		<script src="../js/mui.min.js" charset="UTF-8"></script>
+		<script src="../js/own.js" charset="UTF-8"></script>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src="../js/bmob.js"></script>
+		<script src="../js/bmob-min.js"></script>
+		<script src="../js/bmobSocketIo.js"></script>
+		<script src="../js/bmobSocketIo-min.js"></script>
+		<script type="text/javascript" charset="UTF-8">
+			mui.init({
+				swipeBack: true
+			});
+
+			mui.plusReady(function() {
+
+				sub.addEventListener('tap', function() {
+
+					var email = $("#email").val();
+					//					var regex_phone = /0?(13|14|15|18)[0-9]{9}/;
+					//
+					//					if(!regex_phone.test(email)) {
+					//						alert("请输入正确手机号码！");
+					//						return;
+					//					}
+					//					Bmob.Sms.requestSmsCode({
+					//						"mobilePhoneNumber": "13798542673"
+					//					}).then(function(obj) {
+					//						alert("smsId:" + obj.smsId); //
+					//					}, function(err) {
+					//						alert("发送失败:" + err);
+					//					});
+					var regex_email = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
+					if($.trim(email) == "") {
+						alert("请输入邮箱地址");
+						return;
+					}
+					if(!regex_email.test(email)) {
+						alert("请输入正确的邮箱地址！");
+						return;
+					}
+					Bmob.User.requestPasswordReset(email, {
+						success: function() {
+							alert("找回密码邮件已发送至邮箱，请前往邮箱找回密码");
+							mui.back();
+						},
+						error: function(error) {
+							alert("请确认您填写正确绑定邮箱！");
+						}
+					});
+
+				}, false);
+
+				//服务器
+				//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
+				Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
+			});
+		</script>
+	</body>
+
 </html>
