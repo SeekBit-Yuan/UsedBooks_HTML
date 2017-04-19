@@ -71,13 +71,25 @@
 				//初始化与index有关的页面
 				initIndexView();
 
-				//检测是否需要显示导航页面todo
-
 				//判断是否已经登陆,若没有登陆将预加载登陆页面
 				judgelogin();
 
 				//预加载父子模版
 				initTemplate();
+
+				var backButtonPress = 0;
+				mui.back = function(event) {
+					backButtonPress++;
+					if(backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
 			});
 
 			//初始化

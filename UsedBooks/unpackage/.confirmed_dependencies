@@ -113,7 +113,8 @@
 			"mine/change-psd-needtem.html",
 			"mine/change-email-needtem.html",
 			"mine/my-order-needtem.html",
-			"mine/feedback-needtem.html"
+			"mine/feedback-needtem.html",
+			"mine/center.html"
 		]
 	},
 	"barItem/add.html": {
@@ -124,7 +125,9 @@
 			"js/ajax.js",
 			"js/wl_ajax.js",
 			"js/load.js",
-			"js/md5.js"
+			"js/md5.js",
+			"css/own.css",
+			"css/iconfont.css"
 		],
 		"refer": []
 	},
@@ -161,9 +164,12 @@
 			"css/mui.min.css",
 			"css/own.css",
 			"css/iconfont.css",
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"mine/center.html"
 		],
-		"refer": []
+		"refer": [
+			"mine/center.html"
+		]
 	},
 	"mine/login.html": {
 		"resources": [
@@ -339,6 +345,64 @@
 		"resources": [
 			"css/mui.min.css",
 			"js/mui.min.js"
+		]
+	},
+	"mine/center.html": {
+		"resources": [
+			"js/app.js",
+			"css/own.css",
+			"js/jquery-3.1.1.min.js",
+			"js/own.js",
+			"js/mui.min.js",
+			"img/touxiang.jpg",
+			"js/bmobSocketIo.js",
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"js/bmob-min.js",
+			"fonts/iconfont.ttf",
+			"mine/change-address-needtem.html"
+		],
+		"refer": [
+			"mine/change-address-needtem.html",
+			"mine/forget-psd-needtem.html",
+			"barItem/add.html",
+			"center/nickname.html",
+			"center/change-psd-needtem.html",
+			"center/sex.html"
+		]
+	},
+	"center/change-psd-needtem.html": {
+		"resources": [
+			"css/own.css",
+			"js/mui.min.js",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"js/own.js",
+			"fonts/iconfont.ttf"
+		]
+	},
+	"center/sex.html": {
+		"resources": [
+			"css/own.css",
+			"js/own.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"css/mui.min.css"
+		]
+	},
+	"center/nickname.html": {
+		"resources": [
+			"css/own.css",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"fonts/iconfont.ttf",
+			"js/own.js",
+			"js/mui.min.js",
+			"js/bmob.js",
+			"js/jquery-3.1.1.min.js",
+			"js/bmob-min.js"
 		]
 	}
 }

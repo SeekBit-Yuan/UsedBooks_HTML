@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Mine</title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/own.css" />
+		<title>个人中心</title>
+	</head>
+
+	<body>
+
+		<header class="mui-action-back mui-bar mui-bar-nav own-main-background-color">
+			<button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left">
+				<span class="mui-icon mui-icon-left-nav"></span>
+				<span class="own-left-nav-color">我的</span>
+			</button>
+			<h1 class="mui-title" style="font-weight: bold;">个人中心</h1>
+		</header>
+
+		<div class="mui-content">
+
+			<ul class="mui-table-view" style="margin-top: 10px;">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="#picture" style="height: 80px;line-height: 60px;font-weight: bold;font-size: 20px;">头&nbsp;&nbsp;&nbsp;&nbsp;像：
+						<img id="trueimg" src="../img/touxiang.jpg" style="width: 20%; height: 100%; border-radius: 50%;float:right;margin-right: 20px;" /></a>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view" style="margin-top: 10px;">
+				<li class="mui-table-view-cell">
+					<a id="account" class="mui-navigate" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">用户名：
+						<span id="account_value" style="font-size: 20px;color: #A9A9A9;"></span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="nickname" class="mui-navigate-right" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">昵&nbsp;&nbsp;&nbsp;&nbsp;称：
+						<span id="nickname_value" style="font-size: 20px;color: #A9A9A9;"></span>
+						<span style="font-size: 20px;float: right;margin-right: 20px;color: #A9A9A9;">设置</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="sex" class="mui-navigate-right" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">性&nbsp;&nbsp;&nbsp;&nbsp;别：
+						<span id="sex_value" style="font-size: 20px;color: #A9A9A9;"></span>
+						<span style="font-size: 20px;float: right;margin-right: 20px;color: #A9A9A9;">选择</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="phone" class="mui-navigate" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">手机号：
+					<span id="phone_value" style="font-size: 20px;color: #A9A9A9;"></span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="email" class="mui-navigate" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
+					<span id="email_value" style="font-size: 20px;color: #A9A9A9;"></span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="psd" class="mui-navigate-right" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">登录密码
+						<span style="font-size: 20px;float: right;margin-right: 20px;color: #A9A9A9;">修改</span></a>
+				</li>
+			</ul>
+		</div>
+
+		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a style="color: #A9A9A9;"><b>选择照片</b></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#" style="color: #41cea9;">拍照</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#" style="color: #41cea9;">从相册中选择</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture" style="color: #41cea9;"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src="../js/bmobSocketIo.js"></script>
+		<script src="../js/bmob-min.js"></script>
+		<script src="../js/own.js" charset="UTF-8"></script>
+		<script>
+			mui.init({
+				swipeBack: true
+			});
+
+			mui.plusReady(function() {
+
+				nickname = document.getElementById("nickname");
+				sex = document.getElementById("sex");
+				password = document.getElementById("password");
+
+				var account = localStorage.getItem('user');
+				var password = localStorage.getItem('password');
+
+				var user = Bmob.User.logIn(account, password, {
+					success: function(user) {
+						var query = new Bmob.Query(Bmob.User);
+						query.get(user.id, {
+							success: function(user) {
+								// 查询成功，调用get方法获取对应属性的值
+								account_value = document.getElementById("account_value").innerText = user.get("username");
+								nickname_value = document.getElementById("nickname_value").innerText = user.get("nickname");
+								sex_value = document.getElementById("sex_value").innerText = user.get("sex");
+								phone_value = document.getElementById("phone_value").innerText = user.get("mobilePhoneNumber");
+								email_value = document.getElementById("email_value").innerText = user.get("email");
+								return;
+							},
+							error: function(object, error) {
+								alert("个人信息获取失败");
+								return;
+							}
+						});
+					}
+				});
+
+				nickname.addEventListener("tap", function() {
+					mui.openWindow({
+						id: 'mine/forget-psd-needtem.html',
+						url: '../center/nickname.html'
+					});
+
+				});
+
+				sex.addEventListener("tap", function() {
+					mui.openWindow({
+						id: 'center/sex.html',
+						url: '../center/sex.html'
+					});
+				});
+
+				psd.addEventListener("tap", function() {
+					mui.openWindow({
+//						id: 'center/change-psd-needtem.html',
+//						url: '../center/change-psd-needtem.html'
+					});
+				});
+
+			});
+
+			//服务器
+			//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
+			Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
+		</script>
+
+	</body>
+
+</html>

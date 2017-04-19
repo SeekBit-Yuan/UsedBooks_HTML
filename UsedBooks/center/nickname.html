@@ -4,14 +4,12 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>忘记密码</title>
-
+		<title>设置昵称</title>
 		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/own.css" />
 		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+
 		<style type="text/css">
-			/*下面两项是重置muicss的输入框label和input之间的宽比率*/
-			
 			.mui-input-row label {
 				width: 20%;
 			}
@@ -29,7 +27,7 @@
 			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
 			<span class="own-left-nav-color">取消</span>
 		</button>
-			<h1 class="mui-title" style="font-weight: bold;">忘记密码</h1>
+			<h1 class="mui-title" style="font-weight: bold;">修改昵称</h1>
 		</header>
 
 		<div class="mui-content">
@@ -37,7 +35,7 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-center"></span></label>
-						<input id="email" class="mui-input-clear" type="text" placeholder="输入绑定邮箱" />
+						<input id="nickname" class="mui-input-clear" type="text" placeholder="输入昵称" />
 					</div>
 				</form>
 			</div>
@@ -45,13 +43,13 @@
 				<button id="sub" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">提交</button>
 			</div>
 		</div>
+
 		<script src="../js/mui.min.js" charset="UTF-8"></script>
 		<script src="../js/own.js" charset="UTF-8"></script>
-		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src="../js/ajax.js" charset="UTF-8"></script>
 		<script src="../js/bmob.js"></script>
 		<script src="../js/bmob-min.js"></script>
-		<script src="../js/bmobSocketIo.js"></script>
-		<script src="../js/bmobSocketIo-min.js"></script>
+		<script src="../js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
 			mui.init({
 				swipeBack: true
@@ -59,49 +57,44 @@
 
 			mui.plusReady(function() {
 
-				sub.addEventListener('tap', function() {
-
-					var email = $("#email").val();
-					//					var regex_phone = /0?(13|14|15|18)[0-9]{9}/;
-					//
-					//					if(!regex_phone.test(email)) {
-					//						alert("请输入正确手机号码！");
-					//						return;
-					//					}
-					//					Bmob.Sms.requestSmsCode({
-					//						"mobilePhoneNumber": "13798542673"
-					//					}).then(function(obj) {
-					//						alert("smsId:" + obj.smsId); //
-					//					}, function(err) {
-					//						alert("发送失败:" + err);
-					//					});
-					var regex_email = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-
-					if($.trim(email) == "") {
-						alert("请输入邮箱地址");
+				sub.addEventListener("tap", function() {
+					var nickname = $("#nickname").val();
+					if(nickname.length == 0) {
+						alert("请输入昵称！");
+						return;
+					} else if(nickname.length > 8) {
+						alert("昵称不能超过8位！");
 						return;
 					}
-					if(!regex_email.test(email)) {
-						alert("请输入正确的邮箱地址！");
-						return;
-					}
-					Bmob.User.requestPasswordReset(email, {
-						success: function() {
-							alert("找回密码邮件已发送至邮箱，请前往邮箱找回密码");
-							mui.back();
-						},
-						error: function(error) {
-							alert("请确认您填写正确绑定邮箱！");
+
+					var account = localStorage.getItem('user');
+					var password = localStorage.getItem('password');
+
+					var user = Bmob.User.logIn(account, password, {
+						success: function(user) {
+							user.set("nickname", nickname);
+							user.save(null, {
+								success: function(user) {
+									alert("昵称提交成功！");
+									var wobj = plus.webview.getWebviewById("../mine/center.html");
+                                    wobj.reload(true);
+								},
+								error: function(user, error) {
+									alert("昵称修改失败！请稍后重试！");
+									return;
+								}
+							});
 						}
 					});
-
-				}, false);
+				});
 
 				//服务器
 				//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
 				Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
+
 			});
 		</script>
+
 	</body>
 
 </html>

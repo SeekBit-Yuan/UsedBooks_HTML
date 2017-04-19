@@ -29,7 +29,7 @@
 			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
 			<span class="own-left-nav-color">取消</span>
 		</button>
-			<h1 class="mui-title">登录</h1>
+			<h1 class="mui-title" style="font-weight: bold;">登录</h1>
 		</header>
 
 		<div class="mui-content">
@@ -40,7 +40,7 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-zhanghao01"></span></label>
-						<input id="account" type="text" class="mui-input-clear" placeholder="请输入用户名" />
+						<input id="account" type="text" class="mui-input-clear" placeholder="手机号/邮箱" />
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-mima1"></span></label>
@@ -76,33 +76,52 @@
 				login = document.getElementById('loginBtn');
 				loginWebview = plus.webview.currentWebview();
 				//检测本地的登录过的账号。
-				if(localStorage.getItem('account')) {
-					account.value = localStorage.getItem('account');
+				if(localStorage.getItem('user')) {
+					account.value = localStorage.getItem('user');
 				}
 				//登陆的点击事件
 				login.addEventListener('tap', function() {
 
 					var account = $("#account").val();
 					var password = $("#password").val();
-					
-					if($.trim(account) == ""){
+
+					if($.trim(account) == "") {
 						alert("请输入用户名！");
 						return;
 					}
-					if($.trim(password) == ""){
+					if($.trim(password) == "") {
 						alert("请输入密码！");
 						return;
 					}
-					
-					Bmob.User.logIn(account, password, {
-						success: function(user) {
-							//将两个数据存放起来，第一个是等出之后删除，第二个只要登录之后就会记录保存
-							localStorage.setItem('user', {});
-							mui.back();
-							mui.toast('登录成功');
+
+					var query1 = new Bmob.Query(Bmob.User);
+					query1.equalTo("username", account);
+					var query2 = new Bmob.Query(Bmob.User);
+					query2.equalTo("mobilePhoneNumber", account);
+					var query = Bmob.Query.or(query1,query2);
+					query.find({
+						success: function(results) {
+							if(results.length == 0) {
+								alert("该用户未注册！请前往注册！");
+								return;
+							} else if(results.length > 0){
+								Bmob.User.logIn(account, password, {
+									success: function(user) {
+										//将两个数据存放起来，第一个是等出之后删除，第二个只要登录之后就会记录保存
+										localStorage.setItem('user', account);
+										localStorage.setItem('password', password);
+										mui.back();
+										mui.toast('登录成功');
+									},
+									error: function(user, error) {
+										alert("用户名或密码错误，请重新输入！ ");
+									}
+								});
+							}
 						},
 						error: function(user, error) {
-							alert("用户名或密码错误，请重新输入！ ");
+							alert("该用户未注册！请前往注册！");
+							return;
 						}
 					});
 
@@ -135,11 +154,11 @@
 						url: 'forget-psd-needtem.html'
 					});
 				}, false);
-				
+
 				//服务器
 				//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
 				Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
-				
+
 			});
 		</script>
 	</body>

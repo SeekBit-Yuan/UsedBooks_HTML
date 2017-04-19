@@ -93,6 +93,20 @@
 				initFirstCategoryData();
 				//初始化第二级数据并且设置html
 				initSecondCategoryData(0);
+
+				var backButtonPress = 0;
+				mui.back = function(event) {
+					backButtonPress++;
+					if(backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
 			})
 			//添加点击第一级和第二级的监听事件
 			function addCategoryEvent() {
@@ -118,7 +132,9 @@
 						title: title,
 						isBars: false,
 						barsIcon: '',
-						extendOptions: { categoryID: categoryID }
+						extendOptions: {
+							categoryID: categoryID
+						}
 					})
 				});
 			}

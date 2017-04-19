@@ -301,7 +301,8 @@
 				],
 				"refer": [
 					"mine/change-email-needtem.html",
-					"mine/change-psd-needtem.html"
+					"mine/change-psd-needtem.html",
+					"mine/center.html"
 				],
 				"priority": 0
 			},
@@ -313,7 +314,9 @@
 					"js/ajax.js",
 					"js/wl_ajax.js",
 					"js/load.js",
-					"js/md5.js"
+					"js/md5.js",
+					"css/own.css",
+					"css/iconfont.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -353,7 +356,8 @@
 					"css/mui.min.css",
 					"css/own.css",
 					"css/iconfont.css",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"mine/center.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -548,6 +552,70 @@
 				"resources": [
 					"css/mui.min.css",
 					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"mine/center.html": {
+				"resources": [
+					"js/app.js",
+					"css/own.css",
+					"js/jquery-3.1.1.min.js",
+					"js/own.js",
+					"js/mui.min.js",
+					"img/touxiang.jpg",
+					"js/bmobSocketIo.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"js/bmob-min.js",
+					"fonts/iconfont.ttf",
+					"mine/change-address-needtem.html"
+				],
+				"refer": [
+					"mine/forget-psd-needtem.html",
+					"barItem/add.html",
+					"center/nickname.html",
+					"center/change-psd-needtem.html",
+					"center/sex.html"
+				],
+				"priority": 0
+			},
+			"center/change-psd-needtem.html": {
+				"resources": [
+					"css/own.css",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"js/own.js",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"center/sex.html": {
+				"resources": [
+					"css/own.css",
+					"js/own.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"center/nickname.html": {
+				"resources": [
+					"css/own.css",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"fonts/iconfont.ttf",
+					"js/own.js",
+					"js/mui.min.js",
+					"js/bmob.js",
+					"js/jquery-3.1.1.min.js",
+					"js/bmob-min.js"
 				],
 				"refer": [],
 				"priority": 0

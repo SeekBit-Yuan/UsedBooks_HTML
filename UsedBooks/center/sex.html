@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>修改邮箱</title>
+    <title>性别</title>
     <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/own.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
@@ -24,26 +24,28 @@
 			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
 			<span class="own-left-nav-color">取消</span>
 		</button>
-			<h1 class="mui-title" style="font-weight: bold;">修改邮箱</h1>
+			<h1 class="mui-title" style="font-weight: bold;">性别</h1>
 	</header>
-	
 	<div class="mui-content">
-		<div class="mui-card" style="margin-top: 30px;">
-			<form class="mui-input-group">
-				<div class="mui-input-row">
-					<label><span class="mui-icon iconfont icon-tubiao22"></span></label>
-					<input type="password" class="mui-input-clear" placeholder="旧邮箱" />
-				</div>
-				<div class="mui-input-row">
-					<label><span class="mui-icon iconfont icon-tubiao22"></span></label>
-					<input type="password" class="mui-input-clear" placeholder="新邮箱" />
-				</div>
-			</form>
+		
+			<h5 class="mui-content-padded">选择下面按钮</h5>
+			<div class="mui-card">
+				<form class="mui-input-group">
+					<div class="mui-input-row mui-radio">
+						<label><b>帅&nbsp;哥</b></label>
+						<input name="sex" type="radio">
+					</div>
+					<div class="mui-input-row mui-radio">
+						<label><b>美&nbsp;女</b></label>
+						<input name="sex" type="radio">
+					</div>
+				</form>
+			</div>
+			
+			<div class="mui-button-row" style="margin: 10px 15px;">
+				<button id="sub" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">提交</button>
+			</div>
 		</div>
-		<div class="mui-button-row" style="margin: 10px 15px;">
-			<button type="button" class="mui-btn mui-btn-link own-btn-green mui-btn-block" style="padding: 5px 0px;">修改邮箱</button>
-		</div>
-	</div>
 	
 	<script src="../js/mui.min.js" charset="UTF-8"></script>
 	<script src="../js/own.js" charset="UTF-8"></script>

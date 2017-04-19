@@ -46,7 +46,7 @@
 				</div>
 			</div>
 
-			<ul class="mui-table-view" style="margin-top: 10px;">
+			<ul class="mui-table-view" style="margin-top: 8px;">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="../mine/my-order-needtem.html">
 						<span class="mui-icon iconfont icon-biaoxing"></span> 我的订单
@@ -68,30 +68,12 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a id="changeaddress" class="mui-navigate-right" href="../mine/change-address-needtem.html">
+					<a id="changeaddress" class="mui-navigate-right" href="../mine/center.html">
 						<span class="mui-icon iconfont icon-center"></span> 个人信息
 					</a>
 				</li>
 			</ul>
-			<!--<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 20px;">
-				<li class="mui-table-view-cell mui-collapse">
-					<a class="mui-navigate-right">
-						<span class="mui-icon iconfont icon-center"></span> 个人中心
-					</a>
-					<ul class="mui-table-view mui-table-view-chevron">
-						<li class="mui-table-view-cell">
-							<a class="mui-navigate-right" href="#">修改密码</a>
-						</li>
-						<li class="mui-table-view-cell">
-							<a class="mui-navigate-right" href="#">绑定手机</a>
-						</li>
-						<li class="mui-table-view-cell">
-							<a class="mui-navigate-right" href="#">绑定邮箱</a>
-						</li>
-					</ul>
-				</li>
-			</ul>-->
-			<ul class="mui-table-view" style="margin-top: 20px;">
+			<ul class="mui-table-view" style="margin-top: 8px;">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="../mine/feedback-needtem.html">
 						<span class="mui-icon iconfont icon-kefu"></span> 用户反馈
@@ -99,7 +81,7 @@
 				</li>
 			</ul>
 
-			<ul id="logoutBtn" class="mui-table-view" style="margin-top: 20px;margin-bottom: 20px;">
+			<ul id="logoutBtn" class="mui-table-view" style="margin-top: 12px;margin-bottom: 20px;">
 				<li class="mui-table-view-cell" style="text-align: center;">
 					<span style="color: indianred;">退出登录</span>
 				</li>
@@ -147,6 +129,7 @@
 					touxiangword.innerText = "测试号";
 					touxiangword.style.color = 'white';
 				}, false);
+
 				logoutBtn.addEventListener('tap', function() {
 					var btnArray = ['否', '是'];
 					mui.confirm('确认要退出登录吗？', 'UsedBooks', btnArray, function(e) {
@@ -168,6 +151,20 @@
 						}
 					});
 				}, false)
+
+				var backButtonPress = 0;
+				mui.back = function(event) {
+					backButtonPress++;
+					if(backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
 			})
 			//点击头像事件
 			function addHeadevent() {
@@ -212,7 +209,7 @@
 						url: href
 					});
 				});
-			}	
+			}
 		</script>
 	</body>
 

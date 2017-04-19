@@ -107,63 +107,92 @@
 				var extendOptions = {
 					itemID: itemID
 				};
-//				pushWebView({
-//					webType: 'newWebview_First',
-//					id: 'Home/product-detail-needtem.html',
-//					href: 'Home/product-detail-needtem.html',
-//					aniShow: getaniShow(),
-//					title: "商品详情",
-//					isBars: false,
-//					barsIcon: '',
-//					extendOptions: extendOptions
-//				});
-                mui.openWindow({
-                	id: itemID,
+				//				pushWebView({
+				//					webType: 'newWebview_First',
+				//					id: 'Home/product-detail-needtem.html',
+				//					href: 'Home/product-detail-needtem.html',
+				//					aniShow: getaniShow(),
+				//					title: "商品详情",
+				//					isBars: false,
+				//					barsIcon: '',
+				//					extendOptions: extendOptions
+				//				});
+				mui.openWindow({
+					id: itemID,
 					url: href
-                });
+				});
 			});
+
+			var backButtonPress = 0;
+			mui.back = function(event) {
+				backButtonPress++;
+				if(backButtonPress > 1) {
+					plus.runtime.quit();
+				} else {
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 1000);
+				return false;
+			};
 		})
 
 		function initSomeData() {
-			for (var i = 0; i < 20; i++) {
+			for(var i = 0; i < 20; i++) {
 				var dataItem = {};
 				dataItem.contentId = i;
-				a = i%4;
-				if(a == 0){
-					dataItem.product_price = {default_price:"70.30",list_price:"88.00"};
-				    dataItem.product_name = "Python编程 从入门到实践 ";
-				    dataItem.large_image_url = "../img/ic_book1.jpg";
-				    dataItem.product_id = "10001";
-				}else if(a == 1){
-					dataItem.product_price = {default_price:"67.20",list_price:"80.00"};
-				    dataItem.product_name = "TensorFlow实战 ";
-				    dataItem.large_image_url = "../img/ic_book2.jpg";
-				    dataItem.product_id = "10002";
-				}else if(a == 2){
-					dataItem.product_price = {default_price:"35.70",list_price:"44.00"};
-				    dataItem.product_name = "大数据时代：生活、工作与思维的大变革 ";
-				    dataItem.large_image_url = "../img/ic_book3.jpg";
-				    dataItem.product_id = "10003";
-				}else if(a == 3){
-					dataItem.product_price = {default_price:"35.30",list_price:"40.00"};
-				    dataItem.product_name = "Google：未来之镜 ";
-				    dataItem.large_image_url = "../img/ic_book4.jpg";
-				    dataItem.product_id = "10004";
-				}else{
-					dataItem.product_price = {default_price:"20.00",list_price:"28.0"};
-				    dataItem.product_name = "这些都是书的名字 ";
-				    dataItem.large_image_url = "../img/1.jpg";
-				    dataItem.product_id = "13110";
+				a = i % 4;
+				if(a == 0) {
+					dataItem.product_price = {
+						default_price: "70.30",
+						list_price: "88.00"
+					};
+					dataItem.product_name = "Python编程 从入门到实践 ";
+					dataItem.large_image_url = "../img/ic_book1.jpg";
+					dataItem.product_id = "10001";
+				} else if(a == 1) {
+					dataItem.product_price = {
+						default_price: "67.20",
+						list_price: "80.00"
+					};
+					dataItem.product_name = "TensorFlow实战 ";
+					dataItem.large_image_url = "../img/ic_book2.jpg";
+					dataItem.product_id = "10002";
+				} else if(a == 2) {
+					dataItem.product_price = {
+						default_price: "35.70",
+						list_price: "44.00"
+					};
+					dataItem.product_name = "大数据时代：生活、工作与思维的大变革 ";
+					dataItem.large_image_url = "../img/ic_book3.jpg";
+					dataItem.product_id = "10003";
+				} else if(a == 3) {
+					dataItem.product_price = {
+						default_price: "35.30",
+						list_price: "40.00"
+					};
+					dataItem.product_name = "Google：未来之镜 ";
+					dataItem.large_image_url = "../img/ic_book4.jpg";
+					dataItem.product_id = "10004";
+				} else {
+					dataItem.product_price = {
+						default_price: "20.00",
+						list_price: "28.0"
+					};
+					dataItem.product_name = "这些都是书的名字 ";
+					dataItem.large_image_url = "../img/1.jpg";
+					dataItem.product_id = "13110";
 				}
 				recommendArray.push(dataItem);
 			}
-			for (var i = 0 ; i < 4;i++	) {
-				var marqueeItem  = {};
+			for(var i = 0; i < 4; i++) {
+				var marqueeItem = {};
 				marqueeItem.contentId = i;
-				if (i == 3) {
+				if(i == 3) {
 					marqueeItem.imagerpath = '../img/slider/ic_pic4.jpg';
-				} else{
-					marqueeItem.imagerpath = '../img/slider/ic_pic'+(i+1)+'.jpg';
+				} else {
+					marqueeItem.imagerpath = '../img/slider/ic_pic' + (i + 1) + '.jpg';
 				}
 				marqueeArray.push(marqueeItem);
 			}
@@ -177,8 +206,8 @@
 			var sliderIndicator = document.createElement('div');
 			sliderIndicator.className = 'mui-slider-indicator';
 			sliderMarquee.appendChild(sliderIndicator);
-			for (var i = 0; i < marqueeArray.length; i++) {
-				if (0 == i) {
+			for(var i = 0; i < marqueeArray.length; i++) {
+				if(0 == i) {
 					var sliderItemDuplicate = document.createElement('div');
 					sliderItemDuplicate.className = 'mui-slider-item mui-slider-item-duplicate';
 					sliderItemDuplicate.innerHTML = '<a href="' + marqueeArray[marqueeArray.length - 1].contentId + '">\
@@ -193,13 +222,13 @@
 					</a>';
 				sliderGroup.appendChild(sliderItem);
 				var indicatorItme = document.createElement('div');
-				if (i == 0) {
+				if(i == 0) {
 					indicatorItme.className = 'mui-indicator mui-active';
 				} else {
 					indicatorItme.className = 'mui-indicator';
 				}
 				sliderIndicator.appendChild(indicatorItme);
-				if (marqueeArray.length - 1 == i) {
+				if(marqueeArray.length - 1 == i) {
 					var sliderItemDuplicate = document.createElement('div');
 					sliderItemDuplicate.className = 'mui-slider-item mui-slider-item-duplicate';
 					sliderItemDuplicate.innerHTML = '<a href="' + marqueeArray[0].contentId + '">\
@@ -208,7 +237,7 @@
 					sliderGroup.appendChild(sliderItemDuplicate);
 				}
 				slider = mui('.mui-slider').slider({
-					interval:2000
+					interval: 2000
 				});
 			}
 		}
@@ -220,7 +249,7 @@
 				li.className = 'mui-table-view-cell mui-media mui-col-xs-6';
 				li.innerHTML = '<a href="' + item.product_id + '">\
 					<div class= "bgDiv">\
-						<img class="mui-media-object" src="'+item.large_image_url+'"/>\
+						<img class="mui-media-object" src="' + item.large_image_url + '"/>\
 						<div class="mui-media-body">\
 							<p class="mui-ellipsis-2">' + item.product_name + '</p>\
 							<p class="price-one">¥' + item.product_price.default_price + '</p>\
