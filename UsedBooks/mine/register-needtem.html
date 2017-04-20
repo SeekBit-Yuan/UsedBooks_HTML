@@ -71,33 +71,34 @@
 				reg.addEventListener('tap', function() {
 					var account = $("#account").val();
 					var password = $("#password").val();
+					var email = $("#account").val();
 					var repsd = $("#repsd").val();
-					
+
 					var regex_email = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-					var  regex_password = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/;
+					var regex_password = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/;
 
 					if($.trim(account) == "") {
 						alert("邮箱不能为空！");
 						return;
-					}else if(!regex_email.test(account)){
+					} else if(!regex_email.test(account)) {
 						alert("请输入正确邮箱地址！");
 						return;
 					}
-					
+
 					if($.trim(password) == "") {
 						alert("密码不能为空！");
 						return;
-					}else if(password.length < 6){
+					} else if(password.length < 6) {
 						alert("密码应为6~16位数字和字母组合！");
 						return;
-					}else if(password.length > 16){
+					} else if(password.length > 16) {
 						alert("密码应为6~16位数字和字母组合！");
 						return;
-					}else if(!regex_password.test(password)){
+					} else if(!regex_password.test(password)) {
 						alert("密码应为6~16位数字和字母组合！");
 						return;
 					}
-					
+
 					if($.trim(repsd) == "") {
 						alert("确认密码不能为空！");
 						return;
@@ -108,19 +109,30 @@
 						return;
 					}
 
-					var user = new Bmob.User();
-					user.set("username", account);
-					user.set("password", password);
-					user.set("email",account);
-
-					user.signUp(null, {
-						success: function(user) {
-							mui.toast("注册成功");
-							mui.back();
-						},
-						error: function(user, error) {
-							alert("用户" + account + "已注册，请前往登录 ");
-							mui.back();
+					var query = new Bmob.Query(Bmob.User);
+					query.equalTo("username", account);
+					query.find({
+						success: function(result) {
+							if(result.length == 0) {
+								var user = new Bmob.User();
+								user.set("username", account);
+								user.set("password", password);
+								user.set("email", email);
+								
+								user.signUp(null, {
+											success: function(user) {
+												mui.toast("注册成功");
+												mui.back();
+											},
+											error: function(user, error) {
+												alert("注册失败！请稍后重试！");
+												mui.back();
+											}
+								});
+							} else if(result.length > 0) {
+								alert("该用户已注册！请前往登录！");
+								mui.back();
+							}
 						}
 					});
 

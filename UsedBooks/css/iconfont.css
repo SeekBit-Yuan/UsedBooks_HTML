@@ -21,6 +21,8 @@
 
 .icon-mima1:before { content: "\e61e"; }
 
+.icon-wodedingdan:before { content: "\e68e"; }
+
 .icon-shoujibangding:before { content: "\e617"; }
 
 .icon-querenxinmima:before { content: "\e62a"; }
@@ -48,6 +50,8 @@
 .icon-user:before { content: "\e6c3"; }
 
 .icon-xinmima:before { content: "\e62b"; }
+
+.icon-lianxi:before { content: "\e79d"; }
 
 .icon-xiugaixinxi:before { content: "\e7a9"; }
 

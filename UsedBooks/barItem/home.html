@@ -103,7 +103,7 @@
 			mui('#recommend').on('tap', 'a', function() {
 				var item = this;
 				var itemID = this.getAttribute('href');
-				var href = '../Home/product-detail-needtem.html';
+				var href = '../Home/product-detail.html';
 				var extendOptions = {
 					itemID: itemID
 				};
@@ -165,7 +165,7 @@
 						list_price: "44.00"
 					};
 					dataItem.product_name = "大数据时代：生活、工作与思维的大变革 ";
-					dataItem.large_image_url = "../img/ic_book3.jpg";
+					dataItem.large_image_url = "../img/ic_book4.jpg";
 					dataItem.product_id = "10003";
 				} else if(a == 3) {
 					dataItem.product_price = {
@@ -173,7 +173,7 @@
 						list_price: "40.00"
 					};
 					dataItem.product_name = "Google：未来之镜 ";
-					dataItem.large_image_url = "../img/ic_book4.jpg";
+					dataItem.large_image_url = "../img/ic_book3.jpg";
 					dataItem.product_id = "10004";
 				} else {
 					dataItem.product_price = {
@@ -251,7 +251,7 @@
 					<div class= "bgDiv">\
 						<img class="mui-media-object" src="' + item.large_image_url + '"/>\
 						<div class="mui-media-body">\
-							<p class="mui-ellipsis-2">' + item.product_name + '</p>\
+							<p class="mui-ellipsis-2" style="height: 30px;line-height: 30px;">' + item.product_name + '</p>\
 							<p class="price-one">¥' + item.product_price.default_price + '</p>\
 							<p class="price-two">¥' + item.product_price.list_price + '</p>\
 						</div>\

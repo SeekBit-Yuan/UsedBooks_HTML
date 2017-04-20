@@ -32,12 +32,12 @@
 			<div class="mui-card">
 				<form class="mui-input-group">
 					<div class="mui-input-row mui-radio">
-						<label><b>帅&nbsp;哥</b></label>
-						<input name="sex" type="radio">
+						<label style="color:#007AFF"><b>帅&nbsp;哥</b></label>
+						<input name="sex" type="radio" value="帅哥" class="radio">
 					</div>
 					<div class="mui-input-row mui-radio">
-						<label><b>美&nbsp;女</b></label>
-						<input name="sex" type="radio">
+						<label style="color:#007AFF"><b>美&nbsp;女</b></label>
+						<input name="sex" type="radio" value="美女" class="radio">
 					</div>
 				</form>
 			</div>
@@ -50,10 +50,50 @@
 	<script src="../js/mui.min.js" charset="UTF-8"></script>
 	<script src="../js/own.js" charset="UTF-8"></script>
 	<script src="../js/ajax.js" charset="UTF-8"></script>
+	<script src="../js/bmob.js"></script>
+	<script src="../js/bmob-min.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" charset="UTF-8">
 		mui.init({
 			swipeBack:true
 		});
+		
+		mui.plusReady(function(){
+			sub.addEventListener('tap', function() {
+					
+					var account = localStorage.getItem('user');
+					var password = localStorage.getItem('password');
+					var radioNumber = document.getElementsByClassName('radio');
+					var checkVal = null;
+					for(i = 0;i < radioNumber.length;i++){
+						if(radioNumber[i].checked){
+							checkVal = radioNumber[i].value;
+						}
+					}
+					
+					var user = Bmob.User.logIn(account, password, {
+						success: function(user) {
+							user.set("sex", checkVal);
+							user.save(null, {
+								success: function(user) {
+									alert("提交成功!");
+									var wobj = plus.webview.getWebviewById("../mine/center.html");
+                                    wobj.reload(true);
+								},
+								error: function(user, error) {
+									alert("提交失败！请稍后重试！");
+									return;
+								}
+							});
+						},
+					});
+//
+				}, false);
+		});
+		
+		//服务器
+		//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
+		Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
 		
 	</script>
 	

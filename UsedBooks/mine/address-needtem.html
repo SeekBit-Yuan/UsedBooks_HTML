@@ -1,73 +1,313 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>E3</title>
-    
-    <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/own.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css"/>
-    
-    <style type="text/css">
-    		.mui-input-row label {
-    			width: 100%;
-    		}
-    </style>
-</head>
-<body>
-	<div class="mui-content" >
-		<form class="mui-input-group">
-			<div class="mui-input-row">
-				<input type="text" class="mui-input-clear" placeholder="收货人姓名" />
-			</div>
-			<div class="mui-input-row">
-				<input type="text" class="mui-input-clear" placeholder="手机号码" />
-			</div>
-			<div class="mui-input-row" id="addressPicker">
-				<label>省、市、区</label>
-			</div>
-			<div class="mui-input-row" style="height: 4em; padding-top: 2px;">
-				<textarea placeholder="详细地址"></textarea>
-			</div>
-		</form>
-	</div>
 
-	<script src="../js/mui.min.js" charset="UTF-8"></script>
-	<script src="../js/city.data-3.js" charset="UTF-8"></script>
-	<script src="../js/mui.picker.min.js" charset="UTF-8"></script>
-	<script src="../js/own.js" charset="UTF-8"></script>
-	<script type="text/javascript" charset="UTF-8">
-		mui.init({
-			swipeBack:true
-		});
-		
-		var addressPicker;
-		var pickerlabel;
-		mui.plusReady(function(){
-			addressPicker = document.getElementById('addressPicker');
-			pickerlabel = addressPicker.children[0];
-	
-			//监听呼出picker事件
-			addressPicker.addEventListener('tap',function(){
-				var cityPicker3 = new mui.PopPicker({
-					layer:3
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>添加地址</title>
+
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/own.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+
+		<style type="text/css">
+			.mui-input-row label {
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-main-background-color">
+			<button type="button" class="mui-action-back mui-btn  mui-btn-link mui-pull-left own-button">
+			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
+			<span class="own-left-nav-color">取消</span>
+		    </button>
+			<h1 class="mui-title" style="font-weight: bold;">添加地址</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-table-view-cell">
+					<label style="color: #AAAAAA;">默认昵称：</label>
+					<label id="nickname_value" style="color: #AAAAAA;"></label>
+				</div>
+				<div class="mui-table-view-cell">
+					<label style="color: #AAAAAA;">手机号码：</label>
+					<label id="phone_value" style="color: #AAAAAA;"></label>
+				</div>
+				<div class="mui-content-padded" id="addressPicker" style="margin: 20px 15px;">
+					<button id='show' class="mui-btn mui-btn-block" style="padding: 10px 0px;color: #41cea9;" type='button'>点击选择地址</button>
+				</div>
+				<div class="mui-table-view-cell">
+					<div id='addressResult' class="ui-alert" style="font-size: 20px;color: #41cea9;"></div>
+				</div>
+				<div class="mui-input-row" style="height: 4em; padding-top: 2px;">
+					<textarea id="addressplus" placeholder="填写详细地址"></textarea>
+				</div>
+			</form>
+			<div class="mui-button-row" style="margin: 10px 15px;">
+				<button id="sub" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 10px 0px;">添加</button>
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js" charset="UTF-8"></script>
+		<script src="../js/city.data-3.js" charset="UTF-8"></script>
+		<script src="../js/mui.picker.min.js" charset="UTF-8"></script>
+		<script src="../js/own.js" charset="UTF-8"></script>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src="../js/bmobSocketIo.js"></script>
+		<script src="../js/bmob-min.js"></script>
+		<script type="text/javascript" charset="UTF-8">
+			mui.init({
+				swipeBack: true
+			});
+
+			mui.plusReady(function() {
+
+				var account = localStorage.getItem('user');
+				var password = localStorage.getItem('password');
+
+				var user = Bmob.User.logIn(account, password, {
+					success: function(user) {
+						var query = new Bmob.Query(Bmob.User);
+						query.get(user.id, {
+							success: function(user) {
+								// 查询成功，调用get方法获取对应属性的值
+								nickname_value = document.getElementById("nickname_value").innerText = user.get("nickname");
+								phone_value = document.getElementById("phone_value").innerText = user.get("mobilePhoneNumber");
+								return;
+							},
+							error: function(object, error) {
+								alert("个人信息获取失败");
+								return;
+							}
+						});
+					}
 				});
-				cityPicker3.setData(cityData3);
-				cityPicker3.show(function(items){
-					pickerlabel.innerText = (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+
+				//地址选择器picker
+				pickerAddress();
+				
+				//添加点击事件
+				addListevent();
+			});
+
+			function pickerAddress() {
+				var picker = new mui.PopPicker({
+					layer: 2
 				});
-			},false);
+				picker.setData([{
+					value: '110000',
+					text: '深圳大学宿舍区',
+					children: [{
+						value: "110101",
+						text: "乔梧阁"
+					}, {
+						value: "110102",
+						text: "杜衡阁"
+					}, {
+						value: "110103",
+						text: "文杏阁"
+					}, {
+						value: "110104",
+						text: "文杏阁"
+					}, {
+						value: "110105",
+						text: "乔森阁"
+					}, {
+						value: "110106",
+						text: "辛夷阁"
+					}, {
+						value: "110107",
+						text: "桃李斋"
+					}, {
+						value: "110108",
+						text: "银桦斋"
+					}, {
+						value: "110109",
+						text: "乔木阁"
+					}, {
+						value: "110110",
+						text: "雨鹃斋"
+					}, {
+						value: "110111",
+						text: "乔相阁"
+					}, {
+						value: "110112",
+						text: "海棠阁"
+					}, {
+						value: "110113",
+						text: "米兰斋"
+					}, {
+						value: "110114",
+						text: "乔林阁"
+					}, {
+						value: "110115",
+						text: "紫藤轩"
+					}, {
+						value: "110116",
+						text: "海桐斋"
+					}, {
+						value: "110117",
+						text: "紫檀轩"
+					}, {
+						value: "110118",
+						text: "红榴斋"
+					}, {
+						value: "110119",
+						text: "风槐斋"
+					}, {
+						value: "110120",
+						text: "乔森阁"
+					}, {
+						value: "110121",
+						text: "乔梧阁"
+					}, {
+						value: "110122",
+						text: "石楠轩"
+					}, {
+						value: "110123",
+						text: "雨鹃斋"
+					}, {
+						value: "110124",
+						text: "芸香阁"
+					}, {
+						value: "110125",
+						text: "云杉轩"
+					}, {
+						value: "110126",
+						text: "乔林阁"
+					}, {
+						value: "110127",
+						text: "山茶斋"
+					}, {
+						value: "110128",
+						text: "韵竹阁"
+					}, {
+						value: "110129",
+						text: "凌霄斋"
+					}, {
+						value: "110130",
+						text: "疏影阁"
+					}, {
+						value: "110131",
+						text: "乔相阁"
+					}, {
+						value: "110132",
+						text: "木棉斋"
+					}, {
+						value: "110133",
+						text: "木犀轩"
+					}, {
+						value: "110134",
+						text: "蓬莱斋"
+					}, {
+						value: "110135",
+						text: "丹枫轩"
+					}, {
+						value: "110136",
+						text: "苏铁轩"
+					}, {
+						value: "110137",
+						text: "丁香阁"
+					}]
+				}, {
+					value: '120000',
+					text: '深圳大学西丽校区',
+					children: [{
+						value: "120101",
+						text: "A栋风信子"
+					}, {
+						value: "120102",
+						text: "B栋山楂树"
+					}, {
+						value: "120103",
+						text: "C栋胡杨林"
+					}]
+				},{
+					value: '130000',
+					text: '深圳大学南校区',
+					children: [{
+						value: "130101",
+						text: "春笛"
+					}, {
+						value: "130102",
+						text: "夏筝"
+					}, {
+						value: "130103",
+						text: "秋瑟"
+					}, {
+						value: "130104",
+						text: "冬筑"
+					}]
+				},{
+					value: '140000',
+					text: '深圳大学校区',
+					children: [{
+						value: "140101",
+						text: "教学楼"
+					}, {
+						value: "140102",
+						text: "文科楼"
+					}, {
+						value: "140103",
+						text: "图书馆"
+					}, {
+						value: "140104",
+						text: "运动广场"
+					}]
+				}])
+
+				var addressResult = document.getElementById('addressResult');
+				show.addEventListener('tap', function(event) {
+					picker.pickers[0].setSelectedIndex(0);
+					picker.show(function(SelectedItem) {
+						addressResult.innerText = "地址:" + SelectedItem[0].text + " " + SelectedItem[1].text;
+						console.log(SelectedItem);
+					})
+				}, false);
+				
+			}
 			
-			//接收rightbar事件
-			window.addEventListener('navRightPress', function() {
-				mui.toast('选择了确定');
-				//上报服务器e3-server
-				mui.back();
-			}, false)
-		});
-	</script>
-	
-</body>
+			function addListevent() {
+
+				sub.addEventListener('tap', function() {
+					var account = localStorage.getItem('user');
+					var password = localStorage.getItem('password');
+					var address1 = addressResult.innerText;
+					var address2 = $('#addressplus').val();
+					var address = address1+address2;
+					
+					if($.trim(address1) == ""){
+						alert("请点击选择地址！");
+						return;
+					}
+
+					var user = Bmob.User.logIn(account, password, {
+						success: function(user) {
+							user.set("address", address);
+							user.save(null, {
+								success: function(user) {
+									alert("地址添加成功！");
+									var wobj = plus.webview.getWebviewById("../mine/change-address-needtem.html");
+                                    wobj.reload(true);
+								},
+								error: function(user, error) {
+									alert("地址添加失败！请稍后重试！");
+									return;
+								}
+							});
+						}
+					});
+				});
+			}
+
+			//服务器
+			//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
+			Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
+		</script>
+
+	</body>
+
 </html>

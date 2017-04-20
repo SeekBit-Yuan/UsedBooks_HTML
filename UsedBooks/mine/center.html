@@ -46,11 +46,12 @@
 						<span style="font-size: 20px;float: right;margin-right: 20px;color: #A9A9A9;">选择</span></a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a id="phone" class="mui-navigate" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">手机号：
-					<span id="phone_value" style="font-size: 20px;color: #A9A9A9;"></span></a>
+					<a id="phone" class="mui-navigate-right" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">手机号：
+					<span id="phone_value" style="font-size: 20px;color: #A9A9A9;"></span>
+					<span style="font-size: 20px;float: right;margin-right: 20px;color: #A9A9A9;">修改</span></a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a id="email" class="mui-navigate" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
+					<a id="email" class="mui-navigate-right" style="height: 55px;line-height: 35px;font-weight: bold;font-size: 20px;">邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
 					<span id="email_value" style="font-size: 20px;color: #A9A9A9;"></span></a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -134,11 +135,25 @@
 						url: '../center/sex.html'
 					});
 				});
+				
+				phone.addEventListener("tap", function() {
+					mui.openWindow({
+						id: 'center/bind-phone.html',
+						url: '../center/bind-phone.html'
+					});
+				});
+				
+				email.addEventListener("tap", function() {
+					mui.openWindow({
+						id: 'center/bind-email.html',
+						url: '../center/bind-email.html'
+					});
+				});
 
 				psd.addEventListener("tap", function() {
 					mui.openWindow({
-//						id: 'center/change-psd-needtem.html',
-//						url: '../center/change-psd-needtem.html'
+						id: 'center/change-psd-needtem.html',
+						url: '../center/change-psd-needtem.html'
 					});
 				});
 

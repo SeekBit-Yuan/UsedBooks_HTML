@@ -1,408 +1,508 @@
 {
-	"index.html": {
-		"resources": [
-			"tab-webview-subpage-about.html",
-			"css/own.css",
-			"js/mui.min.js",
-			"css/iconfont.css",
-			"css/mui.min.css",
-			"fonts/iconfont.ttf",
-			"fonts/mui.ttf",
-			"barItem/home.html",
-			"js/app.js",
-			"js/mui.enterfocus.js"
-		],
-		"refer": [
-			"tab-webview-subpage-about.html",
-			"tab-webview-subpage-setting.html",
-			"tab-webview-subpage-chat.html",
-			"tab-webview-subpage-contact.html",
-			"barItem/home.html",
-			"barItem/category.html",
-			"barItem/cart.html",
-			"barItem/mine.html",
-			"barItem/add.html",
-			"barItem/test.html",
-			"template.html",
-			"mine/login.html"
-		]
-	},
-	"tab-webview-subpage-chat.html": {
-		"resources": [
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"tab-webview-subpage-setting.html": {
-		"resources": [
-			"fonts/mui.ttf"
-		],
-		"refer": []
-	},
-	"barItem/home.html": {
-		"resources": [
-			"img/slider/slider2.jpg",
-			"js/own.js",
-			"img/1.jpg",
-			"img/slider/slider1.jpg",
-			"img/slider/slider3.jpg",
-			"img/slider/slider4.png",
-			"img/slider/ic_pic1.jpg",
-			"img/slider/ic_pic2.jpg",
-			"css/mui.min.css",
-			"img/slider/ic_pic4.jpg",
-			"img/slider/ic_pic3.jpg",
-			"img/ic_book3.jpg",
-			"img/ic_book2.jpg",
-			"img/ic_book1.jpg",
-			"img/ic_book4.jpg",
-			"css/own.css",
-			"css/iconfont.css",
-			"js/mui.min.js"
-		],
-		"refer": [
-			"Home/product-detail-needtem.html"
-		]
-	},
-	"barItem/category.html": {
-		"resources": [
-			"css/mui.min.css",
-			"js/own.js",
-			"js/mui.min.js",
-			"img/category/category12.png",
-			"img/category/category2.png",
-			"img/category/category9.png",
-			"img/category/category8.png",
-			"img/category/category10.png",
-			"img/category/category5.png",
-			"img/category/category3.png",
-			"img/category/category4.png",
-			"img/category/category7.png",
-			"img/category/category6.png",
-			"img/category/category11.png",
-			"img/category/category1.png",
-			"css/own.css",
-			"css/iconfont.css",
-			"fonts/iconfont.ttf"
-		],
-		"refer": []
-	},
-	"barItem/mine.html": {
-		"resources": [
-			"img/bg.jpeg",
-			"fonts/mui.ttf",
-			"img/bg.jpg",
-			"js/own.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"mine/change-address-needtem.html",
-			"mine/login.html",
-			"mine/change-psd-needtem.html",
-			"mine/change-email-needtem.html",
-			"mine/my-order-needtem.html",
-			"css/own.css",
-			"css/iconfont.css",
-			"fonts/iconfont.ttf",
-			"img/touxiang.jpg",
-			"mine/feedback-needtem.html"
-		],
-		"refer": [
-			"mine/change-address-needtem.html",
-			"mine/login.html",
-			"mine/change-psd-needtem.html",
-			"mine/change-email-needtem.html",
-			"mine/my-order-needtem.html",
-			"mine/feedback-needtem.html",
-			"mine/center.html"
-		]
-	},
-	"barItem/add.html": {
-		"resources": [
-			"js/own.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"js/ajax.js",
-			"js/wl_ajax.js",
-			"js/load.js",
-			"js/md5.js",
-			"css/own.css",
-			"css/iconfont.css"
-		],
-		"refer": []
-	},
-	"barItem/cart.html": {
-		"resources": [
-			"js/ajax.js",
-			"js/wl_ajax.js",
-			"css/mui.min.css",
-			"js/load.js",
-			"js/md5.js",
-			"js/own.js",
-			"js/mui.min.js",
-			"img/50.jpg",
-			"css/own.css",
-			"css/iconfont.css"
-		],
-		"refer": []
-	},
-	"barItem/test.html": {
-		"resources": [
-			"js/own.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"fonts/mui.ttf",
-			"css/own.css",
-			"css/iconfont.css"
-		],
-		"refer": []
-	},
-	"mine/change-address-needtem.html": {
-		"resources": [
-			"js/own.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"css/iconfont.css",
-			"fonts/mui.ttf",
-			"mine/center.html"
-		],
-		"refer": [
-			"mine/center.html"
-		]
-	},
-	"mine/login.html": {
-		"resources": [
-			"js/own.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"fonts/mui.ttf",
-			"css/iconfont.css",
-			"fonts/iconfont.ttf",
-			"js/jquery-3.1.1.min.js",
-			"js/bmob-min.js",
-			"js/bmob.js",
-			"js/bmobSocketIo-min.js",
-			"js/bmobSocketIo.js"
-		],
-		"refer": [
-			"mine/register-needtem.html",
-			"mine/forget-psd-needtem.html",
-			"mine/register.html"
-		]
-	},
-	"mine/change-psd-needtem.html": {
-		"resources": [
-			"js/own.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"css/iconfont.css",
-			"fonts/iconfont.ttf"
-		],
-		"refer": []
-	},
-	"mine/my-order-needtem.html": {
-		"resources": [
-			"js/own.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"css/iconfont.css"
-		],
-		"refer": []
-	},
-	"template-main-third.html": {
-		"resources": [
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"css/iconfont.css",
-			"fonts/mui.ttf"
-		]
-	},
-	"template-main-first.html": {
-		"resources": [
-			"css/mui.min.css",
-			"js/mui.min.js"
-		]
-	},
-	"template.html": {
-		"refer": [
-			"template-main-third.html",
-			"template-main-second.html",
-			"template-main-first.html",
-			"mine/login.html"
-		],
-		"resources": [
-			"js/own.js",
-			"css/mui.min.css",
-			"js/mui.min.js"
-		]
-	},
-	"login.html": {
-		"resources": [
-			"js/app.js",
-			"js/mui.min.js",
-			"images/sinaweibo.png",
-			"css/mui.min.css",
-			"css/style.css",
-			"images/weixin.png",
-			"images/qq.png",
-			"js/mui.enterfocus.js"
-		]
-	},
-	"mine/change-email-needtem.html": {
-		"resources": [
-			"css/own.css",
-			"js/own.js",
-			"js/mui.min.js",
-			"css/iconfont.css",
-			"css/mui.min.css",
-			"fonts/iconfont.ttf"
-		]
-	},
-	"mine/feedback-needtem.html": {
-		"resources": [
-			"css/own.css",
-			"js/own.js",
-			"js/mui.min.js",
-			"css/iconfont.css",
-			"css/mui.min.css"
-		]
-	},
-	"mine/register-needtem.html": {
-		"resources": [
-			"js/own.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"js/jquery-3.1.1.min.js",
-			"js/bmob-min.js",
-			"js/app.js",
-			"js/bmobSocketIo.js",
-			"js/bmob.js",
-			"js/bmobSocketIo-min.js",
-			"css/own.css",
-			"css/iconfont.css",
-			"fonts/iconfont.ttf",
-			"fonts/mui.ttf"
-		]
-	},
-	"mine/forget-psd-needtem.html": {
-		"resources": [
-			"js/own.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"css/iconfont.css",
-			"fonts/iconfont.ttf",
-			"js/jquery-3.1.1.min.js",
-			"fonts/mui.ttf",
-			"js/bmob.js",
-			"js/bmob-min.js",
-			"js/bmobSocketIo-min.js",
-			"js/bmobSocketIo.js"
-		]
-	},
-	"Home/product-detail-needtem.html": {
-		"resources": [
-			"img/detail/2.jpg",
-			"img/detail/0.jpg",
-			"css/mui.min.css",
-			"img/detail/1.jpg",
-			"img/detail/4.jpg",
-			"img/detail/3.jpg",
-			"js/own.js",
-			"js/mui.min.js",
-			"img/3.jpg",
-			"fonts/mui.ttf",
-			"css/own.css",
-			"img/touxiang.jpg",
-			"css/iconfont.css",
-			"img/ic_book1.jpg"
-		]
-	},
-	"mine/register.html": {
-		"resources": [
-			"js/app.js",
-			"js/jquery-3.1.1.min.js",
-			"js/own.js",
-			"js/bmobSocketIo.js",
-			"js/bmob-min.js",
-			"mine/register.html",
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"css/iconfont.css",
-			"fonts/iconfont.ttf"
-		],
-		"refer": [
-			"mine/register.html"
-		]
-	},
-	"template-main-second.html": {
-		"resources": [
-			"css/mui.min.css",
-			"js/mui.min.js"
-		]
-	},
-	"mine/center.html": {
-		"resources": [
-			"js/app.js",
-			"css/own.css",
-			"js/jquery-3.1.1.min.js",
-			"js/own.js",
-			"js/mui.min.js",
-			"img/touxiang.jpg",
-			"js/bmobSocketIo.js",
-			"fonts/mui.ttf",
-			"css/iconfont.css",
-			"css/mui.min.css",
-			"js/bmob-min.js",
-			"fonts/iconfont.ttf",
-			"mine/change-address-needtem.html"
-		],
-		"refer": [
-			"mine/change-address-needtem.html",
-			"mine/forget-psd-needtem.html",
-			"barItem/add.html",
-			"center/nickname.html",
-			"center/change-psd-needtem.html",
-			"center/sex.html"
-		]
-	},
-	"center/change-psd-needtem.html": {
-		"resources": [
-			"css/own.css",
-			"js/mui.min.js",
-			"css/iconfont.css",
-			"css/mui.min.css",
-			"js/own.js",
-			"fonts/iconfont.ttf"
-		]
-	},
-	"center/sex.html": {
-		"resources": [
-			"css/own.css",
-			"js/own.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/iconfont.css",
-			"css/mui.min.css"
-		]
-	},
-	"center/nickname.html": {
-		"resources": [
-			"css/own.css",
-			"css/iconfont.css",
-			"css/mui.min.css",
-			"fonts/iconfont.ttf",
-			"js/own.js",
-			"js/mui.min.js",
-			"js/bmob.js",
-			"js/jquery-3.1.1.min.js",
-			"js/bmob-min.js"
-		]
-	}
+  "index.html": {
+    "resources": [
+      "tab-webview-subpage-about.html",
+      "css/own.css",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "fonts/mui.ttf",
+      "barItem/home.html",
+      "js/app.js",
+      "js/mui.enterfocus.js"
+    ],
+    "refer": [
+      "tab-webview-subpage-about.html",
+      "tab-webview-subpage-setting.html",
+      "tab-webview-subpage-chat.html",
+      "tab-webview-subpage-contact.html",
+      "barItem/home.html",
+      "barItem/category.html",
+      "barItem/cart.html",
+      "barItem/mine.html",
+      "barItem/add.html",
+      "barItem/test.html",
+      "template.html",
+      "mine/login.html"
+    ]
+  },
+  "tab-webview-subpage-chat.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "tab-webview-subpage-setting.html": {
+    "resources": [
+      "fonts/mui.ttf"
+    ],
+    "refer": []
+  },
+  "barItem/home.html": {
+    "resources": [
+      "img/slider/slider2.jpg",
+      "js/own.js",
+      "img/1.jpg",
+      "img/slider/slider1.jpg",
+      "img/slider/slider3.jpg",
+      "img/slider/slider4.png",
+      "img/slider/ic_pic1.jpg",
+      "img/slider/ic_pic2.jpg",
+      "css/mui.min.css",
+      "img/slider/ic_pic4.jpg",
+      "img/slider/ic_pic3.jpg",
+      "img/ic_book3.jpg",
+      "img/ic_book2.jpg",
+      "img/ic_book1.jpg",
+      "img/ic_book4.jpg",
+      "css/own.css",
+      "css/iconfont.css",
+      "js/mui.min.js"
+    ],
+    "refer": [
+      "Home/product-detail-needtem.html",
+      "Home/product-detail.html"
+    ]
+  },
+  "barItem/category.html": {
+    "resources": [
+      "css/mui.min.css",
+      "js/own.js",
+      "js/mui.min.js",
+      "img/category/category12.png",
+      "img/category/category2.png",
+      "img/category/category9.png",
+      "img/category/category8.png",
+      "img/category/category10.png",
+      "img/category/category5.png",
+      "img/category/category3.png",
+      "img/category/category4.png",
+      "img/category/category7.png",
+      "img/category/category6.png",
+      "img/category/category11.png",
+      "img/category/category1.png",
+      "css/own.css",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf"
+    ],
+    "refer": []
+  },
+  "barItem/mine.html": {
+    "resources": [
+      "img/bg.jpeg",
+      "fonts/mui.ttf",
+      "img/bg.jpg",
+      "js/own.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "mine/change-address-needtem.html",
+      "mine/login.html",
+      "mine/change-psd-needtem.html",
+      "mine/change-email-needtem.html",
+      "mine/my-order-needtem.html",
+      "css/own.css",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "img/touxiang.jpg",
+      "mine/feedback-needtem.html",
+      "js/bmobSocketIo.js",
+      "js/bmob-min.js"
+    ],
+    "refer": [
+      "mine/change-address-needtem.html",
+      "mine/login.html",
+      "mine/change-psd-needtem.html",
+      "mine/change-email-needtem.html",
+      "mine/my-order-needtem.html",
+      "mine/feedback-needtem.html",
+      "mine/center.html",
+      "mine/bind-phone.html",
+      "mine/bind-email.html"
+    ]
+  },
+  "barItem/add.html": {
+    "resources": [
+      "js/own.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/ajax.js",
+      "js/wl_ajax.js",
+      "js/load.js",
+      "js/md5.js",
+      "css/own.css",
+      "css/iconfont.css"
+    ],
+    "refer": []
+  },
+  "barItem/cart.html": {
+    "resources": [
+      "js/ajax.js",
+      "js/wl_ajax.js",
+      "css/mui.min.css",
+      "js/load.js",
+      "js/md5.js",
+      "js/own.js",
+      "js/mui.min.js",
+      "img/50.jpg",
+      "css/own.css",
+      "css/iconfont.css"
+    ],
+    "refer": []
+  },
+  "barItem/test.html": {
+    "resources": [
+      "js/own.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "css/own.css",
+      "css/iconfont.css"
+    ],
+    "refer": []
+  },
+  "mine/change-address-needtem.html": {
+    "resources": [
+      "js/own.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "css/iconfont.css",
+      "fonts/mui.ttf",
+      "mine/center.html",
+      "js/bmob.js",
+      "js/jquery-3.1.1.min.js",
+      "js/bmob-min.js"
+    ],
+    "refer": [
+      "mine/center.html",
+      "mine/address-needtem.html"
+    ]
+  },
+  "mine/login.html": {
+    "resources": [
+      "js/own.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "js/jquery-3.1.1.min.js",
+      "js/bmob-min.js",
+      "js/bmob.js",
+      "js/bmobSocketIo-min.js",
+      "js/bmobSocketIo.js"
+    ],
+    "refer": [
+      "mine/register-needtem.html",
+      "mine/forget-psd-needtem.html",
+      "mine/register.html"
+    ]
+  },
+  "mine/change-psd-needtem.html": {
+    "resources": [
+      "js/own.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf"
+    ],
+    "refer": []
+  },
+  "mine/my-order-needtem.html": {
+    "resources": [
+      "js/own.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "css/iconfont.css",
+      "img/50.jpg"
+    ],
+    "refer": []
+  },
+  "template-main-third.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "css/iconfont.css",
+      "fonts/mui.ttf"
+    ]
+  },
+  "template-main-first.html": {
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ]
+  },
+  "template.html": {
+    "refer": [
+      "template-main-third.html",
+      "template-main-second.html",
+      "template-main-first.html",
+      "mine/login.html"
+    ],
+    "resources": [
+      "js/own.js",
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ]
+  },
+  "login.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "images/sinaweibo.png",
+      "css/mui.min.css",
+      "css/style.css",
+      "images/weixin.png",
+      "images/qq.png",
+      "js/mui.enterfocus.js"
+    ]
+  },
+  "mine/change-email-needtem.html": {
+    "resources": [
+      "css/own.css",
+      "js/own.js",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf"
+    ]
+  },
+  "mine/feedback-needtem.html": {
+    "resources": [
+      "css/own.css",
+      "js/own.js",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css"
+    ]
+  },
+  "mine/register-needtem.html": {
+    "resources": [
+      "js/own.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/jquery-3.1.1.min.js",
+      "js/bmob-min.js",
+      "js/app.js",
+      "js/bmobSocketIo.js",
+      "js/bmob.js",
+      "js/bmobSocketIo-min.js",
+      "css/own.css",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "fonts/mui.ttf"
+    ]
+  },
+  "mine/forget-psd-needtem.html": {
+    "resources": [
+      "js/own.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "js/jquery-3.1.1.min.js",
+      "fonts/mui.ttf",
+      "js/bmob.js",
+      "js/bmob-min.js",
+      "js/bmobSocketIo-min.js",
+      "js/bmobSocketIo.js"
+    ]
+  },
+  "Home/product-detail-needtem.html": {
+    "resources": [
+      "img/detail/2.jpg",
+      "img/detail/0.jpg",
+      "css/mui.min.css",
+      "img/detail/1.jpg",
+      "img/detail/4.jpg",
+      "img/detail/3.jpg",
+      "js/own.js",
+      "js/mui.min.js",
+      "img/3.jpg",
+      "fonts/mui.ttf",
+      "css/own.css",
+      "img/touxiang.jpg",
+      "css/iconfont.css",
+      "img/ic_book1.jpg"
+    ]
+  },
+  "mine/register.html": {
+    "resources": [
+      "js/app.js",
+      "js/jquery-3.1.1.min.js",
+      "js/own.js",
+      "js/bmobSocketIo.js",
+      "js/bmob-min.js",
+      "mine/register.html",
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf"
+    ],
+    "refer": [
+      "mine/register.html"
+    ]
+  },
+  "template-main-second.html": {
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ]
+  },
+  "mine/center.html": {
+    "resources": [
+      "js/app.js",
+      "css/own.css",
+      "js/jquery-3.1.1.min.js",
+      "js/own.js",
+      "js/mui.min.js",
+      "img/touxiang.jpg",
+      "js/bmobSocketIo.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/bmob-min.js",
+      "fonts/iconfont.ttf",
+      "mine/change-address-needtem.html"
+    ],
+    "refer": [
+      "mine/change-address-needtem.html",
+      "mine/forget-psd-needtem.html",
+      "barItem/add.html",
+      "center/nickname.html",
+      "center/change-psd-needtem.html",
+      "center/sex.html",
+      "center/bind-phone.html",
+      "center/bind-email.html"
+    ]
+  },
+  "center/change-psd-needtem.html": {
+    "resources": [
+      "css/own.css",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/own.js",
+      "fonts/iconfont.ttf",
+      "js/bmob.js",
+      "js/jquery-3.1.1.min.js",
+      "fonts/mui.ttf",
+      "js/bmob-min.js"
+    ]
+  },
+  "center/sex.html": {
+    "resources": [
+      "css/own.css",
+      "js/own.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/bmob.js"
+    ]
+  },
+  "center/nickname.html": {
+    "resources": [
+      "css/own.css",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "js/own.js",
+      "js/mui.min.js",
+      "js/bmob.js",
+      "js/jquery-3.1.1.min.js",
+      "js/bmob-min.js"
+    ]
+  },
+  "mine/bind-phone.html": {
+    "resources": [
+      "js/bmob.js",
+      "css/own.css",
+      "js/jquery-3.1.1.min.js",
+      "js/own.js",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/bmob-min.js",
+      "fonts/iconfont.ttf",
+      "fonts/mui.ttf"
+    ]
+  },
+  "mine/bind-email.html": {
+    "resources": [
+      "js/bmob.js",
+      "css/own.css",
+      "js/jquery-3.1.1.min.js",
+      "js/own.js",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/bmob-min.js",
+      "fonts/iconfont.ttf",
+      "fonts/mui.ttf"
+    ]
+  },
+  "mine/address-needtem.html": {
+    "resources": [
+      "css/own.css",
+      "js/mui.picker.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/mui.picker.min.css",
+      "js/city.data-3.js",
+      "js/own.js",
+      "js/mui.min.js",
+      "js/bmobSocketIo.js",
+      "js/jquery-3.1.1.min.js",
+      "js/bmob-min.js"
+    ]
+  },
+  "center/bind-phone.html": {
+    "resources": [
+      "js/bmob.js",
+      "css/own.css",
+      "js/jquery-3.1.1.min.js",
+      "js/own.js",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/bmob-min.js",
+      "fonts/iconfont.ttf"
+    ]
+  },
+  "center/bind-email.html": {
+    "resources": [
+      "js/bmob.js",
+      "css/own.css",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "js/jquery-3.1.1.min.js",
+      "js/own.js",
+      "js/mui.min.js",
+      "js/bmob-min.js"
+    ]
+  },
+  "Home/product-detail.html": {
+    "resources": [
+      "css/mui.min.css",
+      "img/3.jpg",
+      "css/own.css",
+      "js/own.js",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "img/touxiang.jpg",
+      "fonts/mui.ttf",
+      "img/ic_book1.jpg",
+      "fonts/iconfont.ttf"
+    ]
+  }
 }

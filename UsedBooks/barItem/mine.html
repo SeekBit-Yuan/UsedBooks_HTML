@@ -48,23 +48,18 @@
 
 			<ul class="mui-table-view" style="margin-top: 8px;">
 				<li class="mui-table-view-cell">
+					<a id="myfavorite" class="mui-navigate-right" href="../mine/my-order-needtem.html">
+						<span class="mui-icon iconfont icon-biaoxing"></span> 我的收藏
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="../mine/my-order-needtem.html">
-						<span class="mui-icon iconfont icon-biaoxing"></span> 我的订单
+						<span class="mui-icon iconfont icon-wodedingdan"></span> 我的订单
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a id="changeaddress" class="mui-navigate-right" href="../mine/change-address-needtem.html">
-						<span class="mui-icon iconfont icon-zuobiao"></span> 修改地址
-					</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a id="changeaddress" class="mui-navigate-right" href="../mine/change-address-needtem.html">
-						<span class="mui-icon iconfont icon-shoujibangding"></span> 绑定手机
-					</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a id="changeaddress" class="mui-navigate-right" href="../mine/change-address-needtem.html">
-						<span class="mui-icon iconfont icon-tubiao22"></span> 绑定邮箱
+						<span class="mui-icon iconfont icon-zuobiao"></span> 地址管理
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -90,6 +85,8 @@
 		</div>
 		<script type="text/javascript" src="../js/mui.min.js"></script>
 		<script type="text/javascript" src="../js/own.js"></script>
+		<script src="../js/bmobSocketIo.js"></script>
+		<script src="../js/bmob-min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
 			mui.init({
 				swipeBack: false
@@ -120,13 +117,33 @@
 				addListevent();
 				//点击头像事件
 				addHeadevent();
+
 				//接收登录成功事件
 				window.addEventListener('loginSuccess', function() {
+
+					var account = localStorage.getItem('user');
+					var password = localStorage.getItem('password');
+
+					var user = Bmob.User.logIn(account, password, {
+						success: function(user) {
+							var query = new Bmob.Query(Bmob.User);
+							query.get(user.id, {
+								success: function(user) {
+									touxiangword.innerText = user.get("nickname");
+									return;
+								},
+								error: function(object, error) {
+									alert("个人信息获取失败");
+									return;
+								}
+							});
+						}
+					});
+
 					//登出按钮显示出来 头像图片显示出来名字显示出来
 					logoutBtn.style.display = 'block';
 					touxiangimg.style.display = 'none';
 					trueimg.style.display = 'inline';
-					touxiangword.innerText = "测试号";
 					touxiangword.style.color = 'white';
 				}, false);
 
@@ -138,8 +155,10 @@
 							trueimg.style.display = 'none';
 							logoutBtn.style.display = 'none';
 							touxiangimg.style.display = 'inline';
+							touxiangword.innerText = "请登录";
 							touxiangword.style.color = 'white';
 							localStorage.removeItem('user');
+							localStorage.removeItem('password');
 							mui.toast("退出登录")
 							//发出退出登录给wishlish和cart页面
 							var cartwebview = plus.webview.getWebviewById('barItem/cart.html');
@@ -210,6 +229,10 @@
 					});
 				});
 			}
+
+			//服务器
+			//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
+			Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
 		</script>
 	</body>
 
