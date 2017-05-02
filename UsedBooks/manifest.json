@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -89,7 +89,7 @@
         },
         "NativeObj":{
         	"description": "原生对象"
-        }
+        },"Share":{},"Payment":{},"Audio":{}
 	},
 	"plus": {
 		"splashscreen": {
@@ -112,7 +112,7 @@
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+				"permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
 			},
 			"orientation": ["portrait-primary", "portrait-secondary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
 			"icons": {
@@ -203,7 +203,8 @@
 					"barItem/add.html",
 					"barItem/test.html",
 					"template.html",
-					"mine/login.html"
+					"mine/login.html",
+					"guide.html"
 				],
 				"priority": 0
 			},
@@ -288,14 +289,18 @@
 					"mine/my-order-needtem.html",
 					"mine/change-address-needtem.html",
 					"js/bmobSocketIo.js",
-					"js/bmob-min.js"
+					"js/bmob-min.js",
+					"img/touxiang1.jpg",
+					"js/av-min.js",
+					"js/av.js"
 				],
 				"refer": [
 					"mine/change-email-needtem.html",
 					"mine/change-psd-needtem.html",
 					"mine/center.html",
 					"mine/bind-phone.html",
-					"mine/bind-email.html"
+					"mine/bind-email.html",
+					"mine/setting.html"
 				],
 				"priority": 0
 			},
@@ -373,7 +378,9 @@
 					"js/bmob-min.js",
 					"js/bmob.js",
 					"js/bmobSocketIo-min.js",
-					"js/bmobSocketIo.js"
+					"js/bmobSocketIo.js",
+					"js/av-min.js",
+					"js/av.js"
 				],
 				"refer": [
 					"mine/register-needtem.html",
@@ -401,7 +408,8 @@
 					"css/mui.min.css",
 					"css/own.css",
 					"css/iconfont.css",
-					"img/50.jpg"
+					"img/50.jpg",
+					"js/arttmpl.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -471,7 +479,11 @@
 					"js/own.js",
 					"js/mui.min.js",
 					"css/iconfont.css",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"css/mui.imageviewer.css",
+					"js/mui.imageViewer.js",
+					"images/logo.png",
+					"js/arttmpl.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -544,7 +556,9 @@
 					"css/mui.min.css",
 					"js/mui.min.js"
 				],
-				"refer": [],
+				"refer": [
+					"mine/verfication.html"
+				],
 				"priority": 0
 			},
 			"template-main-second.html": {
@@ -569,7 +583,8 @@
 					"css/mui.min.css",
 					"js/bmob-min.js",
 					"fonts/iconfont.ttf",
-					"mine/change-address-needtem.html"
+					"mine/change-address-needtem.html",
+					"img/touxiang1.jpg"
 				],
 				"refer": [
 					"mine/forget-psd-needtem.html",
@@ -595,7 +610,9 @@
 					"fonts/mui.ttf",
 					"js/bmob-min.js"
 				],
-				"refer": [],
+				"refer": [
+					"mine/login.html"
+				],
 				"priority": 0
 			},
 			"center/sex.html": {
@@ -716,9 +733,110 @@
 					"img/touxiang.jpg",
 					"fonts/mui.ttf",
 					"img/ic_book1.jpg",
-					"fonts/iconfont.ttf"
+					"fonts/iconfont.ttf",
+					"js/bmobSocketIo.js",
+					"js/jquery-3.1.1.min.js",
+					"js/bmob-min.js"
+				],
+				"refer": [
+					"mine/login.html",
+					"bookmanage/chat.html",
+					"bookmanage/chat1.html"
+				],
+				"priority": 0
+			},
+			"mine/setting.html": {
+				"resources": [
+					"css/feedback.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/feedback.js",
+					"js/mui.view.js",
+					"css/own.css",
+					"images/logo.png"
+				],
+				"refer": [
+					"center/nickname.html",
+					"center/bind-phone.html",
+					"center/bind-email.html",
+					"center/sex.html",
+					"center/change-psd-needtem.html",
+					"mine/guide.html"
+				],
+				"priority": 0
+			},
+			"mine/verfication.html": {
+				"resources": [
+					"css/mui.min.css"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"bookmanage/chat.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/mui.imageViewer.js",
+					"images/logo.png",
+					"css/mui.imageviewer.css",
+					"js/arttmpl.js",
+					"js/realtime.browser.js",
+					"js/av-min.js",
+					"js/av.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"bookmanage/chat1.html": {
+				"resources": [
+					"js/mui.imageViewer.js",
+					"css/mui.min.css",
+					"css/mui.imageviewer.css",
+					"js/realtime.browser.js",
+					"js/arttmpl.js",
+					"css/own.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/av-min.js",
+					"js/av.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"mine/guide.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"guide.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"main.html": {
+				"resources": [
+					"js/app.js",
+					"css/own.css",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"barItem/home.html",
+					"fonts/iconfont.ttf",
+					"js/mui.enterfocus.js"
+				],
+				"refer": [
+					"barItem/category.html",
+					"guide.html",
+					"barItem/mine.html",
+					"template.html",
+					"barItem/cart.html",
+					"mine/login.html",
+					"barItem/test.html"
+				],
 				"priority": 0
 			}
 		},

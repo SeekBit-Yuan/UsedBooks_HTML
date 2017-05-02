@@ -48,10 +48,6 @@
 		<script src="../js/mui.min.js" charset="UTF-8"></script>
 		<script src="../js/own.js" charset="UTF-8"></script>
 		<script src="../js/jquery-3.1.1.min.js"></script>
-		<script src="../js/bmob.js"></script>
-		<script src="../js/bmob-min.js"></script>
-		<script src="../js/bmobSocketIo.js"></script>
-		<script src="../js/bmobSocketIo-min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
 			mui.init({
 				swipeBack: true
@@ -62,19 +58,6 @@
 				sub.addEventListener('tap', function() {
 
 					var email = $("#email").val();
-					//					var regex_phone = /0?(13|14|15|18)[0-9]{9}/;
-					//
-					//					if(!regex_phone.test(email)) {
-					//						alert("请输入正确手机号码！");
-					//						return;
-					//					}
-					//					Bmob.Sms.requestSmsCode({
-					//						"mobilePhoneNumber": "13798542673"
-					//					}).then(function(obj) {
-					//						alert("smsId:" + obj.smsId); //
-					//					}, function(err) {
-					//						alert("发送失败:" + err);
-					//					});
 					var regex_email = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 
 					if($.trim(email) == "") {
@@ -85,21 +68,18 @@
 						alert("请输入正确的邮箱地址！");
 						return;
 					}
-					Bmob.User.requestPasswordReset(email, {
-						success: function() {
-							alert("找回密码邮件已发送至邮箱，请前往邮箱找回密码");
-							mui.back();
-						},
-						error: function(error) {
-							alert("请确认您填写正确绑定邮箱！");
-						}
-					});
+//					Bmob.User.requestPasswordReset(email, {
+//						success: function() {
+//							alert("找回密码邮件已发送至邮箱，请前往邮箱找回密码");
+//							mui.back();
+//						},
+//						error: function(error) {
+//							alert("请确认您填写正确绑定邮箱！");
+//						}
+//					});
 
 				}, false);
 
-				//服务器
-				//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
-				Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
 			});
 		</script>
 	</body>

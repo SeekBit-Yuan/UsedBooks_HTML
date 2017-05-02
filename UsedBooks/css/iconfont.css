@@ -1,6 +1,6 @@
 
 @font-face {font-family: "iconfont";
-  src: url('../fonts/iconfont.ttf') format('truetype');/* IE6-IE8 */
+  src: url('../fonts/iconfont.ttf') format('truetype'); /* IE6-IE8 */
 }
 
 .iconfont {
@@ -12,6 +12,8 @@
 }
 
 .icon-tubiao22:before { content: "\e6f7"; }
+
+.icon-shezhi:before { content: "\e61a"; }
 
 .icon-queren01:before { content: "\e651"; }
 
@@ -50,6 +52,8 @@
 .icon-user:before { content: "\e6c3"; }
 
 .icon-xinmima:before { content: "\e62b"; }
+
+.icon-sousuo:before { content: "\e8ba"; }
 
 .icon-lianxi:before { content: "\e79d"; }
 

@@ -40,7 +40,7 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-zhanghao01"></span></label>
-						<input id="account" type="text" class="mui-input-clear" placeholder="手机号/邮箱" />
+						<input id="account" type="text" class="mui-input-clear" placeholder="手机号" />
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-mima1"></span></label>
@@ -58,18 +58,24 @@
 
 		</div>
 
+		<script src="../js/av.js"></script>
+		<script src="../js/av-min.js"></script>
 		<script src="../js/mui.min.js" charset="UTF-8"></script>
 		<script src="../js/own.js" charset="UTF-8"></script>
 		<script src="../js/jquery-3.1.1.min.js"></script>
 		<script src="../js/ajax.js" charset="UTF-8"></script>
-		<script src="../js/bmob.js"></script>
-		<script src="../js/bmob-min.js"></script>
-		<script src="../js/bmobSocketIo.js"></script>
-		<script src="../js/bmobSocketIo-min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
 			mui.init({
 				swipeBack: true
 			});
+
+			var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
+			var APP_KEY = 'RLnd5XpcckbBrJDtXQdXSUBs';
+			AV.init({
+				appId: APP_ID,
+				appKey: APP_KEY,
+			});
+
 			var login;
 			var loginWebview;
 			mui.plusReady(function() {
@@ -79,87 +85,72 @@
 				if(localStorage.getItem('user')) {
 					account.value = localStorage.getItem('user');
 				}
+
 				//登陆的点击事件
 				login.addEventListener('tap', function() {
 
 					var account = $("#account").val();
 					var password = $("#password").val();
+					var regex_phone = /^((\(\d{2,3}\))|(\d{3}\-))?13\d{9}$/;
+					var regex_password = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/;
 
 					if($.trim(account) == "") {
-						alert("请输入用户名！");
+						alert("请输入手机号码！");
+						return;
+					} else if(!regex_phone.test(account)) {
+						alert("请输入正确手机号码！");
 						return;
 					}
+
 					if($.trim(password) == "") {
 						alert("请输入密码！");
 						return;
+					} else if(!regex_password.test(password)) {
+						alert("密码应为6~16位数字和字母组合！");
+						return;
 					}
 
-					var query1 = new Bmob.Query(Bmob.User);
-					query1.equalTo("username", account);
-					var query2 = new Bmob.Query(Bmob.User);
-					query2.equalTo("mobilePhoneNumber", account);
-					var query = Bmob.Query.or(query1,query2);
-					query.find({
-						success: function(results) {
-							if(results.length == 0) {
-								alert("该用户未注册！请前往注册！");
-								return;
-							} else if(results.length > 0){
-								Bmob.User.logIn(account, password, {
-									success: function(user) {
-										//将两个数据存放起来，第一个是等出之后删除，第二个只要登录之后就会记录保存
-										localStorage.setItem('user', account);
-										localStorage.setItem('password', password);
-										mui.back();
-										mui.toast('登录成功');
-									},
-									error: function(user, error) {
-										alert("用户名或密码错误，请重新输入！ ");
-									}
-								});
-							}
-						},
-						error: function(user, error) {
-							alert("该用户未注册！请前往注册！");
-							return;
-						}
-					});
-
-					//添加事件接收close事件，并且要判断是否已经登录成功，然后页面close，因为login页面是预先加载的页面
-					//在这里向需要的页面发送消息事件通知已经登录做响应的处理
-					loginWebview.addEventListener('hide', function() {
-						mui.each(plus.webview.all(), function(index, item) {
-							console.log(item.id)
-						})
-						var cartwebview = plus.webview.getWebviewById('barItem/cart.html');
-						var minewebview = plus.webview.getWebviewById('barItem/mine.html');
-						var xinyuandanwebview = plus.webview.getWebviewById('barItem/wishList.html');
-						mui.fire(cartwebview, 'loginSuccess', {});
-						mui.fire(minewebview, 'loginSuccess', {});
-						mui.fire(xinyuandanwebview, 'loginSuccess', {});
-						loginWebview.close();
-					}, false);
-				}, false);
-				//注册按钮的点击事件
-				register.addEventListener('tap', function() {
-					mui.openWindow({
-						id: 'mine/register-needtem.html',
-						url: 'register-needtem.html'
-					});
-				}, false);
-				//注册按钮的点击事件
-				repsd.addEventListener('tap', function() {
-					mui.openWindow({
-						id: 'mine/forget-psd-needtem.html',
-						url: 'forget-psd-needtem.html'
+					AV.User.logIn(account, password).then(function(loginedUser) {
+						//将两个数据存放起来，第一个是等出之后删除，第二个只要登录之后就会记录保存
+						localStorage.setItem('user', account);
+						localStorage.setItem('password', password);
+						mui.back();
+						mui.toast('登录成功');
+					}, function(error) {
+						alert("用户名或密码错误，请重新输入！ ");
 					});
 				}, false);
 
-				//服务器
-				//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
-				Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
-
-			});
+				//添加事件接收close事件，并且要判断是否已经登录成功，然后页面close，因为login页面是预先加载的页面
+				//在这里向需要的页面发送消息事件通知已经登录做响应的处理
+				loginWebview.addEventListener('hide', function() {
+					mui.each(plus.webview.all(), function(index, item) {
+						console.log(item.id)
+					})
+					var cartwebview = plus.webview.getWebviewById('barItem/cart.html');
+					var minewebview = plus.webview.getWebviewById('barItem/mine.html');
+					var xinyuandanwebview = plus.webview.getWebviewById('barItem/wishList.html');
+					mui.fire(cartwebview, 'loginSuccess', {});
+					mui.fire(minewebview, 'loginSuccess', {});
+					mui.fire(xinyuandanwebview, 'loginSuccess', {});
+					loginWebview.close();
+				}, false);
+			}, false);
+			//注册按钮的点击事件
+			register.addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'mine/register-needtem.html',
+					//						url: 'register-needtem.html'
+					url: 'register.html'
+				});
+			}, false);
+			//注册按钮的点击事件
+			repsd.addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'mine/forget-psd-needtem.html',
+					url: 'forget-psd-needtem.html'
+				});
+			}, false);
 		</script>
 	</body>
 

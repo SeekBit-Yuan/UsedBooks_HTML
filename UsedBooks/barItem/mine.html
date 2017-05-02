@@ -40,7 +40,7 @@
 				<div class="touxiang">
 					<div>
 						<span id="touxiangimg" class="mui-icon mui-icon-person" style="font-size: 3.8em; color: white;"></span>
-						<img id="trueimg" src="../img/touxiang.jpg" style="width: 100%; height: 100%; border-radius: 50%;" />
+						<img id="trueimg" src="../img/touxiang1.jpg" style="width: 100%; height: 100%; border-radius: 50%;" />
 					</div>
 					<span id="touxiangword">请登录</span>
 				</div>
@@ -63,15 +63,20 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
+					<a id="changeaddress" class="mui-navigate-right" href="../mine/setting.html">
+						<span class="mui-icon iconfont icon-shezhi"></span> 设置中心
+					</a>
+				</li>
+				<!--<li class="mui-table-view-cell">
 					<a id="changeaddress" class="mui-navigate-right" href="../mine/center.html">
 						<span class="mui-icon iconfont icon-center"></span> 个人信息
 					</a>
-				</li>
+				</li>-->
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 8px;">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="../mine/feedback-needtem.html">
-						<span class="mui-icon iconfont icon-kefu"></span> 用户反馈
+						<span class="mui-icon iconfont icon-kefu"></span> 智能客服
 					</a>
 				</li>
 			</ul>
@@ -83,11 +88,18 @@
 			</ul>
 
 		</div>
+		<script src="../js/av.js"></script>
+		<script src="../js/av-min.js"></script>
 		<script type="text/javascript" src="../js/mui.min.js"></script>
 		<script type="text/javascript" src="../js/own.js"></script>
-		<script src="../js/bmobSocketIo.js"></script>
-		<script src="../js/bmob-min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
+			var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
+			var APP_KEY = 'RLnd5XpcckbBrJDtXQdXSUBs';
+			AV.init({
+				appId: APP_ID,
+				appKey: APP_KEY,
+			});
+
 			mui.init({
 				swipeBack: false
 			});
@@ -124,21 +136,14 @@
 					var account = localStorage.getItem('user');
 					var password = localStorage.getItem('password');
 
-					var user = Bmob.User.logIn(account, password, {
-						success: function(user) {
-							var query = new Bmob.Query(Bmob.User);
-							query.get(user.id, {
-								success: function(user) {
-									touxiangword.innerText = user.get("nickname");
-									return;
-								},
-								error: function(object, error) {
-									alert("个人信息获取失败");
-									return;
-								}
-							});
-						}
+					AV.User.logIn(account, password).then(function(loginedUser) {
+						touxiangword.innerText = loginedUser.get("nickname");
+					}).catch(function(error) {
+						// 异常处理
+						alert("个人信息获取失败");
+						return;
 					});
+
 
 					//登出按钮显示出来 头像图片显示出来名字显示出来
 					logoutBtn.style.display = 'block';
@@ -229,10 +234,6 @@
 					});
 				});
 			}
-
-			//服务器
-			//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
-			Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
 		</script>
 	</body>
 

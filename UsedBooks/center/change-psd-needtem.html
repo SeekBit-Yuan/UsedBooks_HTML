@@ -52,66 +52,61 @@
 			</div>
 		</div>
 
+		<script src="../js/av.js"></script>
+		<script src="../js/av-min.js"></script>
 		<script src="../js/mui.min.js" charset="UTF-8"></script>
 		<script src="../js/own.js" charset="UTF-8"></script>
 		<script src="../js/ajax.js" charset="UTF-8"></script>
-		<script src="../js/bmob.js"></script>
-		<script src="../js/bmob-min.js"></script>
 		<script src="../js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
+			var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
+			var APP_KEY = 'RLnd5XpcckbBrJDtXQdXSUBs';
+			AV.init({
+				appId: APP_ID,
+				appKey: APP_KEY,
+			});
+
 			mui.init({
 				swipeBack: true
 			});
 
 			mui.plusReady(function() {
 				sub.addEventListener('tap', function() {
-					
+
 					var account = localStorage.getItem('user');
 					var password = $("#password").val();
 					var newpassword = $("#newpassword").val();
 					var repassword = $("#repassword").val();
-					
+
 					if($.trim(password) == "") {
 						alert("请输入原密码！");
 						return;
-					}else if($.trim(newpassword) == "") {
+					} else if($.trim(newpassword) == "") {
 						alert("请输入新密码！");
 						return;
-					}else if($.trim(repassword) == "") {
+					} else if($.trim(repassword) == "") {
 						alert("请输入确认新密码！");
 						return;
-					}else if($.trim(newpassword) != $.trim(repassword)) {
+					} else if($.trim(newpassword) != $.trim(repassword)) {
 						alert("两次输入密码必须一致！");
 						return;
 					}
 
-					var user = Bmob.User.logIn(account, password, {
-						success: function(user) {
-							user.set("password", newpassword);
-							user.save(null, {
-								success: function(user) {
-									alert("密码修改成功！退出后重新登录生效！");
-									mui.back();
-								},
-								error: function(user, error) {
-									alert("密码修改失败！请稍后重试！");
-									return;
-								}
-							});
-						},
-						error: function() {
-							alert("原密码错误！请重新输入");
-							return;
-						}
+					AV.User.logIn(account, password).then(function(loginedUser) {
+						loginedUser.set('password', newpassword);
+						return loginedUser.save().then(function(result) {
+							alert("密码修改成功！退出登录后生效！");
+							mui.back();
+						});
+					}).catch(function(error) {
+						// 异常处理
+						alert("原密码错误！请重新输入");
+						return;
 					});
 
 				}, false);
 
 			});
-
-			//服务器
-			//		BmobSocketIo.initialize("e9978deb922a3ee549d8ca3266edff09");
-			Bmob.initialize("b551c742d81f62b5689f55ea822fd745", "dc9269914044ae5017b748972cb5e92c");
 		</script>
 
 	</body>

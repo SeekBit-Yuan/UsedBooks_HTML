@@ -166,35 +166,37 @@
 			<h1 class="mui-title" style="font-weight: bold;">图书详情</h1>
 		</header>
 		<div class="mui-content">
-			<li class="mui-table-view-cell">
+			<li class="mui-table-view-cell" style="padding-bottom: 5px;">
 				<div class="mui-table">
-					<img id="trueimg" src="../img/ic_book1.jpg" style="background:blue;width:100%;height:100%;"/>
+					<img id="trueimg" src="../img/ic_book1.jpg" style="background:blue;width:100%;height:100%;" />
 				</div>
 			</li>
 			<li class="mui-table-view-cell">
 				<div class="mui-table">
-					<div class="mui-table-cell mui-col-xs-10">
-						<h5 class="own-black-color mui-ellipsis-2" style="height: 30px;line-height: 30px;">书名</h5>
-						<h5 class="own-main-color">¥28.00</h5>
-						<h6 class="own-text-through">¥38.00</h6>
+					<div class="mui-table-cell mui-col-xs-10" style="width: 50%;">
+						<h5 id="bname" class="own-black-color mui-ellipsis-2" style="height: 30px;line-height: 30px;font-size: 20px;"></h5>
+						<h6 id="author" class="own-text" style="font-size: 15px;"></h6>
+						<h6 id="publish" class="own-text" style="font-size: 15px;"></h6>
+						<h5 id="cur_price" class="own-main-color" style="font-size: 18px;"></h5>
+						<h6 id="price" class="own-text-through" style="font-size: 15px;"></h6>
 					</div>
-				</div>
+					<div class="mui-table-cell mui-col-xs-2 mui-text-right" style="width: 50%;">
+						<div class="borderleft">
+							<h6 id="bdesc" class="own-text" style="font-size: 12px;"></h6>
+						</div>
+					</div>
 			</li>
 			<li class="mui-table-view-cell">
 				<p class="evaluateTitle">宝贝评价</p>
 				<div>
-					<span class="evaluate">味道好闻（46）</span>
-					<span class="evaluate">服务态度好（2）</span>
-					<span class="evaluate">是正品（1）</span>
-					<span class="evaluate">包装严实（6）</span>
-					<span class="evaluate">快递不错（90）</span>
-					<span class="evaluate">质量不错（20）</span>
+					<!--<span id="comment_value" class="evaluate"></span>-->
+					<h6 id="comment_value" class="own-text" style="font-size: 15px;"></h6>
 				</div>
 			</li>
 			<li class="mui-table-view-cell">
 				<div class="evaluaterHead">
 					<img src="../img/3.jpg">
-					<span class="mui-ellipsis">[妮妮的店铺]全部正品</span>
+					<span id="nickname" class="mui-ellipsis">[妮妮的店铺]全部正品</span>
 				</div>
 				<div class="mui-table">
 					<div class="mui-table-cell mui-col-xs-4">发货速度：4.8</div>
@@ -205,52 +207,244 @@
 			<li class="mui-table-view-cell">
 				<div class="evaluaterHead">
 					<img src="../img/touxiang.jpg" />
-					<span>王**小明</span>
+					<span id="nickname">王**小明</span>
 				</div>
 				<p class="evaluteContent">颜色和图片上的一样，没有色差，穿上以后也没有想象中的显黑，反而显白,颜色和图片上的一样，没有色差，穿上以后也没有想象中的显黑，反而显白</p>
 				<p class="evaluteMsg">2015－01-02,颜色分类：风之恋男 Q版5ml 净含量：其他/other</p>
-			</li><li class="mui-table-view-cell moreEvaluate">
+			</li>
+			<li class="mui-table-view-cell moreEvaluate">
 				<a></a>
 			</li>
 			<li class="mui-table-view-cell moreEvaluate">
 				<a href="#">点击查看更多评价</a>
 			</li>
-			</li><li class="mui-table-view-cell moreEvaluate" style="padding-bottom: 50px;">
+			</li>
+			<li class="mui-table-view-cell moreEvaluate" style="padding-bottom: 50px;">
 				<a></a>
 			</li>
 
 			<nav class="mui-bar mui-bar-tab ">
-				<a class="mui-tab-item mui-active" href="barItem/home.html" style="width: 14%;">
+				<a id="chat" class="mui-tab-item mui-active" href="barItem/home.html" style="width: 14%;">
 					<span class="mui-icon iconfont icon-lianxi" style="font-size: 24px;color: gray;"></span>
 					<span class="mui-tab-label" style="font-size: 12px;color: gray;">卖家</span>
 				</a>
-				<a class="mui-tab-item" href="barItem/category.html" style="width: 14%;">
-					<span class="mui-icon iconfont icon-biaoxing" style="font-size: 24px;color: gray;"></span>
-					<span class="mui-tab-label" style="font-size: 12px;color: gray;">收藏</span>
+				<a id="collection" class="mui-tab-item" href="barItem/category.html" style="width: 14%;">
+					<span id="collection_icon" class="mui-icon iconfont icon-biaoxing" style="font-size: 24px;color: gray;"></span>
+					<span id="collection_text" class="mui-tab-label" style="font-size: 12px;color: gray;">收藏</span>
 				</a>
 				<a class="mui-tab-item" href="barItem/cart.html" style="width: 16%;">
-					<span class="mui-icon iconfont icon-gouwuche" style="font-size: 24px;color: gray;"><span class="mui-badge">3</span></span>
+					<span class="mui-icon iconfont icon-gouwuche" style="font-size: 24px;color: gray;"><span id="cartNum" class="mui-badge">0</span></span>
 					<span class="mui-tab-label" style="font-size: 12px;color: gray;">购物车</span>
 				</a>
-				<a class="mui-tab-item" href="barItem/test.html" style="width:28%;background-color:orange;">
+				<a id="addCart" class="mui-tab-item" href="barItem/test.html" style="width:28%;background-color:orange;">
 					<span class="mui-tab-label" style="font-size: 17px;color: white;">加入购物车</span>
 				</a>
-				<a class="mui-tab-item" href="barItem/mine.html" style="width:28%;background-color:red">
+				<a id="buy" class="mui-tab-item" href="barItem/mine.html" style="width:28%;background-color:red">
 					<span class="mui-tab-label" style="font-size: 18px;color: white;">立即购买</span>
 				</a>
 			</nav>
-		</div>
+			</div>
 
-		<script type="text/javascript" src="../js/mui.min.js"></script>
-		<script type="text/javascript" src="../js/own.js"></script>
-		<script type="text/javascript" charset="UTF-8">
-			mui.init({
-				swipeBack: false
-			});
-			mui.plusReady(function() {
+			<script type="text/javascript" src="../js/mui.min.js"></script>
+			<script type="text/javascript" src="../js/own.js"></script>
+			<script src="../js/jquery-3.1.1.min.js"></script>
+			<script type="text/javascript" charset="UTF-8">
+				mui.init({
+					swipeBack: false
+				});
+				mui.plusReady(function() {
+					//初始化图书详情
+//					setBookDetail();
 
-			})
-		</script>
+					//初始化评论详情
+//					setComment();
+
+					//初始化导航栏
+					setBar();
+
+				})
+
+//				function setBookDetail() {
+//					var id = 50;
+//					var Book = Bmob.Object.extend("book");
+//					var query = new Bmob.Query(Book);
+//					query.equalTo("id", id);
+//					query.first({
+//						success: function(Book) {
+//							query.get(Book.id, {
+//								success: function(Book) {
+//									// 查询成功，调用get方法获取对应属性的值
+//									bname = document.getElementById("bname").innerText = Book.get("bname");
+//									author = document.getElementById("author").innerText = Book.get("author");
+//									publish = document.getElementById("publish").innerText = Book.get("publish");
+//									cur_price = document.getElementById("cur_price").innerText = Book.get("cur_price");
+//									price = document.getElementById("price").innerText = Book.get("price");
+//									bdesc = document.getElementById("bdesc").innerText = Book.get("bdesc");
+//									return;
+//								},
+//								error: function(Book, error) {
+//									alert("图书详情获取失败！");
+//									return;
+//								}
+//							});
+//
+//						}
+//
+//					});
+//				}
+//
+//				function setComment() {
+//					var bid = 50;
+//					var Comment = Bmob.Object.extend("comments");
+//					var query = new Bmob.Query(Comment);
+//					query.equalTo("bid", bid);
+//					query.first({
+//						success: function(Comment) {
+//							query.get(Comment.id, {
+//								success: function(Comment) {
+//									// 查询成功，调用get方法获取对应属性的值
+//									comment_value = document.getElementById("comment_value").innerText = Comment.get("content");
+//									return;
+//								},
+//								error: function(Comment, error) {
+//									alert("图书评论获取失败！");
+//									return;
+//								}
+//							});
+//						},
+//						error: function(Comment, error) {
+//							alert("图书评论查询失败！");
+//							return;
+//						}
+//
+//					});
+//				}
+
+				function setBar() {
+					account = localStorage.getItem('user');
+					password = localStorage.getItem('password');
+
+//					Bmob.User.logIn(account, password, {
+//						success: function(user) {
+//							var uid = user.get("uid");
+//							var Cart = Bmob.Object.extend("cart");
+//							var query = new Bmob.Query(Cart);
+//							query.equalTo("uid", uid);
+//							query.count({
+//								success: function(count) {
+//									// 查询成功，返回记录数量
+//									cratNum = document.getElementById("cartNum").innerText = count;
+//								},
+//								error: function(error) {
+//									// 查询失败
+//									cratNum = document.getElementById("cartNum").innerText = 0;
+//								}
+//							});
+//
+//						},
+//						error: function(count, error) {
+//							cratNum = document.getElementById("cartNum").innerText = 0;
+//						}
+//					});
+
+					addCart.addEventListener('tap', function() {
+						if(localStorage.getItem('user')) {
+							var account = localStorage.getItem('user');
+							var password = localStorage.getItem('password');
+//							var user = Bmob.User.logIn(account, password, {
+//								success: function(user) {
+//									var uid = user.get("uid");
+//									var bid = 50;
+//									var date = new Date();
+//									var Cart = Bmob.Object.extend("cart");
+//									var cart = new Cart();
+//									cart.set("uid", uid);
+//									cart.set("bid", bid);
+//									cart.set("num", 1);
+//									cart.set("date", date);
+//									cart.save(null, {
+//										success: function(cart) {
+//											var Cart = Bmob.Object.extend("cart");
+//											var query = new Bmob.Query(Cart);
+//											query.equalTo("uid", uid);
+//											query.count({
+//												success: function(count) {
+//													// 查询成功，返回记录数量
+//													cratNum = document.getElementById("cartNum").innerText = count;
+//												}
+//											});
+//										},
+//										error: function(cart, error) {
+//											alert("加入购物车失败！");
+//										}
+//									});
+//								}
+//							});
+						} else {
+							alert("请先登录！");
+							mui.openWindow({
+								id: "mine/login.html",
+								url: "../mine/login.html"
+							});
+						}
+
+					}, false);
+					
+					collection.addEventListener("tap",function(){
+						if(localStorage.getItem('user')) {
+							var account = localStorage.getItem('user');
+							var password = localStorage.getItem('password');
+//							var user = Bmob.User.logIn(account, password, {
+//								success: function(user) {
+//									var uid = user.get("uid");
+//									var bid = 51;
+//									var date = new Date();
+//									var Favorites = Bmob.Object.extend("favorites");
+//									var favorites = new Favorites();
+//									favorites.set("uid", uid);
+//									favorites.set("bid", bid);
+//									favorites.set("date", date);
+//									favorites.save(null, {
+//										success: function(favorites) {
+//											collection_icon = document.getElementById("collection_icon");
+//											collection_icon.style.color = "#41CEA9";
+//											collection_text = document.getElementById("collection_text").innerText = "已收藏";
+//										},
+//										error: function(favorites, error) {
+//											alert("添加收藏失败！");
+//										}
+//									});
+//								}
+//							});
+						} else {
+							alert("请先登录！");
+							mui.openWindow({
+								id: "mine/login.html",
+								url: "../mine/login.html"
+							});
+						}
+						
+					},false);
+					
+					chat.addEventListener("tap",function(){
+						if(localStorage.getItem('user')) {
+							mui.openWindow({
+								id: "bookmanage/chat.html",
+//								url: "../bookmanage/chat.html"
+								url: "../bookmanage/chat1.html"
+							});
+						} else {
+							alert("请先登录！");
+							mui.openWindow({
+								id: "mine/login.html",
+								url: "../mine/login.html"
+							});
+						}
+						
+					},false);
+				}
+
+			</script>
 	</body>
 
 </html>

@@ -21,7 +21,10 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav own-main-background-color">
-			<h1 id="title" class="mui-title">首页</h1>
+			<h3 id="title" class="mui-title" style="color: #D8D8D8;">
+				<span class="mui-icon iconfont icon-sousuo" style="color: white;">
+				</span>&nbsp;&nbsp;&nbsp;搜索图书名称
+			</h3>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
 			<a id="defaultTab" class="mui-tab-item mui-active" href="barItem/home.html">
@@ -37,7 +40,8 @@
 				<span class="mui-tab-label">发布</span>
 			</a>
 			<a class="mui-tab-item" href="barItem/cart.html">
-				<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge">9</span></span>
+				<span class="mui-icon iconfont icon-gouwuche">
+				<span id="cartNum" class="mui-badge need-login">0</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</a>
 			<a class="mui-tab-item" href="barItem/mine.html">
@@ -60,14 +64,38 @@
 			var barItemWebviewArray = [];
 			var barItemArray = ['barItem/home.html', 'barItem/category.html', 'barItem/test.html', 'barItem/cart.html', 'barItem/mine.html'];
 			mui.plusReady(function() {
+				var launchFlag = plus.storage.getItem("launchFlag");
+				if(launchFlag) {
+					mui.openWindow({
+						url: "index.html",
+						id: "index",
+						extras: {
+							mark: "index" //额外的参数，仅仅是个标识，实际开发中不用；
+						}
+					});
+				} else {
+					mui.openWindow({
+						url: "guide.html",
+                        id: "guide"
+					});
+				}
+
 				//获取当前title和当前webview
 				navTitle = document.querySelector('.mui-title');
 				mainWebview = plus.webview.currentWebview();
+				needlogin = document.querySelector('.need-login');
 
 				plus.navigator.setStatusBarBackground("#41cea9");
 
 				//设置只支持竖屏幕显示
 				plus.screen.lockOrientation("portrait-primary");
+
+				//特殊：添加事件接收登录页面成功后发来的消息
+				window.addEventListener('loginSuccess', function() {
+					//页面成功后，要隐藏登录模块，然后去加载数据返回
+					needlogin.style.display = 'none';
+				}, false);
+
 				//初始化与index有关的页面
 				initIndexView();
 
@@ -90,6 +118,13 @@
 					}, 1000);
 					return false;
 				};
+
+				title.addEventListener("tap", function() {
+					mui.openWindow({
+						id: 'Home/search.html',
+						url: '../Home/search.html'
+					});
+				});
 			});
 
 			//初始化
@@ -162,12 +197,33 @@
 				localStorage.removeItem('user');
 				//判断是否已经登录成功//localstorage在页面关闭的时候也同样存在，sessionstorage页面关闭数据不存在
 				if(!localStorage.getItem('user')) {
+					needlogin.style.display = 'none';
 					mui.preload({
 						url: 'mine/login.html',
 						id: 'mine/login.html',
 						styles: {
 							top: '0px',
 							bottom: '0px'
+						}
+					});
+				} else {
+					var account = localStorage.getItem('user');
+					var password = localStorage.getItem('password');
+					var user = Bmob.User.logIn(account, password, {
+						success: function(user) {
+							var uid = user.get("uid");
+							var Cart = Bmob.Object.extend("cart");
+							var query = new Bmob.Query(Cart);
+							query.equalTo("uid", uid);
+							query.count({
+								success: function(count) {
+									// 查询成功，返回记录数量
+									cratNum = document.getElementById("cartNum").innerText = count;
+								}
+							});
+						},
+						error: function(cart, error) {
+							alert("获取购物车图书数量失败！");
 						}
 					});
 				}

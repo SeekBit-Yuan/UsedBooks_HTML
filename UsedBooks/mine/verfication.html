@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>注册</title>
+		<title>验证用户</title>
 		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/own.css" />
 		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
@@ -28,29 +28,22 @@
 			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
 			<span class="own-left-nav-color">取消</span>
 		</button>
-			<h1 class="mui-title" style="font-weight: bold;">快速注册</h1>
+			<h1 class="mui-title" style="font-weight: bold;">验证手机</h1>
 		</header>
 
 		<div class="mui-content">
 			<div class="mui-card" style="margin-top: 30px;">
 				<form class="mui-input-group">
 					<div class="mui-input-row">
-						<label><span class="mui-icon iconfont icon-user"></span></label>
-						<input id="account" class="mui-input-clear" type="text" placeholder="手机号" />
-					</div>
-					<div class="mui-input-row">
-						<label><span class="mui-icon iconfont icon-psw"></span></label>
-						<input id="password" class="mui-input-clear" type="password" placeholder="密码" />
-					</div>
-					<!--<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-shoujibangding"></span></label>
+						<!--<button id="send" class="mui-btn mui-btn-outlined mui-btn-positive" style="width:30%;margin:1px;float:right;">发送验证码</button>-->
 						<input type="button" id="send" value="发送验证码" class="mui-btn mui-btn-outlined mui-btn-positive" style="width:30%;margin:1px;float:right;">
 						<input id="verification" type="text" class="mui-input" style="width:40%;float:left;" placeholder="验证码">
-					</div>-->
+					</div>
 				</form>
 			</div>
 			<div class="mui-button-row" style="margin: 10px 15px;">
-				<button id="reg" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">注册</button>
+				<button id="ver" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">验证手机</button>
 			</div>
 		</div>
 
@@ -59,8 +52,6 @@
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/app.js"></script>
 		<script src="../js/jquery-3.1.1.min.js"></script>
-		<script src="../js/bmobSocketIo.js"></script>
-		<script src="../js/bmob-min.js"></script>
 		<script src="../js/own.js" charset="UTF-8"></script>
 		<script>
 			var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
@@ -74,55 +65,64 @@
 				swipeBack: true
 			});
 
-			var account;
-			var psd;
 			var ver;
-			var registerBtn;
+			var verBtn;
 			mui.plusReady(function() {
-				registerBtn = document.getElementById("reg");
+				verBtn = document.getElementById("ver");
+
+				send.addEventListener('tap', function() {
+					var send = document.getElementById('send'),
+						times = 60,
+						timer = null;
+					send.onclick = function() {
+						// 计时开始
+						var that = this;
+						this.disabled = true;
+						timer = setInterval(function() {
+							times--;
+							that.value = times + "秒后重试";
+							if(times <= 0) {
+								that.disabled = false;
+								that.value = "发送验证码";
+								clearInterval(timer);
+								times = 60;
+							}
+							//console.log(times);
+						}, 1000);
+					}
+
+					AV.Cloud.requestSmsCode('13798542673').then(function(success) {
+						mui.toast("验证码已发送！");
+					}, function(error) {
+						alert("验证码发送失败！稍后重试!");
+					});
+				});
 
 				//注册按钮的点击事件
-				reg.addEventListener('tap', function() {
+				verBtn.addEventListener('tap', function() {
 
-					var account = $("#account").val();
-					var password = $("#password").val();
 					var ver = $("#verification").val();
-					var regex_phone = /^((\(\d{2,3}\))|(\d{3}\-))?13\d{9}$/;
-					var regex_password = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/;
 					var regex_ver = /^\d{6}$/;
 
-					if($.trim(account) == "") {
-						alert("请输入手机号码！");
+					if($.trim(ver) == "") {
+						alert("请输入验证码！");
 						return;
-					} else if(!regex_phone.test(account)) {
-						alert("请输入正确手机号码！");
-						return;
-					}
-
-					if($.trim(password) == "") {
-						alert("密码不能为空！");
-						return;
-					} else if(!regex_password.test(password)) {
-						alert("密码应为6~16位数字和字母组合！");
+					} else if(!regex_ver.test(ver)) {
+						alert("请输入6位数字验证码！");
 						return;
 					}
 
-					var user = new AV.User();
-					user.set("username", account);
-					user.set("password", password);
-					user.setMobilePhoneNumber(account);
-					user.signUp().then(function(success) {
-						mui.toast("注册成功！请前往验证！");
-						mui.openWindow({
-							id: 'mine/verfication.html',
-							url: 'verfication.html'
-						});
-					}, function(error) {
-						mui.toast("该用户已注册！请前往登录！");
+					AV.User.verifyMobilePhone('886684').then(function() {
+						//验证成功
+						mui.toast("验证成功！请前往登录");
 						mui.openWindow({
 							id: 'mine/login.html',
 							url: 'login.html'
 						});
+					}, function(err) {
+						//验证失败
+						alert("验证失败！请点击重新发送按钮");
+						return;
 					});
 
 				}, false);

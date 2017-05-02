@@ -24,7 +24,8 @@
       "barItem/add.html",
       "barItem/test.html",
       "template.html",
-      "mine/login.html"
+      "mine/login.html",
+      "guide.html"
     ]
   },
   "tab-webview-subpage-chat.html": {
@@ -108,7 +109,10 @@
       "img/touxiang.jpg",
       "mine/feedback-needtem.html",
       "js/bmobSocketIo.js",
-      "js/bmob-min.js"
+      "js/bmob-min.js",
+      "img/touxiang1.jpg",
+      "js/av-min.js",
+      "js/av.js"
     ],
     "refer": [
       "mine/change-address-needtem.html",
@@ -119,7 +123,8 @@
       "mine/feedback-needtem.html",
       "mine/center.html",
       "mine/bind-phone.html",
-      "mine/bind-email.html"
+      "mine/bind-email.html",
+      "mine/setting.html"
     ]
   },
   "barItem/add.html": {
@@ -193,7 +198,9 @@
       "js/bmob-min.js",
       "js/bmob.js",
       "js/bmobSocketIo-min.js",
-      "js/bmobSocketIo.js"
+      "js/bmobSocketIo.js",
+      "js/av-min.js",
+      "js/av.js"
     ],
     "refer": [
       "mine/register-needtem.html",
@@ -219,7 +226,8 @@
       "css/mui.min.css",
       "css/own.css",
       "css/iconfont.css",
-      "img/50.jpg"
+      "img/50.jpg",
+      "js/arttmpl.js"
     ],
     "refer": []
   },
@@ -230,13 +238,15 @@
       "css/own.css",
       "css/iconfont.css",
       "fonts/mui.ttf"
-    ]
+    ],
+    "refer": []
   },
   "template-main-first.html": {
     "resources": [
       "css/mui.min.css",
       "js/mui.min.js"
-    ]
+    ],
+    "refer": []
   },
   "template.html": {
     "refer": [
@@ -261,7 +271,8 @@
       "images/weixin.png",
       "images/qq.png",
       "js/mui.enterfocus.js"
-    ]
+    ],
+    "refer": []
   },
   "mine/change-email-needtem.html": {
     "resources": [
@@ -271,7 +282,8 @@
       "css/iconfont.css",
       "css/mui.min.css",
       "fonts/iconfont.ttf"
-    ]
+    ],
+    "refer": []
   },
   "mine/feedback-needtem.html": {
     "resources": [
@@ -279,8 +291,13 @@
       "js/own.js",
       "js/mui.min.js",
       "css/iconfont.css",
-      "css/mui.min.css"
-    ]
+      "css/mui.min.css",
+      "css/mui.imageviewer.css",
+      "js/mui.imageViewer.js",
+      "images/logo.png",
+      "js/arttmpl.js"
+    ],
+    "refer": []
   },
   "mine/register-needtem.html": {
     "resources": [
@@ -297,7 +314,8 @@
       "css/iconfont.css",
       "fonts/iconfont.ttf",
       "fonts/mui.ttf"
-    ]
+    ],
+    "refer": []
   },
   "mine/forget-psd-needtem.html": {
     "resources": [
@@ -313,7 +331,8 @@
       "js/bmob-min.js",
       "js/bmobSocketIo-min.js",
       "js/bmobSocketIo.js"
-    ]
+    ],
+    "refer": []
   },
   "Home/product-detail-needtem.html": {
     "resources": [
@@ -331,7 +350,8 @@
       "img/touxiang.jpg",
       "css/iconfont.css",
       "img/ic_book1.jpg"
-    ]
+    ],
+    "refer": []
   },
   "mine/register.html": {
     "resources": [
@@ -348,14 +368,16 @@
       "fonts/iconfont.ttf"
     ],
     "refer": [
-      "mine/register.html"
+      "mine/register.html",
+      "mine/verfication.html"
     ]
   },
   "template-main-second.html": {
     "resources": [
       "css/mui.min.css",
       "js/mui.min.js"
-    ]
+    ],
+    "refer": []
   },
   "mine/center.html": {
     "resources": [
@@ -371,7 +393,8 @@
       "css/mui.min.css",
       "js/bmob-min.js",
       "fonts/iconfont.ttf",
-      "mine/change-address-needtem.html"
+      "mine/change-address-needtem.html",
+      "img/touxiang1.jpg"
     ],
     "refer": [
       "mine/change-address-needtem.html",
@@ -396,6 +419,9 @@
       "js/jquery-3.1.1.min.js",
       "fonts/mui.ttf",
       "js/bmob-min.js"
+    ],
+    "refer": [
+      "mine/login.html"
     ]
   },
   "center/sex.html": {
@@ -407,7 +433,8 @@
       "css/iconfont.css",
       "css/mui.min.css",
       "js/bmob.js"
-    ]
+    ],
+    "refer": []
   },
   "center/nickname.html": {
     "resources": [
@@ -420,7 +447,8 @@
       "js/bmob.js",
       "js/jquery-3.1.1.min.js",
       "js/bmob-min.js"
-    ]
+    ],
+    "refer": []
   },
   "mine/bind-phone.html": {
     "resources": [
@@ -434,7 +462,8 @@
       "js/bmob-min.js",
       "fonts/iconfont.ttf",
       "fonts/mui.ttf"
-    ]
+    ],
+    "refer": []
   },
   "mine/bind-email.html": {
     "resources": [
@@ -448,7 +477,8 @@
       "js/bmob-min.js",
       "fonts/iconfont.ttf",
       "fonts/mui.ttf"
-    ]
+    ],
+    "refer": []
   },
   "mine/address-needtem.html": {
     "resources": [
@@ -463,7 +493,8 @@
       "js/bmobSocketIo.js",
       "js/jquery-3.1.1.min.js",
       "js/bmob-min.js"
-    ]
+    ],
+    "refer": []
   },
   "center/bind-phone.html": {
     "resources": [
@@ -476,7 +507,8 @@
       "css/mui.min.css",
       "js/bmob-min.js",
       "fonts/iconfont.ttf"
-    ]
+    ],
+    "refer": []
   },
   "center/bind-email.html": {
     "resources": [
@@ -489,7 +521,8 @@
       "js/own.js",
       "js/mui.min.js",
       "js/bmob-min.js"
-    ]
+    ],
+    "refer": []
   },
   "Home/product-detail.html": {
     "resources": [
@@ -502,7 +535,102 @@
       "img/touxiang.jpg",
       "fonts/mui.ttf",
       "img/ic_book1.jpg",
-      "fonts/iconfont.ttf"
+      "fonts/iconfont.ttf",
+      "js/bmobSocketIo.js",
+      "js/jquery-3.1.1.min.js",
+      "js/bmob-min.js"
+    ],
+    "refer": [
+      "mine/login.html",
+      "bookmanage/chat.html",
+      "bookmanage/chat1.html"
+    ]
+  },
+  "mine/setting.html": {
+    "resources": [
+      "css/feedback.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/feedback.js",
+      "js/mui.view.js",
+      "css/own.css",
+      "images/logo.png"
+    ],
+    "refer": [
+      "center/nickname.html",
+      "center/bind-phone.html",
+      "center/bind-email.html",
+      "center/sex.html",
+      "center/change-psd-needtem.html",
+      "mine/guide.html"
+    ]
+  },
+  "mine/verfication.html": {
+    "resources": [
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "bookmanage/chat.html": {
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.imageViewer.js",
+      "images/logo.png",
+      "css/mui.imageviewer.css",
+      "js/arttmpl.js",
+      "js/realtime.browser.js",
+      "js/av-min.js",
+      "js/av.js"
+    ],
+    "refer": []
+  },
+  "bookmanage/chat1.html": {
+    "resources": [
+      "js/mui.imageViewer.js",
+      "css/mui.min.css",
+      "css/mui.imageviewer.css",
+      "js/realtime.browser.js",
+      "js/arttmpl.js",
+      "css/own.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/av-min.js",
+      "js/av.js"
+    ],
+    "refer": []
+  },
+  "mine/guide.html": {
+    "resources": [
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "guide.html": {
+    "resources": [
+      "css/mui.min.css"
+    ]
+  },
+  "main.html": {
+    "resources": [
+      "js/app.js",
+      "css/own.css",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "barItem/home.html",
+      "fonts/iconfont.ttf",
+      "js/mui.enterfocus.js"
+    ],
+    "refer": [
+      "barItem/category.html",
+      "guide.html",
+      "barItem/home.html",
+      "barItem/mine.html",
+      "template.html",
+      "barItem/cart.html",
+      "mine/login.html",
+      "barItem/test.html"
     ]
   }
 }
