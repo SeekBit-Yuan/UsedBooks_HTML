@@ -77,6 +77,8 @@
 					var password = $("#password").val();
 					var newpassword = $("#newpassword").val();
 					var repassword = $("#repassword").val();
+					
+					var regex_password = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/;
 
 					if($.trim(password) == "") {
 						alert("请输入原密码！");
@@ -84,7 +86,10 @@
 					} else if($.trim(newpassword) == "") {
 						alert("请输入新密码！");
 						return;
-					} else if($.trim(repassword) == "") {
+					} else if(!regex_password.test(newpassword)) {
+						alert("密码应为6~16位数字和字母组合！");
+						return;
+					}else if($.trim(repassword) == "") {
 						alert("请输入确认新密码！");
 						return;
 					} else if($.trim(newpassword) != $.trim(repassword)) {

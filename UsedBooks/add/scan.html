@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/own.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<style type="text/css">
+			.barcode {
+				width: 100%;
+				position: absolute;
+				top: 0px;
+				bottom: 51px;
+				text-align: center;
+				background-color: #000;
+			}
+			
+			.barcode .tip {
+				position: fixed;
+				left: 50%;
+				top: 50%;
+				color: #FFFFFF;
+				font-weight: bold;
+				-webkit-transform: translateX(-50%) translateY(-50%);
+				-moz-transform: translateX(-50%) translateY(-50%);
+				-ms-transform: translateX(-50%) translateY(-50%);
+				transform: translateX(-50%) translateY(-50%);
+			}
+			
+			.mui-table .mui-table-cell {
+				text-align: center;
+				line-height: 50px;
+				color: #fff;
+				background-color: #26a2ff;
+			}
+			
+			.mui-table .mui-table-cell:active {
+				background-color: #0698F5;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-main-background-color">
+			<h1 class="mui-title" style="font-weight: bold;">扫描ISBN条形码发布</h1>
+		</header>
+		<div class="mui-content">
+			<div class="barcode" id="barcode">
+				<p class="tip">...载入中...</p>
+			</div>
+			<div class="mui-table mui-bar mui-bar-tab">
+				<div data-type="flash" data-state="false" class="mui-table-cell" style="background-color: #41cea9;font-weight: bold;">打开闪光灯</div>
+				<div data-type="gallery" class="mui-table-cell" style="background-color: #41cea9;font-weight: bold;">打开相册</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/av-min.js"></script>
+		<script src="../js/leancoud.config.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+			mui.init();
+
+			var scan = null,
+				context;
+			mui.plusReady(function() {
+				context = plus.webview.currentWebview();
+				context.addEventListener('show', function() {
+					console.log('show');
+					if(scan == null) {
+						scan = new plus.barcode.Barcode('barcode', [plus.barcode.QR, plus.barcode.EAN8, plus.barcode.EAN13, plus.barcode.CODE128], {
+							frameColor: '#00FF00',
+							scanbarColor: '#00FF00'
+						});
+						scan.onmarked = onmarked;
+					}
+					scan.start({
+						conserve: true,
+						filename: "_doc/barcode/"
+					});
+				});
+				context.addEventListener("hide", function(e) {
+					console.log('hide');
+					scan.cancel();
+				}, false);
+				context.addEventListener("close", function(e) {
+					scan.close();
+				}, false);
+				context.show("pop-in");
+			})
+
+			mui('.mui-table').on('tap', '.mui-table-cell', function() {
+				var target = this;
+				var type = target.getAttribute('data-type');
+				switch(type) {
+					case 'flash':
+						setFlash(target);
+						break;
+					case 'gallery':
+						scanPicture();
+						break;
+					default:
+						break;
+				}
+			})
+
+			// 二维码扫描成功
+			function onmarked(type, result, file) {
+				result = result.replace(/\n/g, '').trim();
+				console.log("type:" + type + ";result:" + result);
+				handleData(result);
+			}
+
+			// 设置闪光灯
+			function setFlash(target) {
+				var state = !eval(target.getAttribute('data-state'));
+				scan.setFlash(state);
+				target.innerHTML = state ? '关闭闪光灯' : '打开闪光灯';
+				target.setAttribute('data-state', state);
+			}
+
+			// 从相册中选择二维码图片 
+			function scanPicture() {
+				plus.gallery.pick(function(path) {
+					plus.barcode.scan(path, onmarked, function(error) {
+						mui.toast("无法识别此图片");
+					});
+				}, function(error) {
+					mui.toast("失败: " + error.message);
+				});
+			}
+
+			function handleData(code) {
+				mui.ajax('http://aliapi63.jisuapi.com/isbn/query', {
+					data: {
+						isbn: code
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'GET', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					headers: {
+						'Authorization': 'APPCODE ecf9c0e0e2eb4992b473c1bf9b60e81d'
+					},
+					success: function(data) {
+						console.log(JSON.stringify(data.result));
+						publish(data.result);
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast(JSON.stringify(xhr));
+					}
+				});
+			}
+
+			function publish(bookinfo) {
+				var pic = bookinfo.pic;
+				var title = bookinfo.title;
+				var author = bookinfo.author;
+				var publisher = bookinfo.publisher;
+				var price = bookinfo.price;
+				mui.toast("扫描成功！继续发布！")
+				mui.fire(plus.webview.getWebviewById('barItem/add.html'),'info',{
+					pic:pic,
+					bname:title,
+					suthor:author,
+					publish:publisher,
+					price:price
+				});
+				mui.back();
+			}
+		</script>
+	</body>
+
+</html>

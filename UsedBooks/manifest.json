@@ -314,9 +314,26 @@
 					"js/load.js",
 					"js/md5.js",
 					"css/own.css",
-					"css/iconfont.css"
+					"css/iconfont.css",
+					"js/av-min.js",
+					"js/av.js",
+					"images/iconfont-tianjia.png",
+					"css/feedback.css",
+					"js/feedback.js",
+					"images/user-photo.png",
+					"js/mui.view.js",
+					"js/mui.picker.min.js",
+					"barItem/add.html",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"css/mui.picker.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"add/add-category.html",
+					"add/add-newold.html",
+					"add/scan.html",
+					"mine/login.html"
+				],
 				"priority": 0
 			},
 			"barItem/cart.html": {
@@ -736,12 +753,15 @@
 					"fonts/iconfont.ttf",
 					"js/bmobSocketIo.js",
 					"js/jquery-3.1.1.min.js",
-					"js/bmob-min.js"
+					"js/bmob-min.js",
+					"js/leancoud.config.js"
 				],
 				"refer": [
 					"mine/login.html",
 					"bookmanage/chat.html",
-					"bookmanage/chat1.html"
+					"bookmanage/chat1.html",
+					"barItem/add.html",
+					"Home/mycart.html"
 				],
 				"priority": 0
 			},
@@ -835,8 +855,40 @@
 					"template.html",
 					"barItem/cart.html",
 					"mine/login.html",
-					"barItem/test.html"
+					"barItem/test.html",
+					"barItem/add.html"
 				],
+				"priority": 0
+			},
+			"add/add-category.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"add/add-newold.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"add/scan.html": {
+				"resources": [
+					"js/leancoud.config.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"barItem/add.html"
+				],
+				"priority": 0
+			},
+			"Home/mycart.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

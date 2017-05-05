@@ -51,12 +51,21 @@
 			</div>
 		</div>
 
+		<script src="../js/av.js"></script>
+		<script src="../js/av-min.js"></script>
 		<script src="../js/mui.min.js" charset="UTF-8"></script>
 		<script src="../js/city.data-3.js" charset="UTF-8"></script>
 		<script src="../js/mui.picker.min.js" charset="UTF-8"></script>
 		<script src="../js/own.js" charset="UTF-8"></script>
 		<script src="../js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
+			var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
+			var APP_KEY = 'RLnd5XpcckbBrJDtXQdXSUBs';
+			AV.init({
+				appId: APP_ID,
+				appKey: APP_KEY,
+			});
+
 			mui.init({
 				swipeBack: true
 			});
@@ -66,27 +75,20 @@
 				var account = localStorage.getItem('user');
 				var password = localStorage.getItem('password');
 
-				var user = Bmob.User.logIn(account, password, {
-					success: function(user) {
-						var query = new Bmob.Query(Bmob.User);
-						query.get(user.id, {
-							success: function(user) {
-								// 查询成功，调用get方法获取对应属性的值
-								nickname_value = document.getElementById("nickname_value").innerText = user.get("nickname");
-								phone_value = document.getElementById("phone_value").innerText = user.get("mobilePhoneNumber");
-								return;
-							},
-							error: function(object, error) {
-								alert("个人信息获取失败");
-								return;
-							}
-						});
-					}
+				AV.User.logIn(account, password).then(function(loginedUser) {
+					// 查询成功，调用get方法获取对应属性的值
+					nickname_value = document.getElementById("nickname_value").innerText = loginedUser.get("nickname");
+					phone_value = document.getElementById("phone_value").innerText = loginedUser.get("mobilePhoneNumber");
+					return;
+				}).catch(function(error) {
+					// 异常处理
+					alert("个人信息获取失败");
+					return;
 				});
 
 				//地址选择器picker
 				pickerAddress();
-				
+
 				//添加点击事件
 				addListevent();
 			});
@@ -223,7 +225,7 @@
 						value: "120103",
 						text: "C栋胡杨林"
 					}]
-				},{
+				}, {
 					value: '130000',
 					text: '深圳大学南校区',
 					children: [{
@@ -239,7 +241,7 @@
 						value: "130104",
 						text: "冬筑"
 					}]
-				},{
+				}, {
 					value: '140000',
 					text: '深圳大学校区',
 					children: [{
@@ -265,9 +267,9 @@
 						console.log(SelectedItem);
 					})
 				}, false);
-				
+
 			}
-			
+
 			function addListevent() {
 
 				sub.addEventListener('tap', function() {
@@ -275,32 +277,28 @@
 					var password = localStorage.getItem('password');
 					var address1 = addressResult.innerText;
 					var address2 = $('#addressplus').val();
-					var address = address1+address2;
-					
-					if($.trim(address1) == ""){
+					var address = address1 + address2;
+
+					if($.trim(address1) == "") {
 						alert("请点击选择地址！");
 						return;
 					}
 
-//					var user = Bmob.User.logIn(account, password, {
-//						success: function(user) {
-//							user.set("address", address);
-//							user.save(null, {
-//								success: function(user) {
-//									alert("地址添加成功！");
-//									var wobj = plus.webview.getWebviewById("../mine/change-address-needtem.html");
-//                                  wobj.reload(true);
-//								},
-//								error: function(user, error) {
-//									alert("地址添加失败！请稍后重试！");
-//									return;
-//								}
-//							});
-//						}
-//					});
+					AV.User.logIn(account, password).then(function(loginedUser) {
+						loginedUser.set("address", address);
+						return loginedUser.save().then(function(result) {
+							alert("地址添加成功！");
+							var wobj = plus.webview.getWebviewById("../mine/change-address-needtem.html");
+							wobj.reload(true);
+						});
+					}).catch(function(error) {
+						// 异常处理
+						alert("地址添加失败！请稍后重试！");
+						return;
+					});
+
 				});
 			}
-
 		</script>
 
 	</body>

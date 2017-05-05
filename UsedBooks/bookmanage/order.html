@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>订单</title>
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/own.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+
+		<style type="text/css">
+			.emptyAddress {
+				text-align: center;
+				margin-top: 50px;
+				font-size: 0.9em;
+			}
+			
+			h5 {
+				color: black
+			}
+			
+			.name {
+				float: left;
+			}
+			
+			.number {
+				float: right;
+			}
+			
+			.address {
+				padding-top: 2px;
+				clear: both;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav own-main-background-color">
+			<button type="button" class="mui-action-back mui-btn  mui-btn-link mui-pull-left own-button">
+			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
+			<span class="own-left-nav-color">取消</span>
+		    </button>
+			<h1 class="mui-title" style="font-weight: bold;">订单</h1>
+			<button id="message" type="button" class="mui-btn  mui-btn-link mui-pull-right own-button">
+			<span class="own-left-nav-color iconfont icon-lianxi"></span>
+		    </button>
+		</header>
+
+		<div class="mui-content">
+			<div class="need-add" style="text-align: center; margin-top: 50px;display: none;">
+				<span style="color: gray; font-size: 0.9em;">你还没有添加地址</span>
+				<br />
+				<button id="add" type="button" class="mui-btn own-btn-green" style="margin-top: 10px; padding: 5px 20px;">请添加</button>
+			</div>
+			<ul id="addressList" class="mui-table-view" style="margin-top: 1px;">
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a id="del" class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<h4 id="nickname_value" class="name"></h4>
+						<h4 id="phone_value" class="number"></h4>
+						<p id="address_value" class="address" style="font-size: 18px;"></p>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../js/av.js"></script>
+		<script src="../js/av-min.js"></script>
+		<script src="../js/mui.min.js" charset="UTF-8"></script>
+		<script src="../js/own.js" charset="UTF-8"></script>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" charset="UTF-8">
+			var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
+			var APP_KEY = 'RLnd5XpcckbBrJDtXQdXSUBs';
+			AV.init({
+				appId: APP_ID,
+				appKey: APP_KEY,
+			});
+
+			mui.init({
+				swipeBack: true
+			});
+
+			var needadd; //需要添加地址显示的div
+
+			mui.plusReady(function() {
+				//初始化一些本地数据
+				initSomeData();
+
+				//添加点击事件
+				addListevent();
+
+			});
+
+			function initSomeData() {
+
+				needadd = document.querySelector('.need-add');
+				addressDiv = document.querySelector('.mui-table-view');
+				var account = localStorage.getItem('user');
+				var password = localStorage.getItem('password');
+
+				addressDiv.style.display = 'none';
+
+				AV.User.logIn(account, password).then(function(loginedUser) {
+					var address = loginedUser.get("address");
+					if(address == null) {
+						needadd.style.display = 'block';
+						addressDiv.style.display = 'none';
+					} else {
+						needadd.style.display = 'none';
+						addressDiv.style.display = 'block';
+						// 查询成功，调用get方法获取对应属性的值
+						nickname_value = document.getElementById("nickname_value").innerText = loginedUser.get("nickname");
+						phone_value = document.getElementById("phone_value").innerText = loginedUser.get("mobilePhoneNumber");
+						address_value = document.getElementById("address_value").innerText = loginedUser.get("address");
+					}
+					return;
+				}).catch(function(error) {
+					// 异常处理
+					alert("地址获取失败！");
+					return;
+				});
+
+			}
+
+			//点击事件
+			function addListevent() {
+				add.addEventListener('tap', function() {
+					mui.openWindow({
+						id: 'mine/address-needtem.html',
+						url: '../mine/address-needtem.html'
+					});
+				});
+
+				message.addEventListener('tap', function() {
+					mui.openWindow({
+						id: "bookmanage/chat.html",
+						url: "bookmanage/chat.html"
+					});
+				});
+
+				del.addEventListener('tap', function() {
+					mui.confirm('确认移除该订单？', '订单移除', ['确认', '取消'], function(e) {
+						if(e.index == 0) {
+							var account = localStorage.getItem('user');
+							var password = localStorage.getItem('password');
+
+							AV.User.logIn(account, password).then(function(loginedUser) {
+								loginedUser.set("address", null);
+								return loginedUser.save().then(function(result) {
+									alert("订单已移除！");
+									var wobj = plus.webview.getWebviewById("../mine/change-address-needtem.html");
+									wobj.reload(true);
+								});
+							}).catch(function(error) {
+								// 异常处理
+								alert("订单获取失败！");
+								return;
+							});
+						} else {
+							return;
+						}
+					});
+
+				});
+			}
+		</script>
+
+	</body>
+
+</html>

@@ -68,10 +68,19 @@
 			</ul>
 		</div>
 
+		<script src="../js/av.js"></script>
+		<script src="../js/av-min.js"></script>
 		<script src="../js/mui.min.js" charset="UTF-8"></script>
 		<script src="../js/own.js" charset="UTF-8"></script>
 		<script src="../js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
+			var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
+			var APP_KEY = 'RLnd5XpcckbBrJDtXQdXSUBs';
+			AV.init({
+				appId: APP_ID,
+				appKey: APP_KEY,
+			});
+
 			mui.init({
 				swipeBack: true
 			});
@@ -96,32 +105,25 @@
 
 				addressDiv.style.display = 'none';
 
-//				var user = Bmob.User.logIn(account, password, {
-//					success: function(user) {
-//						var query = new Bmob.Query(Bmob.User);
-//						query.get(user.id, {
-//							success: function(user) {
-//								var address = user.get("address");
-//								if(address == null) {
-//									needadd.style.display = 'block';
-//									addressDiv.style.display = 'none';
-//								} else {
-//									needadd.style.display = 'none';
-//									addressDiv.style.display = 'block';
-//									// 查询成功，调用get方法获取对应属性的值
-//									nickname_value = document.getElementById("nickname_value").innerText = user.get("nickname");
-//									phone_value = document.getElementById("phone_value").innerText = user.get("mobilePhoneNumber");
-//									address_value = document.getElementById("address_value").innerText = user.get("address");
-//								}
-//								return;
-//							},
-//							error: function(object, error) {
-//								alert("地址获取失败！");
-//								return;
-//							}
-//						});
-//					}
-//				});
+				AV.User.logIn(account, password).then(function(loginedUser) {
+					var address = loginedUser.get("address");
+					if(address == null) {
+						needadd.style.display = 'block';
+						addressDiv.style.display = 'none';
+					} else {
+						needadd.style.display = 'none';
+						addressDiv.style.display = 'block';
+						// 查询成功，调用get方法获取对应属性的值
+						nickname_value = document.getElementById("nickname_value").innerText = loginedUser.get("nickname");
+						phone_value = document.getElementById("phone_value").innerText = loginedUser.get("mobilePhoneNumber");
+						address_value = document.getElementById("address_value").innerText = loginedUser.get("address");
+					}
+					return;
+				}).catch(function(error) {
+					// 异常处理
+					alert("地址获取失败！");
+					return;
+				});
 
 			}
 
@@ -141,36 +143,31 @@
 					});
 				});
 
-//				del.addEventListener('tap', function() {
-//					mui.confirm('确认移除该地址？', '地址移除', ['确认', '取消'], function(e) {
-//						if(e.index == 0) {
-//							var account = localStorage.getItem('user');
-//							var password = localStorage.getItem('password');
-//
-//							var user = Bmob.User.logIn(account, password, {
-//								success: function(user) {
-//									user.set("address", null);
-//									user.save(null, {
-//										success: function(user) {
-//											alert("地址已移除！");
-//											var wobj = plus.webview.getWebviewById("../mine/change-address-needtem.html");
-//											wobj.reload(true);
-//										},
-//										error: function(user, error) {
-//											alert("地址修改失败！请稍后重试！");
-//											return;
-//										}
-//									});
-//								}
-//							});
-//						} else {
-//							return;
-//						}
-//					});
-//
-//				});
-			}
+				del.addEventListener('tap', function() {
+					mui.confirm('确认移除该地址？', '地址移除', ['确认', '取消'], function(e) {
+						if(e.index == 0) {
+							var account = localStorage.getItem('user');
+							var password = localStorage.getItem('password');
 
+							AV.User.logIn(account, password).then(function(loginedUser) {
+								loginedUser.set("address", null);
+								return loginedUser.save().then(function(result) {
+									alert("地址已移除！");
+									var wobj = plus.webview.getWebviewById("../mine/change-address-needtem.html");
+									wobj.reload(true);
+								});
+							}).catch(function(error) {
+								// 异常处理
+								alert("地址获取失败！");
+								return;
+							});
+						} else {
+							return;
+						}
+					});
+
+				});
+			}
 		</script>
 
 	</body>

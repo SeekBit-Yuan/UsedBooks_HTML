@@ -33,50 +33,145 @@
 		</header>
 
 		<div class="mui-content">
-			<div class="mui-card" style="margin-top: 30px;">
+			<div class="mui-input-row" style="margin: 10px 15px 10px;">
 				<form class="mui-input-group">
-					<div class="mui-input-row">
-						<label><span class="mui-icon iconfont icon-center"></span></label>
-						<input id="email" class="mui-input-clear" type="text" placeholder="输入绑定邮箱" />
-					</div>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell" style="background-color:#EEEEEE">
+							<a class="mui-navigate mui-input-clear" style="height: 55px;line-height: 35px;">手机号
+								<input id="phone" type="text" class="mui-input-clear" placeholder="请输入手机号" /></a>
+						</li>
+					</ul>
 				</form>
 			</div>
-			<div class="mui-button-row" style="margin: 10px 15px;">
-				<button id="sub" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">提交</button>
+			<div style="width: 100%;">
+				<div class="mui-card" style="margin-top: 1px;margin-bottom:10px;margin-right:5px;width: 60%;float: left;">
+					<form class="mui-input-group">
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell" style="background-color:#EEEEEE;float: left;width: 100%;">
+								<a class="mui-navigate" style="height: 55px;line-height: 35px;font-weight: bold;">验证码
+									<input id="verificationcode" type="text" class="mui-input-clear" placeholder="请输入验证码" /></a>
+							</li>
+						</ul>
+					</form>
+				</div>
+				<div class="mui-card " style="margin-top: 1px;margin-left:5px;margin-right:20px;float: right;width: 25%;">
+					<!--<button id="send" style="background-color:#CCCCCC;width: 100%;height: 55px;font-weight: bold;color:#F9F9F9;">获取验证码</button>-->
+					<input type="button" id="send" value="发送验证码" class="mui-btn mui-btn-outlined mui-btn-positive" style="background-color:#CCCCCC;height:55px;color:#F9F9F9;">
+				</div>
+			</div>
+			<div class="mui-input-row" style="margin: 10px 15px;">
+				<form class="mui-input-group">
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell" style="background-color:#EEEEEE">
+							<a class="mui-navigate mui-input-clear" style="height: 55px;line-height: 35px;">新密码
+								<input id="newpsd" type="password" class="mui-input-clear" placeholder="请输入新密码" /></a>
+						</li>
+					</ul>
+				</form>
+			</div>
+			<div class="mui-button-row" style="margin: 0px 15px;">
+				<button id="sub" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">确定</button>
 			</div>
 		</div>
+		<script src="../js/av.js"></script>
+		<script src="../js/av-min.js"></script>
 		<script src="../js/mui.min.js" charset="UTF-8"></script>
 		<script src="../js/own.js" charset="UTF-8"></script>
 		<script src="../js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
+			var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
+			var APP_KEY = 'RLnd5XpcckbBrJDtXQdXSUBs';
+			AV.init({
+				appId: APP_ID,
+				appKey: APP_KEY,
+			});
+
 			mui.init({
 				swipeBack: true
 			});
 
 			mui.plusReady(function() {
+				send.addEventListener('tap', function() {
+					var phone = $("#phone").val();
+					var regex_phone = /^((\(\d{2,3}\))|(\d{3}\-))?13\d{9}$/;
+
+					if($.trim(phone) == "") {
+						alert("请输入手机号");
+						return;
+					}
+					if(!regex_phone.test(phone)) {
+						alert("请输入正确的手机号码！");
+						return;
+					}
+
+					var send = document.getElementById('send'),
+						times = 60,
+						timer = null;
+					send.onclick = function() {
+						// 计时开始
+						var that = this;
+						this.disabled = true;
+						timer = setInterval(function() {
+							times--;
+							that.value = times + "秒后重试";
+							if(times <= 0) {
+								that.disabled = false;
+								that.value = "发送验证码";
+								clearInterval(timer);
+								times = 60;
+							}
+							//console.log(times);
+						}, 1000);
+					}
+
+					AV.User.requestPasswordResetBySmsCode(""+phone).then(function(success) {
+						mui.toast("验证码已发送，请发送修改密码短信重置密码！")
+						return;
+					}, function(error) {
+						alert("验证码发送失败！稍后重试!");
+					});
+				});
 
 				sub.addEventListener('tap', function() {
 
-					var email = $("#email").val();
-					var regex_email = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+					var phone = $("#phone").val();
+					var ver = $("#verificationcode").val();
+					var newpsd = $("#newpsd").val();
+					var regex_phone = /^((\(\d{2,3}\))|(\d{3}\-))?13\d{9}$/;
+					var regex_ver = /^\d{6}$/;
+					var regex_password = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/;
 
-					if($.trim(email) == "") {
-						alert("请输入邮箱地址");
+					if($.trim(phone) == "") {
+						alert("请输入手机号");
 						return;
 					}
-					if(!regex_email.test(email)) {
-						alert("请输入正确的邮箱地址！");
+					if(!regex_phone.test(phone)) {
+						alert("请输入正确的手机号码！");
 						return;
 					}
-//					Bmob.User.requestPasswordReset(email, {
-//						success: function() {
-//							alert("找回密码邮件已发送至邮箱，请前往邮箱找回密码");
-//							mui.back();
-//						},
-//						error: function(error) {
-//							alert("请确认您填写正确绑定邮箱！");
-//						}
-//					});
+
+					if($.trim(ver) == "") {
+						alert("请输入验证码！");
+						return;
+					} else if(!regex_ver.test(ver)) {
+						alert("请输入6位数字验证码！");
+						return;
+					}
+
+					if($.trim(newpsd) == "") {
+						alert("密码不能为空！");
+						return;
+					} else if(!regex_password.test(newpsd)) {
+						alert("密码应为6~16位数字和字母组合！");
+						return;
+					}
+
+					AV.User.resetPasswordBySmsCode('886684', newpsd).then(function(success) {
+						mui.toast("重置成功！");
+						mui.back();
+					}, function(error) {
+						alert("密码重置失败！请稍后重试!");
+					});
 
 				}, false);
 

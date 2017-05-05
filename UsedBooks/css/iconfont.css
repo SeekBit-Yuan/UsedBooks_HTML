@@ -1,6 +1,6 @@
 
 @font-face {font-family: "iconfont";
-  src: url('../fonts/iconfont.ttf') format('truetype'); /* IE6-IE8 */
+  src:url('../fonts/iconfont.ttf') format('truetype'); /* chrome, firefox */
 }
 
 .iconfont {
@@ -50,6 +50,8 @@
 .icon-psw:before { content: "\e6ba"; }
 
 .icon-user:before { content: "\e6c3"; }
+
+.icon-saomiao:before { content: "\e673"; }
 
 .icon-xinmima:before { content: "\e62b"; }
 

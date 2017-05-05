@@ -20,11 +20,13 @@
 				color: #fff;
 				border-color: #fff;
 			}
+			
 			.item-logo {
 				width: 100%;
 				height: 100%;
 				position: relative;
 			}
+			
 			.item-logo a {
 				width: 200px;
 				height: 200px;
@@ -41,6 +43,7 @@
 				left: 50%;
 				margin-left: -100px;
 			}
+			
 			.animate {
 				position: absolute;
 				left: 0;
@@ -49,10 +52,12 @@
 				color: #fff;
 				display: -moz-box;
 			}
+			
 			.animate h2 {
 				text-align: center;
 				margin-bottom: 20px;
 			}
+			
 			.animate li {
 				width: 50%;
 				height: 30px;
@@ -61,34 +66,44 @@
 				font-size: 16px;
 				text-align: right;
 			}
+			
 			.animate li:nth-child(3) {
 				text-align: left;
 				float: right;
 			}
+			
 			.animated {
 				-webkit-animation-duration: 1s;
 				-webkit-animation-play-state: paused;
 				-webkit-animation-fill-mode: both;
 			}
+			
 			.guide-show .bounceInDown {
 				-webkit-animation-name: bounceInDown;
 				-webkit-animation-play-state: running;
 				-webkit-animation-delay: 1s;
 				display: block;
 			}
+			
 			.guide-show .bounceInLeft {
 				-webkit-animation-name: bounceInLeft;
 				display: block;
 				-webkit-animation-play-state: running;
 			}
+			
 			.guide-show .bounceInRight {
 				-webkit-animation-name: bounceInRight;
 				display: block;
 				-webkit-animation-play-state: running;
 				-webkit-animation-delay: 0.5s;
 			}
+			
 			@-webkit-keyframes bounceInDown {
-				0%, 60%, 75%, 90%, 100% {
+				0%,
+				60%,
+				75%,
+				90%,
+				100% {
 					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 				}
@@ -115,8 +130,13 @@
 					transform: none;
 				}
 			}
+			
 			@-webkit-keyframes bounceInLeft {
-				0%, 60%, 75%, 90%, 100% {
+				0%,
+				60%,
+				75%,
+				90%,
+				100% {
 					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 				}
@@ -143,8 +163,13 @@
 					transform: none;
 				}
 			}
+			
 			@-webkit-keyframes bounceInRight {
-				0%, 60%, 75%, 90%, 100% {
+				0%,
+				60%,
+				75%,
+				90%,
+				100% {
 					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 				}
@@ -181,7 +206,7 @@
 				<div class="mui-slider-item">
 					<div class="item-logo" style="background-color: #D74B28">
 						<a href="#">
-						UsedBook
+							UsedBook
 						</a>
 						<div class="animate guide-show">
 							<h2 class="animated bounceInDown">HTML5实现</h2>
@@ -194,7 +219,7 @@
 				<div class="mui-slider-item">
 					<div class="item-logo" style="background-color: #02C1ED;">
 						<a href="#">
-						UsedBook
+							UsedBook
 						</a>
 						<div id="tips-2" class="animate mui-hidden">
 							<h2 class="animated bounceInDown">最新H5 PLUS</h2>
@@ -207,7 +232,7 @@
 				<div class="mui-slider-item">
 					<div class="item-logo" style="background-color: #67C962;">
 						<a href="#">
-						UsedBook
+							UsedBook
 						</a>
 						<div id="tips-3" class="animate mui-hidden">
 							<h2 class="animated bounceInDown">大学生二手书</h2>
@@ -220,7 +245,7 @@
 				<div class="mui-slider-item">
 					<div class="item-logo" style="background-color: #FCD208;">
 						<a href="#">
-						UsedBook
+							UsedBook
 						</a>
 						<div class="animate">
 							<button id='close' class="mui-btn mui-btn-warning mui-btn-outlined">立即体验</button>
@@ -237,9 +262,22 @@
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script>
-			mui.back = function() {};
 			mui.plusReady(function() {
-				if(mui.os.ios){
+				var backButtonPress = 0;
+				mui.back = function(event) {
+					backButtonPress++;
+					if(backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
+
+				if(mui.os.ios) {
 					plus.navigator.setFullscreen(true);
 				}
 				plus.navigator.closeSplashscreen();
@@ -252,17 +290,16 @@
 			}, false);
 			//图片切换时，触发动画
 			document.querySelector('.mui-slider').addEventListener('slide', function(event) {
-			 	//注意slideNumber是从0开始的；
-			 	var index = event.detail.slideNumber+1;
-			 	if(index==2||index==3){
-			 		var item = document.getElementById("tips-"+index);
-			 		if(item.classList.contains("mui-hidden")){
-			 			item.classList.remove("mui-hidden");
-			 			item.classList.add("guide-show");
-			 		}
-			 	}
+				//注意slideNumber是从0开始的；
+				var index = event.detail.slideNumber + 1;
+				if(index == 2 || index == 3) {
+					var item = document.getElementById("tips-" + index);
+					if(item.classList.contains("mui-hidden")) {
+						item.classList.remove("mui-hidden");
+						item.classList.add("guide-show");
+					}
+				}
 			});
-			
 		</script>
 	</body>
 

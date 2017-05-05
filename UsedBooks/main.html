@@ -21,7 +21,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav own-main-background-color">
-			<h3 id="title" class="mui-title" style="color: #D8D8D8;">
+			<h3 id="title" class="mui-title" style="color: white;">
 				<span class="mui-icon iconfont icon-sousuo" style="color: white;">
 				</span>&nbsp;&nbsp;&nbsp;搜索图书名称
 			</h3>
@@ -35,7 +35,7 @@
 				<span class="mui-icon iconfont icon-leimu"></span>
 				<span class="mui-tab-label">分类</span>
 			</a>
-			<a class="mui-tab-item" href="barItem/test.html">
+			<a id="add" class="mui-tab-item" href="barItem/add.html">
 				<span class="mui-icon iconfont icon-jiahao"></span>
 				<span class="mui-tab-label">发布</span>
 			</a>
@@ -62,13 +62,18 @@
 			var curBarItemWebview;
 
 			var barItemWebviewArray = [];
-			var barItemArray = ['barItem/home.html', 'barItem/category.html', 'barItem/test.html', 'barItem/cart.html', 'barItem/mine.html'];
+			var barItemArray = ['barItem/home.html', 'barItem/category.html', 'barItem/cart.html', 'barItem/mine.html'];
 			mui.plusReady(function() {
-				var launchFlag = plus.storage.getItem("launchFlag");
-				if(launchFlag) {
+				var showGuide = plus.storage.getItem("lauchFlag");
+				//仅支持竖屏显示
+				plus.screen.lockOrientation("portrait-primary");
+				if(showGuide) {
+					//关闭splash页面；
+					plus.navigator.closeSplashscreen();
+					plus.navigator.setFullscreen(false);
 					mui.openWindow({
-						url: "index.html",
-						id: "index",
+						url: "main.html",
+						id: "m",
 						extras: {
 							mark: "index" //额外的参数，仅仅是个标识，实际开发中不用；
 						}
@@ -179,7 +184,14 @@
 					}
 				});
 			}
-
+			
+			add.addEventListener("tap", function() {
+				mui.openWindow({
+					id: 'barItem/add.html',
+				    url: 'barItem/add.html'
+				});
+			});
+			
 			//预加载template
 			function initTemplate() {
 				var webview = mui.preload({

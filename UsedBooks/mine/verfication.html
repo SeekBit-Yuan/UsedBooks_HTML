@@ -115,10 +115,7 @@
 					AV.User.verifyMobilePhone('886684').then(function() {
 						//验证成功
 						mui.toast("验证成功！请前往登录");
-						mui.openWindow({
-							id: 'mine/login.html',
-							url: 'login.html'
-						});
+						mui.back();
 					}, function(err) {
 						//验证失败
 						alert("验证失败！请点击重新发送按钮");
