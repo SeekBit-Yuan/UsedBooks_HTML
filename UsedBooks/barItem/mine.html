@@ -48,7 +48,7 @@
 
 			<ul class="mui-table-view" style="margin-top: 8px;">
 				<li class="mui-table-view-cell">
-					<a id="myfavorite" class="mui-navigate-right" href="../mine/my-order-needtem.html">
+					<a id="myfavorite" class="mui-navigate-right" href="../mine/my-collection.html">
 						<span class="mui-icon iconfont icon-biaoxing"></span> 我的收藏
 					</a>
 				</li>
@@ -99,7 +99,6 @@
 				appId: APP_ID,
 				appKey: APP_KEY,
 			});
-
 			mui.init({
 				swipeBack: false
 			});
@@ -129,13 +128,10 @@
 				addListevent();
 				//点击头像事件
 				addHeadevent();
-
 				//接收登录成功事件
 				window.addEventListener('loginSuccess', function() {
-
 					var account = localStorage.getItem('user');
 					var password = localStorage.getItem('password');
-
 					AV.User.logIn(account, password).then(function(loginedUser) {
 						touxiangword.innerText = loginedUser.get("nickname");
 					}).catch(function(error) {
@@ -143,15 +139,12 @@
 						alert("个人信息获取失败");
 						return;
 					});
-
-
 					//登出按钮显示出来 头像图片显示出来名字显示出来
 					logoutBtn.style.display = 'block';
 					touxiangimg.style.display = 'none';
 					trueimg.style.display = 'inline';
 					touxiangword.style.color = 'white';
 				}, false);
-
 				logoutBtn.addEventListener('tap', function() {
 					var btnArray = ['否', '是'];
 					mui.confirm('确认要退出登录吗？', 'UsedBooks', btnArray, function(e) {
@@ -175,7 +168,6 @@
 						}
 					});
 				}, false)
-
 				var backButtonPress = 0;
 				mui.back = function(event) {
 					backButtonPress++;
@@ -195,6 +187,10 @@
 				//点击头像登录
 				touxiangimg.addEventListener('tap', function() {
 					if(!localStorage.getItem('user')) {
+//						mui.openWindow({
+//								id: 'mine/login.html',
+//								url: '../mine/login.html'
+//						});
 						pushWebView({
 							webType: 'newWebview_First',
 							id: 'mine/login.html',

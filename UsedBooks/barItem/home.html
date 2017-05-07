@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 	<head>
@@ -70,11 +70,15 @@
 
 	<body>
 		<div class="mui-content">
+			<div class="mui-content-padded">
+				<button id="search" type="button" class="mui-btn iconfont icon-sousuo" style="width: 100%;background-color:#EEEEEE;color:#AAAAAA;">
+		            &nbsp;&nbsp;&nbsp;搜索图书名称
+		        </button>
+			</div>
 			<div id="homeDiv" class="mui-content own-content-padding">
 				<div id="productSlider" class="mui-slider">
 				</div>
 				<div id="recommend" class="mui-table-view mui-grid-view own-gray-color">
-
 				</div>
 			</div>
 		</div>
@@ -91,6 +95,13 @@
 		var marqueeArray = []; //跑马灯数据数组
 		var recommendArray = []; //推荐商品数组
 		mui.plusReady(function() {
+			search.addEventListener("tap",function(){
+				mui.openWindow({
+					id: 'Home/search.html',
+					url: '../Home/search.html'
+				});
+			});
+			
 			currentWebview = plus.webview.currentWebview();
 			homeDiv = document.getElementById('homeDiv');
 			//初始化一些本地数据
@@ -107,16 +118,6 @@
 				var extendOptions = {
 					itemID: itemID
 				};
-				//				pushWebView({
-				//					webType: 'newWebview_First',
-				//					id: 'Home/product-detail-needtem.html',
-				//					href: 'Home/product-detail-needtem.html',
-				//					aniShow: getaniShow(),
-				//					title: "商品详情",
-				//					isBars: false,
-				//					barsIcon: '',
-				//					extendOptions: extendOptions
-				//				});
 				mui.openWindow({
 					id: itemID,
 					url: href

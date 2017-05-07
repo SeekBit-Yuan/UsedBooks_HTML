@@ -64,7 +64,8 @@
 		],
 		"refer": [
 			"Home/product-detail-needtem.html",
-			"Home/product-detail.html"
+			"Home/product-detail.html",
+			"Home/search.html"
 		]
 	},
 	"barItem/category.html": {
@@ -88,7 +89,9 @@
 			"css/iconfont.css",
 			"fonts/iconfont.ttf"
 		],
-		"refer": []
+		"refer": [
+			"Home/showBook.html"
+		]
 	},
 	"barItem/mine.html": {
 		"resources": [
@@ -124,7 +127,8 @@
 			"mine/center.html",
 			"mine/bind-phone.html",
 			"mine/bind-email.html",
-			"mine/setting.html"
+			"mine/setting.html",
+			"mine/my-collection.html"
 		]
 	},
 	"barItem/add.html": {
@@ -149,7 +153,8 @@
 			"barItem/add.html",
 			"js/mui.picker.js",
 			"js/mui.poppicker.js",
-			"css/mui.picker.min.css"
+			"css/mui.picker.min.css",
+			"js/jquery-3.1.1.min.js"
 		],
 		"refer": [
 			"add/add-category.html",
@@ -170,9 +175,19 @@
 			"js/mui.min.js",
 			"img/50.jpg",
 			"css/own.css",
-			"css/iconfont.css"
+			"css/iconfont.css",
+			"css/iconfont1.css",
+			"images/yuantiao.jpg",
+			"images/logo.png",
+			"img/ic_book1.jpg",
+			"js/jquery-3.1.1.min.js",
+			"js/av-min.js",
+			"js/av.js",
+			"fonts/mui.ttf"
 		],
-		"refer": []
+		"refer": [
+			"mine/login.html"
+		]
 	},
 	"barItem/test.html": {
 		"resources": [
@@ -641,7 +656,8 @@
 			"css/mui.min.css",
 			"barItem/home.html",
 			"fonts/iconfont.ttf",
-			"js/mui.enterfocus.js"
+			"js/mui.enterfocus.js",
+			"barItem/category.html"
 		],
 		"refer": [
 			"barItem/category.html",
@@ -652,7 +668,8 @@
 			"barItem/cart.html",
 			"mine/login.html",
 			"barItem/test.html",
-			"barItem/add.html"
+			"barItem/add.html",
+			"Home/search.html"
 		]
 	},
 	"add/add-category.html": {
@@ -676,6 +693,47 @@
 	},
 	"Home/mycart.html": {
 		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"Home/search.html": {
+		"resources": [
+			"css/common.css",
+			"css/mui.min.css",
+			"js/common.js",
+			"js/jquery-3.1.1.min.js"
+		],
+		"refer": [
+			"Home/showSearch.html"
+		]
+	},
+	"Home/showSearch.html": {
+		"resources": [
+			"css/common.css",
+			"css/mui.min.css",
+			"css/feedback.css",
+			"css/mui.picker.min.css",
+			"images/logo.png",
+			"css/app.css",
+			"images/yuantiao.jpg",
+			"js/vue.js"
+		]
+	},
+	"mine/my-collection.html": {
+		"resources": [
+			"css/mui.min.css",
+			"img/50.jpg",
+			"js/arttmpl.js",
+			"images/yuantiao.jpg"
+		],
+		"refer": [
+			"Home/product-detail.html"
+		]
+	},
+	"Home/showBook.html": {
+		"resources": [
+			"js/common.js",
+			"images/logo.png",
 			"css/mui.min.css"
 		]
 	}

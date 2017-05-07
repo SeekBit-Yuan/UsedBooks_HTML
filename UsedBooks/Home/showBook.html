@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>图书展示</title>
+
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/own.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-main-background-color">
+			<button type="button" class="mui-action-back mui-btn  mui-btn-link mui-pull-left own-button">
+			<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>
+		</button>
+			<h1 id="title" class="mui-title" style="font-weight: bold;">图书</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="mui-input-row">
+				<select id="category" class="mui-btn mui-btn-block" style="width: 48%;float: left;margin-top: 5px;margin-left: 5px;color:#999999;">
+					<option value="全部分类">全部分类</option>
+					<option value="工学">工学</option>
+					<option value="理学">理学</option>
+					<option value="法学">法学</option>
+					<option value="教育学">教育学</option>
+					<option value="经济学">经济学</option>
+					<option value="管理学">管理学</option>
+					<option value="哲学">哲学</option>
+					<option value="农学">农学</option>
+					<option value="医学">医学</option>
+					<option value="军事学">军事学</option>
+					<option value="文学">文学</option>
+					<option value="历史学">历史学</option>
+				</select>
+				<select class="mui-btn mui-btn-block" style="width: 46%;float:right;margin-top: 5px;margin-right: 10px;color:#999999;">
+					<option value="item-2">价格从低到高</option>
+					<option value="item-0">新旧从新到旧</option>
+					<option value="item-1">发布从前到后</option>
+				</select>
+			</div>
+		</div>
+		<!--<div class="mui-card">
+				<div class="mui-card-header mui-card-media">
+					<img src="../images/logo.png" />
+					<div class="mui-media-body" id="username">
+						wqwq
+					</div>
+					<div class="mui-media-body">
+						<p id="time">wewewe</p>
+					</div>
+				</div>
+				<div class="mui-card-content-inner">
+					<h3 class="mui-subtitle" id="bname">书名</h3>
+					<div class="summary" id="bdesc">简介</div>
+				</div>
+				<div class="mui-card-content">
+					<img src="../images/yuantiao.jpg" alt="" width="100%" />
+				</div>
+				<div class="mui-card-footer">
+					<a class="mui-card-link" style="color: gray;float: left;width: 1%;">￥：</a>
+					<a id="price" class="mui-card-link" style="color: gray;width: 33%;">9.00</a>
+					<a id="newold" class="mui-card-link" style="color: gray;width: 33%;">9成新</a>
+					<a id="chat" class="mui-tab-item mui-active">
+						<span class="mui-icon iconfont icon-lianxi" style="color: gray;width: 33%;"></span>
+					</a>
+				</div>
+		</div>-->
+
+		<div id="recommend" class="mui-card">
+
+			<script src="../js/av.js"></script>
+			<script src="../js/av-min.js"></script>
+			<script src="../js/mui.min.js "></script>
+			<script type="text/javascript" src="../js/common.js"></script>
+			<script src="../js/jquery-3.1.1.min.js"></script>
+			<script src="../js/app.js"></script>
+			<script type="text/javascript">
+				var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
+				var APP_KEY = 'RLnd5XpcckbBrJDtXQdXSUBs';
+				AV.init({
+					appId: APP_ID,
+					appKey: APP_KEY,
+				});
+
+				mui.init();
+
+				var books = [];
+				var recommendArray = []; //搜索结果数组
+				mui.plusReady(function() {
+					category.addEventListener("tap", function() {
+						var category = document.getElementById("category");
+						var index = category.selectedIndex;
+						var title_value = category.options[index+1].value;;
+						var title = document.getElementById('title');
+						title.innerText = title_value;
+					});
+
+					queryBooks();
+				});
+
+				function queryBooks() {
+					var query = new AV.Query('Book');
+					query.limit(10);
+					query.find().then(function(books) {
+						if(books.length == 0) {
+							return;
+						}
+						for(var i = 0; i < books.length; i++) {
+							var dataItem = {};
+							dataItem.username = books[i].get("username");
+							dataItem.time = books[i].createdAt.Format("yyyy-MM-dd hh:mm");
+							dataItem.bname = books[i].get("bname");
+							dataItem.bdesc = books[i].get("bdesc");
+							var imageurl = books[i].get("img_logo");
+							dataItem.image_url = 'http://ac-bugabhqt.clouddn.com/ab634ba80147079862a8.jpg';
+							dataItem.price = books[i].get("price");
+							dataItem.cur_price = books[i].get("cur_price");
+							dataItem.newold = books[i].get("newold");
+							recommendArray.push(dataItem);
+						}
+						setRecommend();
+						//						books.forEach(function(book) {
+						//							$("#username").html(book.get("username"));
+						//							$("#time").html(book.createdAt.Format("yyyy-MM-dd hh:mm"));
+						//							$("#bname").html(book.get("bname"));
+						//							$("#bdesc").html(book.get("bdesc"));
+						//							$("#price").html(book.get("price"));
+						//							$("#newold").html(book.get("newold"));
+						//						});
+					});
+				}
+
+				//设置搜索结果
+				function setRecommend() {
+					var recommend = document.getElementById('recommend');
+					mui.each(recommendArray, function(index, item) {
+						var div = document.createElement('div');;
+						div.className = 'mui-card-header mui-card-media';
+						div.innerHTML = '<img src="../images/logo.png" />\
+					                       <div class="mui-media-body" id="username">\
+						                   ' + item.username + '\
+					                       </div>\
+					                       <div class="mui-media-body">\
+						                   <p id="time">' + item.time + '</p>\
+					                       </div>\
+				                        <div class="mui-card-content-inner">\
+					                        <h5 class="mui-subtitle" id="bname" style="font-size:18px;color:black">' + item.bname + '</h5>\
+					                        <div class="summary" id="bdesc" style="font-size:10px;color:black">' + item.bdesc + '</div>\
+				                        </div>\
+				                        <div class="mui-card-content">\
+					                        <img src="' + item.image_url + '" alt="" width="100%" />\
+				                        </div>\
+				                        <div class="mui-card-footer" >\
+					                        <a class="own-text-through" style="color: gray;float: left;width: 10%;">￥：</a>\
+					                        <a id="price" class="own-text-through" style="color: gray;width: 30%;">' + item.price + '</a>\
+					                        <a class="mui-card-link" style="color: gray;float: left;width: 10%;">￥：</a>\
+					                        <a id="price" class="mui-card-link" style="color: gray;width: 30%;">' + item.cur_price + '</a>\
+					                        <a id="newold" class="mui-card-link" style="color: gray;width: 20%;">' + item.newold + '</a>\
+					                        </a>\
+				                        </div>';
+						recommend.appendChild(div);
+					});
+
+				}
+			</script>
+	</body>
+
+</html>
