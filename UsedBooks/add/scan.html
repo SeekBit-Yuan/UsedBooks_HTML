@@ -160,14 +160,17 @@
 				var publisher = bookinfo.publisher;
 				var price = bookinfo.price;
 				mui.toast("扫描成功！继续发布！")
-				mui.fire(plus.webview.getWebviewById('barItem/add.html'),'info',{
-					pic:pic,
-					bname:title,
-					suthor:author,
-					publish:publisher,
-					price:price
+				mui.openWindow({
+					id: 'add/add1.html',
+					url: '../add/add1.html',
+					extras: {
+						pic:pic,
+					    bname:title,
+					    author:author,
+					    publish:publisher,
+					    price:price
+					}
 				});
-				mui.back();
 			}
 		</script>
 	</body>

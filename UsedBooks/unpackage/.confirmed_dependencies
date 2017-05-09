@@ -154,7 +154,8 @@
 			"js/mui.picker.js",
 			"js/mui.poppicker.js",
 			"css/mui.picker.min.css",
-			"js/jquery-3.1.1.min.js"
+			"js/jquery-3.1.1.min.js",
+			"images/er.png"
 		],
 		"refer": [
 			"add/add-category.html",
@@ -579,7 +580,8 @@
 			"bookmanage/chat.html",
 			"bookmanage/chat1.html",
 			"barItem/add.html",
-			"Home/mycart.html"
+			"Home/mycart.html",
+			"Home/payment_iap.html"
 		]
 	},
 	"mine/setting.html": {
@@ -617,7 +619,8 @@
 			"js/arttmpl.js",
 			"js/realtime.browser.js",
 			"js/av-min.js",
-			"js/av.js"
+			"js/av.js",
+			"images/yuantiao.jpg"
 		],
 		"refer": []
 	},
@@ -688,12 +691,14 @@
 			"css/mui.min.css"
 		],
 		"refer": [
-			"barItem/add.html"
+			"barItem/add.html",
+			"add/add1.html"
 		]
 	},
 	"Home/mycart.html": {
 		"resources": [
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"img/50.jpg"
 		]
 	},
 	"Home/search.html": {
@@ -734,6 +739,21 @@
 		"resources": [
 			"js/common.js",
 			"images/logo.png",
+			"css/mui.min.css"
+		]
+	},
+	"add/add1.html": {
+		"resources": [
+			"css/feedback.css",
+			"css/mui.picker.min.css",
+			"css/mui.min.css"
+		]
+	},
+	"Home/payment_iap.html": {
+		"resources": [
+			"js/common.js",
+			"css/common.css",
+			"images/er.png",
 			"css/mui.min.css"
 		]
 	}

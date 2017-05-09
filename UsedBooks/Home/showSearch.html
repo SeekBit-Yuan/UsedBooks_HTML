@@ -128,8 +128,9 @@
 							dataItem.time = books[i].createdAt.Format("yyyy-MM-dd hh:mm");
 							dataItem.bname = books[i].get("bname");
 							dataItem.bdesc = books[i].get("bdesc");
-							var imageurl = books[i].get("img_logo");
-							dataItem.image_url = 'http://ac-bugabhqt.clouddn.com/ab634ba80147079862a8.jpg';
+							dataItem.image_url = books[i].get("pic");
+//							var imageurl = books[i].get("img_logo");
+//							dataItem.image_url = 'http://ac-bugabhqt.clouddn.com/ab634ba80147079862a8.jpg';
 							dataItem.price = books[i].get("price");
 							dataItem.cur_price = books[i].get("cur_price");
 							dataItem.newold = books[i].get("newold");

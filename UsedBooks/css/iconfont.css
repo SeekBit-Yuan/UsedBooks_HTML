@@ -11,6 +11,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-erweima:before { content: "\e601"; }
+
 .icon-tubiao22:before { content: "\e6f7"; }
 
 .icon-shezhi:before { content: "\e61a"; }

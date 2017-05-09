@@ -43,10 +43,25 @@
 			<!--<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>-->
 			<span class="own-left-nav-color">取消</span>
 		</button>
-			<h1 class="mui-title" style="font-weight: bold;">我的订单</h1>
+			<h1 id="title" class="mui-title" style="font-weight: bold;">我的订单</h1>
 		</header>
 
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-content">
+			<div class="mui-input-row">
+				<select id="category" class="mui-btn mui-btn-block" style="width: 48%;float: left;margin-top: 5px;margin-left: 5px;color:#999999;">
+					<option value="全部订单">全部订单</option>
+					<option value="已完成订单">已完成订单</option>
+					<option value="正在进行订单">正在进行订单</option>
+					<option value="未完成订单">未完成订单</option>
+				</select>
+				<select class="mui-btn mui-btn-block" style="width: 46%;float:right;margin-top: 5px;margin-right: 10px;color:#999999;">
+					<option value="item-2">时间从前到后</option>
+					<option value="item-0">价格从高到低</option>
+					<option value="item-1">时间从前到后</option>
+				</select>
+			</div>
+		</div>
 			<div class="mui-scroll">
 				<ul id="wishList" class="mui-table-view">
 
@@ -86,6 +101,14 @@
 			var isloaded = false; //是否正在请求数据
 			var li; //将要删除的li删除后设置为null
 			mui.plusReady(function() {
+				
+				category.addEventListener("tap", function() {
+						var category = document.getElementById("category");
+						var index = category.selectedIndex;
+						var title_value = category.options[index+1].value;;
+						var title = document.getElementById('title');
+						title.innerText = title_value;
+					});
 
 				wishListwebview = plus.webview.currentWebview();
 				needlogin = document.querySelector('.need-login');
@@ -176,7 +199,7 @@
 					var item = {};
 					item.product_id = i;
 					item.large_image_url = '../img/ic_book2.jpg';
-					item.product_name = "谁叫你加入心愿单的，找死啊";
+					item.product_name = "测试用例，正在进行的订单";
 					item.default_price = "28.0";
 					item.list_price = '30.0';
 					wishListData.push(item);

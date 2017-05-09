@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>发布二手书</title>
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/own.css" />
+		<link rel="stylesheet" type="text/css" href="../css/feedback.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-main-background-color">
+			<button type="button" class="mui-action-back mui-btn  mui-btn-link mui-pull-left own-button">
+			<span class="mui-action-back mui-icon mui-icon-left-nav own-left-nav-color"></span>
+		</button>
+			<h1 class="mui-title" style="font-weight: bold;">发布二手书</h1>
+			<button id="scan" type="button" class="mui-btn  mui-btn-link mui-pull-right own-button">
+			<span class="mui-icon iconfont icon-saomiao" style="color: white;"></span>
+		</header>
+		<div class="mui-content">
+			<h5 style="float: left;">上传图书封面以及收款二维码，不要上传错误，记得备注收款方式哦（支付宝/微信）</h5>
+			<img id="book_img" src="../images/iconfont-tianjia.png" style="height: 100px;width: 100px;margin-top: 5px;margin-left: 10px;">
+			<img id="pay_img" src="../images/er.png" style="height: 100px;width: 100px;margin-top: 5px;margin-left: 10px;">
+			<div class="mui-input-row" style="margin-top: 5px;">
+				<form class="mui-input-group">
+					<ul class="mui-table-view mui-table-view-chevron mui-input-row">
+						<li class="mui-table-view-cell">
+							<a id="bname" class="mui-input-clear" />书名
+						</li>
+					</ul>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a id="author" class="mui-input-clear" />作者
+						</li>
+					</ul>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a id="publish" class="mui-input-clear" />出版社
+						</li>
+					</ul>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a id="price" class="mui-input-clear" />原价
+						</li>
+					</ul>
+					<ul class="mui-table-view mui-table-view-chevron " style="margin-top: 10px;">
+						<li class="mui-table-view-cell">
+							<a style="color:#666666;float:left;font-size:14px;">出售价：
+								<input id="cur_price" type="text" class="mui-input" />
+							</a>
+						</li>
+					</ul>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate mui-input-clear" style="color:#666666;float: left;font-size: 14px;">数&nbsp;&nbsp;&nbsp;&nbsp;量：
+								<input id="bnum" type="text" class="mui-input" value="1"/>
+							</a>
+						</li>
+					</ul>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<p id='showCategory' style="color:#666666;float: left;width: 50%;font-size: 12px;">分类：
+								<span id='categoryResult' style="font-size: 12px;color:#999999;">点击选择分类</span>
+							</p>
+							<p id='showNewold' class="mui-navigate mui-input-clear" style="color:#666666;float: right;width: 50%;font-size: 12px;">新旧：
+								<span id='newoldResult' style="font-size: 12px;color:#999999;">点击选择新旧</span>
+							</p>
+						</li>
+					</ul>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate mui-input-clear" style="color:#666666;float: left;font-size: 14px;">备&nbsp;&nbsp;&nbsp;&nbsp;注：
+								<input id="bdesc" class="mui-input-clear" style="font-size: 14px;color:#999999;" placeholder="可为空" />
+							</a>
+						</li>
+					</ul>
+				</form>
+			</div>
+			<div class="mui-button-row" style="margin: 5px 15px;">
+				<button id="add" type="button" class="mui-btn mui-btn-block own-btn-green" style="padding: 5px 0px;">确定</button>
+			</div>
+			</div>
+
+			<script src="../js/av.js"></script>
+			<script src="../js/av-min.js"></script>
+			<script src="../js/mui.min.js "></script>
+			<script src="../js/mui.picker.js"></script>
+			<script src="../js/mui.poppicker.js"></script>
+			<script src="../js/mui.view.js"></script>
+			<script src="../js/own.js" charset="UTF-8"></script>
+			<script src="../js/jquery-3.1.1.min.js"></script>
+			<script type="text/javascript" charset="UTF-8">
+				var APP_ID = 'buGABhqtimg7HSEsEzvamc0Q-gzGzoHsz';
+				var APP_KEY = 'RLnd5XpcckbBrJDtXQdXSUBs';
+				AV.init({
+					appId: APP_ID,
+					appKey: APP_KEY,
+				});
+
+				mui.init();
+				var pic;
+				var bname;
+			    var author;
+				var publish;
+				var price;
+				mui.plusReady(function() {
+					var categoryValueResult;
+					pic = plus.webview.currentWebview().pic;
+					bname = plus.webview.currentWebview().bname;
+					author = plus.webview.currentWebview().author;
+					publish = plus.webview.currentWebview().publish;
+					price = plus.webview.currentWebview().price;
+					
+					document.getElementById("book_img").src = pic;
+					var bname_value = document.getElementById('bname');
+					bname_value.innerText = bname;
+					var author_value = document.getElementById('author');
+					author_value.innerText = author;
+					var publish_value = document.getElementById('publish');
+					publish_value.innerText = publish;
+					var price_value = document.getElementById('price');
+					price_value.innerText = price;
+					
+					//获取扫描数据
+					scanData;
+					//分类选择器picker
+					pickerCategory();
+
+					//新旧选择器picker
+					pickerNewold();
+
+					//上传图片
+					book_img.addEventListener("tap", function() {
+						if(mui.os.plus) {
+							var a = [{
+								title: "拍照"
+							}, {
+								title: "从手机相册选择"
+							}];
+							plus.nativeUI.actionSheet({
+								title: "选择图书照片",
+								cancel: "取消",
+								buttons: a
+							}, function(b) {
+								switch(b.index) {
+									case 0:
+										break;
+									case 1:
+										getImage();
+										break;
+									case 2:
+										galleryImg();
+										break;
+									default:
+										break
+								}
+							})
+						}
+					});
+
+					function getImage() {
+						var c = plus.camera.getCamera();
+						c.captureImage(function(e) {
+							plus.io.resolveLocalFileSystemURL(e, function(entry) {
+								var s = entry.toLocalURL() + "?version=" + new Date().getTime();
+								console.log(s);
+								document.getElementById("book_img").src = s;
+								//变更大图预览的src
+								//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+								document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();;;
+							}, function(e) {
+								console.log("读取拍照文件错误：" + e.message);
+							});
+						}, function(s) {
+							console.log("error" + s);
+						}, {
+							filename: "_doc/head.jpg"
+						})
+					}
+
+					function galleryImg() {
+						plus.gallery.pick(function(a) {
+							plus.io.resolveLocalFileSystemURL(a, function(entry) {
+								plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
+									root.getFile("head.jpg", {}, function(file) {
+										//文件已存在
+										file.remove(function() {
+											console.log("file remove success");
+											entry.copyTo(root, 'head.jpg', function(e) {
+													var e = e.fullPath + "?version=" + new Date().getTime();
+													document.getElementById("book_img").src = e;
+													//变更大图预览的src
+													//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+													document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
+												},
+												function(e) {
+													console.log('copy image fail:' + e.message);
+												});
+										}, function() {
+											console.log("delete image fail:" + e.message);
+										});
+									}, function() {
+										//文件不存在
+										entry.copyTo(root, 'head.jpg', function(e) {
+												var path = e.fullPath + "?version=" + new Date().getTime();
+												document.getElementById("book_img").src = path;
+												//变更大图预览的src
+												//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+												document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;
+											},
+											function(e) {
+												console.log('copy image fail:' + e.message);
+											});
+									});
+								}, function(e) {
+									console.log("get _www folder fail");
+								})
+							}, function(e) {
+								console.log("读取拍照文件错误：" + e.message);
+							});
+						}, function(a) {}, {
+							filter: "image"
+						})
+					};
+
+					function defaultImg() {
+						if(mui.os.plus) {
+							plus.io.resolveLocalFileSystemURL("_doc/head.jpg", function(entry) {
+								var s = entry.fullPath + "?version=" + new Date().getTime();;
+								document.getElementById("book_img").src = s;
+							}, function(e) {
+								document.getElementById("book_img").src = '../images/iconfont-tianjia.png';
+							})
+						} else {
+							document.getElementById("book_img").src = '../images/iconfont-tianjia.png';
+						}
+
+					}
+					document.getElementById("book_img").addEventListener('tap', function(e) {
+						e.stopPropagation();
+					});
+
+					function initImgPreview() {
+						var imgs = document.querySelectorAll("img.mui-action-preview");
+						imgs = mui.slice.call(imgs);
+						if(imgs && imgs.length > 0) {
+							var slider = document.createElement("div");
+							slider.setAttribute("id", "__mui-imageview__");
+							slider.classList.add("mui-slider");
+							slider.classList.add("mui-fullscreen");
+							slider.style.display = "none";
+							slider.addEventListener("tap", function() {
+								slider.style.display = "none";
+							});
+							slider.addEventListener("touchmove", function(event) {
+								event.preventDefault();
+							})
+							var slider_group = document.createElement("div");
+							slider_group.setAttribute("id", "__mui-imageview__group");
+							slider_group.classList.add("mui-slider-group");
+							imgs.forEach(function(value, index, array) {
+								//给图片添加点击事件，触发预览显示；
+								value.addEventListener('tap', function() {
+									slider.style.display = "block";
+									_slider.refresh();
+									_slider.gotoItem(index, 0);
+								})
+								var item = document.createElement("div");
+								item.classList.add("mui-slider-item");
+								var a = document.createElement("a");
+								var img = document.createElement("img");
+								img.setAttribute("src", value.src);
+								a.appendChild(img)
+								item.appendChild(a);
+								slider_group.appendChild(item);
+							});
+							slider.appendChild(slider_group);
+							document.body.appendChild(slider);
+							var _slider = mui(slider).slider();
+						}
+					}
+
+					//注册列表的点击事件
+					addListevent();
+
+				});
+
+				function scanData() {
+					window.addEventListener('info', function(event) {
+						bname = document.getElementById("bname").innerText = event.bname;
+						author = document.getElementById("author").innerText = event.author;
+						publish = document.getElementById("publish").innerText = event.publish;
+						price = document.getElementById("price").innerText = event.price;
+					});
+				}
+
+				function pickerCategory() {
+					var categoryPicker = new mui.PopPicker();
+					categoryPicker.setData([{
+						value: "1",
+						text: "工学"
+					}, {
+						value: "2",
+						text: "理学"
+					}, {
+						value: "3",
+						text: "法学"
+					}, {
+						value: "4",
+						text: "教育学"
+					}, {
+						value: "5",
+						text: "经济学"
+					}, {
+						value: "6",
+						text: "管理学"
+					}, {
+						value: "7",
+						text: "哲学"
+					}, {
+						value: "8",
+						text: "农学"
+					}, {
+						value: "9",
+						text: "医学"
+					}, {
+						value: "10",
+						text: "军事学"
+					}, {
+						value: "11",
+						text: "文学"
+					}, {
+						value: "12",
+						text: "历史学"
+					}]);
+
+					var showCategory = document.getElementById('showCategory');
+					var categoryResult = document.getElementById('categoryResult');
+					showCategory.addEventListener('tap', function(event) {
+						categoryPicker.show(function(items) {
+							categoryResult.innerText = items[0].text;
+							var categoryValueResult = items[0].value;
+							//返回 false 可以阻止选择框的关闭
+							//							return false;
+						});
+					}, false);
+
+				};
+
+				function pickerNewold() {
+					var newoldPicker = new mui.PopPicker();
+					newoldPicker.setData([{
+						value: "1",
+						text: "全新"
+					}, {
+						value: "2",
+						text: "9成新"
+					}, {
+						value: "3",
+						text: "8成新"
+					}, {
+						value: "4",
+						text: "7成新"
+					}, {
+						value: "5",
+						text: "6成新"
+					}, {
+						value: "6",
+						text: "5成新"
+					}]);
+
+					var showNewold = document.getElementById('showNewold');
+					var newoldResult = document.getElementById('newoldResult');
+					showNewold.addEventListener('tap', function(event) {
+						newoldPicker.show(function(items) {
+							newoldResult.innerText = items[0].text;
+							//返回 false 可以阻止选择框的关闭
+							//							return false;
+						});
+					}, false);
+
+				};
+
+				function addListevent() {
+					add.addEventListener("tap", function() {
+						if(localStorage.getItem('user')) {
+							var account = localStorage.getItem('user');
+							var password = localStorage.getItem('password');
+							var pic = document.getElementById("book_img").src;
+
+							AV.User.logIn(account, password).then(function(loginedUser) {
+								var username = loginedUser.get('username');
+								var oid = loginedUser.id;
+								var bname = $("#bname").val();
+								var author = $("#author").val();
+								var publish = $("#publish").val();
+								var price = $("#price").val();
+								var cur_price = $("#cur_price").val();
+								var bnum = $("#bnum").val();
+								var category = categoryResult.innerText;
+								var newold = newoldResult.innerText;
+								var bdesc = $("#bdesc").val();
+
+								if($.trim(bname) == "") {
+									mui.toast("请输入书名！");
+									return;
+								} else if($.trim(author) == "") {
+									mui.toast("请输入作者！");
+									return;
+								} else if($.trim(publish) == "") {
+									mui.toast("请输入出版社！");
+									return;
+								} else if($.trim(price) == "") {
+									mui.toast("请输入原价！");
+									return;
+								} else if($.trim(cur_price) == "") {
+									mui.toast("请输入售价！");
+									return;
+								} else if($.trim(bnum) == "") {
+									mui.toast("请输入数量！");
+									return;
+								} else if($.trim(category) == "点击选择分类") {
+									mui.toast("请点击选择分类！");
+									return;
+								} else if($.trim(newold) == "点击选择新旧") {
+									mui.toast("请点击选择新旧！");
+									return;
+								}
+
+								// 声明类型
+								var Book = AV.Object.extend('Book');
+								// 新建对象
+								var book = new Book();
+								book.set('username', username);
+								book.set('oid', oid);
+								book.set('bname', bname);
+								book.set('pic', pic);
+								book.set('author', author);
+								book.set('publish', publish);
+								book.set('price', price);
+								book.set('cur_price', cur_price);
+								book.set('bnum', bnum);
+								book.set('category', category);
+								book.set('newold', newold);
+								book.set('bdesc', bdesc);
+								book.save().then(function(todo) {
+									alert("图书发布成功！");
+									mui.back();
+								}, function(error) {
+									alert("发布图书失败！请稍后重试！");
+									return;
+								});
+							});
+
+						} else {
+							alert("请先登录！");
+							mui.openWindow({
+								id: "mine/login.html",
+								url: "../mine/login.html"
+							});
+						}
+
+					}, false);
+
+					scan.addEventListener("tap", function() {
+						mui.openWindow({
+							id: 'add/scan.html',
+							url: '../add/scan.html'
+						});
+					});
+
+				}
+			</script>
+	</body>
+
+</html>
